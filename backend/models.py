@@ -16,3 +16,5 @@ class Complaint(Base):
     status = Column(String, default="pending")
     verified = Column(Boolean, default=False)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
+    followup_question = Column(String, nullable=True)
+    followup_answer = Column(String, nullable=True)
