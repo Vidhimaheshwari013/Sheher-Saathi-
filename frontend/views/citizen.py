@@ -14,8 +14,18 @@ def show_citizen_page():
         height=150,
     )
 
+    location = st.text_input(
+        "📍 Location",
+        placeholder="Example: Rajpur Road, Dehradun",
+    )
+
     if st.button("Submit Complaint", type="primary"):
-        if complaint.strip():
-            st.success("Complaint received!")
-        else:
+        if not complaint.strip():
             st.warning("Please describe your issue.")
+        elif not location.strip():
+            st.warning("Please enter the location.")
+        else:
+            st.success("Complaint received!")
+            st.write("**Issue:**", complaint)
+            st.write("**Location:**", location)
+            
