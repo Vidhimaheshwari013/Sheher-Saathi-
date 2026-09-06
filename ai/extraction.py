@@ -6,7 +6,7 @@ def extract_complaint(raw_text: str) -> dict:
     client = get_groq_client()
 
     response = client.chat.completions.create(
-        model="qwen/qwen3.6-27b",
+        model="qwen/qwen3.8-27b",
         messages=[
             {"role": "system", "content": EXTRACTION_SYSTEM_PROMPT},
             {"role": "user", "content": raw_text},
