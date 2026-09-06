@@ -17,6 +17,11 @@ class ComplaintOut(BaseModel):
     status: str
     verified: bool
     created_at: datetime
+    followup_question: Optional[str] = None
+    followup_answer: Optional[str] = None
 
     class Config:
         from_attributes = True
+
+class FollowupAnswer(BaseModel):
+    answer: str

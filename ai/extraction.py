@@ -7,6 +7,7 @@ def extract_complaint(raw_text: str) -> dict:
 
     response = client.chat.completions.create(
         model="qwen/qwen3.8-27b",
+        max_tokens=500,
         messages=[
             {"role": "system", "content": EXTRACTION_SYSTEM_PROMPT},
             {"role": "user", "content": raw_text},
