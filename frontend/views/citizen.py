@@ -32,26 +32,52 @@ def show_citizen_page():
             st.warning("Please enter the location.")
 
         else:
-            raw_text = f"{complaint.strip()} Location: {location.strip()}"
+            raw_text = (
+                f"{complaint.strip()} "
+                f"Location: {location.strip()}"
+            )
 
             try:
+                # 1. Create complaint
                 response = requests.post(
                     f"{API_URL}/complaints",
                     json={"raw_text": raw_text},
                     timeout=10,
                 )
 
-                if response.status_code == 200:
-                    data = response.json()
+                if response.status_code != 200:
+                    st.error(
+                        f"Could not submit complaint. "
+                        f"Status: {response.status_code}"
+                    )
+                    return
 
-                    st.success("Complaint submitted successfully! ✅")
+                complaint_data = response.json()
 
-                    st.write("**Complaint ID:**", data["id"])
-                    st.write("**Status:**", data["status"])
+                st.success("Complaint submitted successfully! ✅")
+
+                st.write("**Complaint ID:**", complaint_data["id"])
+                st.write("**Status:**", complaint_data["status"])
+
+                # 2. Analyze complaint using AI
+                with st.spinner("Analyzing your complaint... 🤖"):
+                    analysis_response = requests.post(
+                        f"{API_URL}/complaints/analyze",
+                        json={"raw_text": raw_text},
+                        timeout=30,
+                    )
+
+                if analysis_response.status_code == 200:
+                    analysis = analysis_response.json()
+
+                    st.subheader("🤖 AI Analysis")
+                    st.write(analysis)
 
                 else:
-                    st.error(
-                        f"Backend error: {response.status_code}"
+                    st.warning(
+                        "Complaint was submitted, but AI analysis "
+                        f"could not be completed. "
+                        f"Status: {analysis_response.status_code}"
                     )
 
             except requests.exceptions.RequestException:
