@@ -7,6 +7,7 @@ from . import models, schemas
 from .database import engine, get_db
 from ai.embeddings import get_embedding
 from ai.faiss_index import complaint_index
+from ai.clustering import cluster_complaints
 
 # Creates the sheher_saathi.db file + complaints table on first run
 models.Base.metadata.create_all(bind=engine)
@@ -71,3 +72,50 @@ def answer_followup(complaint_id: int, payload: schemas.FollowupAnswer, db: Sess
     db.commit()
     db.refresh(db_complaint)
     return db_complaint
+
+@app.get("/clusters")
+def get_clusters(db: Session = Depends(get_db)):
+    complaints = db.query(models.Complaint).all()
+    if not complaints:
+        return {"clusters": []}
+
+    ids = [c.id for c in complaints]
+    embeddings = [get_embedding(c.raw_text) for c in complaints]
+    labels = cluster_complaints(ids, embeddings)
+
+    # Group complaints by cluster label
+    grouped = {}
+    for c in complaints:
+        label = labels[c.id]
+        if label == -1:
+            continue  # skip unclustered/noise complaints
+        grouped.setdefault(label, []).append(c)
+
+    clusters = []
+    for label, members in grouped.items():
+        clusters.append({
+            "cluster_id": label,
+            "size": len(members),
+            "category": members[0].category,  # rough guess — Day 5 priority engine refines this
+            "locations": list({m.location for m in members if m.location}),
+            "complaint_ids": [m.id for m in members],
+        })
+
+    return {"clusters": clusters}
+
+@app.get("/clusters/{cluster_id}")
+def get_cluster_detail(cluster_id: int, db: Session = Depends(get_db)):
+    complaints = db.query(models.Complaint).all()
+    ids = [c.id for c in complaints]
+    embeddings = [get_embedding(c.raw_text) for c in complaints]
+    labels = cluster_complaints(ids, embeddings)
+
+    members = [c for c in complaints if labels.get(c.id) == cluster_id]
+    if not members:
+        raise HTTPException(status_code=404, detail="Cluster not found")
+
+    return {
+        "cluster_id": cluster_id,
+        "size": len(members),
+        "complaints": [schemas.ComplaintOut.model_validate(m) for m in members],
+    }
