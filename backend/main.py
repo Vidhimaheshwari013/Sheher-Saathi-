@@ -5,6 +5,8 @@ from typing import List
 from ai.extraction import extract_complaint
 from . import models, schemas
 from .database import engine, get_db
+from ai.embeddings import get_embedding
+from ai.faiss_index import complaint_index
 
 # Creates the sheher_saathi.db file + complaints table on first run
 models.Base.metadata.create_all(bind=engine)
@@ -35,6 +37,8 @@ def create_complaint(complaint: schemas.ComplaintCreate, db: Session = Depends(g
     db.add(db_complaint)
     db.commit()
     db.refresh(db_complaint)
+    embedding = get_embedding(db_complaint.raw_text)
+    complaint_index.add(db_complaint.id, embedding)
     return db_complaint
 
 @app.get("/complaints", response_model=List[schemas.ComplaintOut])
