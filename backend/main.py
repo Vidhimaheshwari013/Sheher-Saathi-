@@ -8,6 +8,7 @@ from .database import engine, get_db
 from ai.embeddings import get_embedding
 from ai.faiss_index import complaint_index
 from ai.clustering import cluster_complaints
+from ai.priority import calculate_priority
 
 # Creates the sheher_saathi.db file + complaints table on first run
 models.Base.metadata.create_all(bind=engine)
@@ -92,13 +93,24 @@ def get_clusters(db: Session = Depends(get_db)):
         grouped.setdefault(label, []).append(c)
 
     clusters = []
+
+    VULNERABLE_KEYWORDS = ["children", "bachche", "bachchon", "elderly", "students", "senior"]
+
     for label, members in grouped.items():
+        severities = [m.severity for m in members if m.severity is not None]
+        has_vulnerable = any(
+        m.affected_group and any(k in m.affected_group.lower() for k in VULNERABLE_KEYWORDS)
+        for m in members
+        )
+        priority = calculate_priority(len(members), severities, has_vulnerable)
+
         clusters.append({
             "cluster_id": label,
             "size": len(members),
             "category": members[0].category,  # rough guess — Day 5 priority engine refines this
             "locations": list({m.location for m in members if m.location}),
             "complaint_ids": [m.id for m in members],
+            "priority": priority,
         })
 
     return {"clusters": clusters}
@@ -119,3 +131,44 @@ def get_cluster_detail(cluster_id: int, db: Session = Depends(get_db)):
         "size": len(members),
         "complaints": [schemas.ComplaintOut.model_validate(m) for m in members],
     }
+
+@app.get("/dashboard")
+def get_dashboard(db: Session = Depends(get_db)):
+    complaints = db.query(models.Complaint).all()
+    total = len(complaints)
+    verified = len([c for c in complaints if c.verified])
+
+    by_category = {}
+    for c in complaints:
+        if c.category:
+            by_category[c.category] = by_category.get(c.category, 0) + 1
+
+    by_status = {}
+    for c in complaints:
+        by_status[c.status] = by_status.get(c.status, 0) + 1
+
+    return {
+        "total_complaints": total,
+        "verified_count": verified,
+        "by_category": by_category,
+        "by_status": by_status,
+    }
+
+@app.get("/memory")
+def civic_memory(db: Session = Depends(get_db)):
+    complaints = db.query(models.Complaint).all()
+    location_category_counts = {}
+
+    for c in complaints:
+        if c.location and c.category:
+            key = (c.location, c.category)
+            location_category_counts[key] = location_category_counts.get(key, 0) + 1
+
+    recurring = [
+        {"location": loc, "category": cat, "occurrences": count}
+        for (loc, cat), count in location_category_counts.items()
+        if count >= 2  # "recurring" = seen more than once
+    ]
+    recurring.sort(key=lambda x: x["occurrences"], reverse=True)
+
+    return {"recurring_issues": recurring}
