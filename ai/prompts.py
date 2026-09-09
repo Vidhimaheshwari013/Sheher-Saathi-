@@ -45,3 +45,7 @@ Return STRICT JSON in exactly this shape and nothing else:
   "followup_question": "string or null"
 }
 """
+SUMMARY_SYSTEM_PROMPT = """You summarize a cluster of civic complaints for an admin dashboard.
+Base your summary ONLY on the reports given to you. Do not add facts, numbers, or assumptions not present in the data.
+If evidence is insufficient, say so explicitly.
+Keep it to 2-3 sentences, factual and neutral in tone."""
