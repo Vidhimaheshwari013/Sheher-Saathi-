@@ -9,6 +9,8 @@ from ai.embeddings import get_embedding
 from ai.faiss_index import complaint_index
 from ai.clustering import cluster_complaints
 from ai.priority import calculate_priority
+from datetime import datetime, timedelta, timezone
+from ai.extraction import summarize_cluster
 
 # Creates the sheher_saathi.db file + complaints table on first run
 models.Base.metadata.create_all(bind=engine)
@@ -125,10 +127,11 @@ def get_cluster_detail(cluster_id: int, db: Session = Depends(get_db)):
     members = [c for c in complaints if labels.get(c.id) == cluster_id]
     if not members:
         raise HTTPException(status_code=404, detail="Cluster not found")
-
+    summary = summarize_cluster([m.raw_text for m in members])
     return {
         "cluster_id": cluster_id,
         "size": len(members),
+        "summary": summary,
         "complaints": [schemas.ComplaintOut.model_validate(m) for m in members],
     }
 
@@ -172,3 +175,55 @@ def civic_memory(db: Session = Depends(get_db)):
     recurring.sort(key=lambda x: x["occurrences"], reverse=True)
 
     return {"recurring_issues": recurring}
+
+
+@app.get("/pulse")
+def civic_pulse(db: Session = Depends(get_db)):
+    now = datetime.now(timezone.utc)
+    last_72h_start = now - timedelta(hours=72)
+    prev_72h_start = now - timedelta(hours=144)
+
+    complaints = db.query(models.Complaint).all()
+
+    def in_range(c, start, end):
+        created = c.created_at
+        if created.tzinfo is None:
+            created = created.replace(tzinfo=timezone.utc)
+        return start <= created < end
+
+    current_window = [c for c in complaints if in_range(c, last_72h_start, now)]
+    previous_window = [c for c in complaints if in_range(c, prev_72h_start, last_72h_start)]
+
+    def count_by_category(items):
+        counts = {}
+        for c in items:
+            if c.category:
+                counts[c.category] = counts.get(c.category, 0) + 1
+        return counts
+
+    current_counts = count_by_category(current_window)
+    previous_counts = count_by_category(previous_window)
+
+    emerging = []
+    for category, current_count in current_counts.items():
+        previous_count = previous_counts.get(category, 0)
+        if previous_count == 0 and current_count >= 2:
+            emerging.append({
+                "category": category,
+                "current_72h": current_count,
+                "previous_72h": previous_count,
+                "status": "new_emerging_issue",
+            })
+        elif previous_count > 0 and current_count >= previous_count * 2:
+            emerging.append({
+                "category": category,
+                "current_72h": current_count,
+                "previous_72h": previous_count,
+                "status": "rapid_increase",
+            })
+
+    return {
+        "current_72h_total": len(current_window),
+        "previous_72h_total": len(previous_window),
+        "emerging_issues": emerging,
+    }
