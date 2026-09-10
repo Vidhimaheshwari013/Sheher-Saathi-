@@ -1,0 +1,1289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sheher Saathi - Report an Issue</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- Material Symbols -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#000000",
+                        secondary: "#a73918",
+                        surface: "#f8f9ff",
+                        background: "#f8f9ff",
+                        "surface-low": "#eff4ff",
+                        "surface-container": "#e5eeff",
+                        "surface-high": "#dce9ff",
+                        "outline": "#76777c",
+                        "outline-light": "#c6c6cc",
+                        "text-main": "#0b1c30",
+                        "text-muted": "#45464b",
+                        error: "#ba1a1a"
+                    },
+                    fontFamily: {
+                        body: ["Public Sans", "sans-serif"],
+                        headline: ["Space Grotesk", "sans-serif"]
+                    }
+                }
+            }
+        };
+    </script>
+
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings:
+                "FILL" 0,
+                "wght" 400,
+                "GRAD" 0,
+                "opsz" 24;
+            line-height: 1;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            outline: none !important;
+            box-shadow: none !important;
+            border-color: #a73918 !important;
+        }
+    </style>
+</head>
+
+<body class="bg-background text-text-main font-body min-h-screen">
+
+    <!-- ================= HEADER ================= -->
+
+    <header class="w-full bg-white border-b border-outline-light sticky top-0 z-50">
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+
+            <div class="flex items-center justify-between">
+
+                <!-- Logo -->
+
+                <a href="index.html" class="flex items-center gap-3">
+
+                    <div class="w-9 h-9 bg-secondary flex items-center justify-center text-white">
+                        <span class="material-symbols-outlined">
+                            account_balance
+                        </span>
+                    </div>
+
+                    <div>
+                        <div class="font-headline text-lg font-bold">
+                            Sheher Saathi
+                        </div>
+
+                        <div class="text-xs text-text-muted uppercase tracking-wider">
+                            Citizen Municipal Portal
+                        </div>
+                    </div>
+
+                </a>
+
+
+                <!-- Desktop Navigation -->
+
+                <nav class="hidden md:flex items-center gap-8">
+
+                    <a
+                        href="report.html"
+                        class="text-secondary font-bold border-b-2 border-secondary pb-1 flex items-center gap-1"
+                    >
+                        <span class="material-symbols-outlined text-lg">
+                            add_circle
+                        </span>
+                        Report Issue
+                    </a>
+
+                    <a
+                        href="community.html"
+                        class="text-text-muted hover:text-secondary flex items-center gap-1"
+                    >
+                        <span class="material-symbols-outlined text-lg">
+                            group_work
+                        </span>
+                        Community Issues
+                    </a>
+
+                    <a
+                        href="reports.html"
+                        class="text-text-muted hover:text-secondary flex items-center gap-1"
+                    >
+                        <span class="material-symbols-outlined text-lg">
+                            search
+                        </span>
+                        Track Report
+                    </a>
+
+                    <a
+                        href="index.html#how-it-works"
+                        class="text-text-muted hover:text-secondary flex items-center gap-1"
+                    >
+                        <span class="material-symbols-outlined text-lg">
+                            info
+                        </span>
+                        How it works
+                    </a>
+
+                </nav>
+
+
+                <!-- Header Buttons -->
+
+                <div class="flex items-center gap-2">
+
+                    <a
+                        href="admin.html"
+                        class="hidden sm:inline-flex items-center gap-1 px-4 py-2 border border-outline-light text-sm font-semibold hover:bg-slate-50"
+                    >
+                        <span class="material-symbols-outlined text-base">
+                            admin_panel_settings
+                        </span>
+                        Authority Login
+                    </a>
+
+                    <a
+                        href="report.html"
+                        class="inline-flex items-center gap-1.5 px-4 py-2 bg-secondary text-white text-sm font-bold"
+                    >
+                        <span class="material-symbols-outlined text-lg">
+                            add
+                        </span>
+                        Raise Ticket
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- ================= SUB BANNER ================= -->
+
+    <div class="bg-surface-low border-b border-outline-light">
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2">
+
+            <div class="flex flex-wrap items-center justify-between text-xs sm:text-sm text-text-muted">
+
+                <div class="flex items-center gap-2">
+
+                    <span class="inline-block w-2 h-2 bg-secondary"></span>
+
+                    <span class="font-semibold uppercase tracking-wide">
+                        Public Civic Desk
+                    </span>
+
+                    <span>|</span>
+
+                    <span>
+                        Municipal Unified Triage Engine
+                    </span>
+
+                </div>
+
+                <div class="hidden sm:flex items-center gap-4">
+
+                    <span>
+                        Assistance Toll-Free:
+                        <strong class="text-text-main">1916</strong>
+                    </span>
+
+                    <span>|</span>
+
+                    <span>
+                        Average Ward Response:
+                        <strong class="text-text-main">
+                            &lt; 4 Hours
+                        </strong>
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        <!-- Page Heading -->
+
+        <div class="mb-8 border-b border-outline-light pb-6">
+
+            <div class="inline-flex items-center gap-2 px-2 py-1 bg-surface-container text-text-main text-xs font-semibold mb-2">
+
+                <span class="material-symbols-outlined text-base text-secondary">
+                    campaign
+                </span>
+
+                CITIZEN ACTION DESK • DIRECT MUNICIPAL ROUTING
+
+            </div>
+
+            <h1 class="font-headline text-3xl sm:text-4xl font-bold tracking-tight">
+                Report an Issue
+            </h1>
+
+            <p class="text-base sm:text-lg text-text-muted max-w-3xl mt-2 leading-relaxed">
+                Describe what you are facing in your neighbourhood.
+                Our municipal AI assistant understands your everyday
+                language and routes it to the right ward department.
+            </p>
+
+        </div>
+
+
+        <!-- ================= TWO COLUMN LAYOUT ================= -->
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+
+
+            <!-- ================= LEFT FORM ================= -->
+
+            <section class="lg:col-span-7 bg-white border border-outline-light p-6">
+
+                <!-- Language Notice -->
+
+                <div class="bg-surface-low border border-outline-light p-4 mb-6 flex items-start gap-3">
+
+                    <span class="material-symbols-outlined text-secondary text-2xl">
+                        translate
+                    </span>
+
+                    <div class="text-sm text-text-main">
+
+                        <span class="font-semibold block mb-1">
+                            Multilingual Voice &amp; Text Parsing Supported
+                        </span>
+
+                        Voice or text supported in
+                        <strong>English</strong>,
+                        <strong>Hindi (हिन्दी)</strong>, and
+                        <strong>Hinglish</strong>.
+
+                    </div>
+
+                </div>
+
+
+                <!-- FORM -->
+
+                <form
+                    id="complaintForm"
+                    class="space-y-6"
+                    onsubmit="submitComplaint(event)"
+                >
+
+                    <!-- Complaint -->
+
+                    <div>
+
+                        <div class="flex items-center justify-between mb-2">
+
+                            <label
+                                for="grievance-text"
+                                class="font-semibold text-sm"
+                            >
+                                Describe the Issue in Your Words
+                                <span class="text-error">*</span>
+                            </label>
+
+                            <button
+                                type="button"
+                                onclick="startVoice()"
+                                class="inline-flex items-center gap-1 text-xs font-semibold text-secondary px-2 py-1 border border-secondary bg-surface-low"
+                            >
+                                <span class="material-symbols-outlined text-base">
+                                    mic
+                                </span>
+                                Voice Record
+                            </button>
+
+                        </div>
+
+
+                        <textarea
+                            id="grievance-text"
+                            rows="7"
+                            required
+                            placeholder="Example: Road pe bada khadda hai aur paani bhara hai..."
+                            class="w-full bg-slate-50 border border-outline-light p-4 text-sm leading-relaxed resize-y"
+                        ></textarea>
+
+
+                        <p class="mt-2 text-xs text-text-muted flex items-center gap-1">
+
+                            <span class="material-symbols-outlined text-sm">
+                                auto_fix_high
+                            </span>
+
+                            Tip: Include duration, nearby landmark,
+                            or urgency so ward teams can prioritize accurately.
+
+                        </p>
+
+                    </div>
+
+
+                    <!-- LOCATION -->
+
+                    <div>
+
+                        <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+
+                            <label
+                                for="location-input"
+                                class="font-semibold text-sm"
+                            >
+                                Location &amp; Landmark
+                                <span class="text-error">*</span>
+                            </label>
+
+                            <button
+                                type="button"
+                                onclick="detectLocation()"
+                                class="inline-flex items-center gap-1 text-xs font-semibold border border-outline-light px-3 py-2 bg-white"
+                            >
+                                <span class="material-symbols-outlined text-base text-secondary">
+                                    my_location
+                                </span>
+
+                                Auto-detect current location
+                            </button>
+
+                        </div>
+
+
+                        <div class="relative">
+
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+
+                                <span class="material-symbols-outlined text-text-muted">
+                                    pin_drop
+                                </span>
+
+                            </div>
+
+                            <input
+                                id="location-input"
+                                type="text"
+                                required
+                                placeholder="Enter your location or nearby landmark"
+                                class="w-full pl-10 pr-4 py-3 bg-slate-50 border border-outline-light text-sm"
+                            >
+
+                        </div>
+
+
+                        <div class="mt-2 flex flex-wrap items-center gap-2">
+
+                            <span class="text-xs text-text-muted">
+                                Detected Jurisdiction:
+                            </span>
+
+                            <span
+                                id="wardTag"
+                                class="inline-flex items-center gap-1 px-2 py-1 bg-surface-container text-text-main text-xs font-medium border border-outline-light"
+                            >
+                                <span class="material-symbols-outlined text-sm text-secondary">
+                                    verified
+                                </span>
+
+                                Ward will be identified by AI
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PHOTO UPLOAD -->
+
+                    <div>
+
+                        <label class="block font-semibold text-sm mb-2">
+                            Add Photos
+                            <span class="font-normal text-text-muted">
+                                (Optional)
+                            </span>
+                        </label>
+
+
+                        <label
+                            for="photoInput"
+                            class="border-2 border-dashed border-outline-light hover:border-secondary bg-slate-50 p-8 flex flex-col items-center justify-center text-center cursor-pointer"
+                        >
+
+                            <span class="material-symbols-outlined text-secondary text-3xl mb-2">
+                                add_photo_alternate
+                            </span>
+
+                            <span class="font-semibold text-sm">
+                                Click to upload photos
+                            </span>
+
+                            <span class="text-xs text-text-muted mt-1">
+                                JPEG, PNG up to 10MB
+                            </span>
+
+                        </label>
+
+                        <input
+                            id="photoInput"
+                            type="file"
+                            accept="image/*"
+                            multiple
+                            class="hidden"
+                            onchange="showSelectedPhotos()"
+                        >
+
+                        <div
+                            id="photoPreview"
+                            class="grid grid-cols-3 gap-2 mt-3"
+                        ></div>
+
+                    </div>
+
+
+                    <!-- CONTACT -->
+
+                    <div class="border-t border-outline-light pt-6">
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+                            <div>
+
+                                <label
+                                    for="phone-num"
+                                    class="block font-semibold text-sm mb-1"
+                                >
+                                    Mobile Number
+                                    <span class="font-normal text-xs text-text-muted">
+                                        (Optional)
+                                    </span>
+                                </label>
+
+                                <input
+                                    id="phone-num"
+                                    type="tel"
+                                    placeholder="Enter mobile number"
+                                    class="w-full bg-slate-50 border border-outline-light p-3 text-sm"
+                                >
+
+                            </div>
+
+
+                            <div>
+
+                                <label
+                                    for="citizen-name"
+                                    class="block font-semibold text-sm mb-1"
+                                >
+                                    Full Name
+                                </label>
+
+                                <input
+                                    id="citizen-name"
+                                    type="text"
+                                    placeholder="Enter your name"
+                                    class="w-full bg-slate-50 border border-outline-light p-3 text-sm"
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Privacy -->
+
+                        <div class="flex items-start gap-2 bg-surface-low p-3 border border-outline-light mt-4">
+
+                            <span class="material-symbols-outlined text-text-muted text-lg">
+                                security
+                            </span>
+
+                            <p class="text-xs text-text-muted">
+
+                                <strong class="text-text-main">
+                                    Civic Privacy Guarantee:
+                                </strong>
+
+                                Your personal information is kept confidential
+                                and is not displayed publicly with your complaint.
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- SUBMIT -->
+
+                    <button
+                        id="submitButton"
+                        type="submit"
+                        class="w-full py-4 px-6 bg-secondary text-white font-headline text-lg font-bold flex items-center justify-center gap-2 hover:opacity-90"
+                    >
+
+                        <span class="material-symbols-outlined text-xl">
+                            smart_toy
+                        </span>
+
+                        Submit Report for Dispatch
+
+                    </button>
+
+
+                    <!-- STATUS -->
+
+                    <div
+                        id="submitStatus"
+                        class="hidden p-4 text-sm border"
+                    ></div>
+
+                </form>
+
+            </section>
+
+
+            <!-- ================= RIGHT COLUMN ================= -->
+
+            <section class="lg:col-span-5 space-y-6">
+
+
+                <!-- AI CARD -->
+
+                <div class="bg-white border-2 border-secondary p-5">
+
+                    <div class="flex items-center justify-between border-b border-outline-light pb-4 mb-4">
+
+                        <div class="flex items-center gap-2">
+
+                            <div class="w-7 h-7 bg-secondary flex items-center justify-center text-white">
+
+                                <span class="material-symbols-outlined text-base">
+                                    psychology
+                                </span>
+
+                            </div>
+
+                            <h2 class="font-headline text-lg font-bold">
+                                AI Understanding
+                            </h2>
+
+                        </div>
+
+                        <span class="text-xs px-2 py-1 bg-surface-container border border-outline-light">
+                            AI Assisted
+                        </span>
+
+                    </div>
+
+
+                    <p class="text-sm text-text-muted mb-5">
+
+                        Your complaint will be analyzed by the
+                        civic AI system and converted into a structured
+                        municipal record.
+
+                    </p>
+
+
+                    <!-- Category -->
+
+                    <div class="border-t border-outline-light py-4">
+
+                        <div class="flex items-start gap-3">
+
+                            <span class="material-symbols-outlined text-secondary">
+                                category
+                            </span>
+
+                            <div>
+
+                                <span class="text-xs text-text-muted uppercase tracking-wider">
+                                    Identified Category
+                                </span>
+
+                                <p
+                                    id="aiCategory"
+                                    class="font-semibold mt-1"
+                                >
+                                    Waiting for your complaint...
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Location -->
+
+                    <div class="border-t border-outline-light py-4">
+
+                        <div class="flex items-start gap-3">
+
+                            <span class="material-symbols-outlined text-secondary">
+                                location_on
+                            </span>
+
+                            <div>
+
+                                <span class="text-xs text-text-muted uppercase tracking-wider">
+                                    Location
+                                </span>
+
+                                <p
+                                    id="aiLocation"
+                                    class="font-semibold mt-1"
+                                >
+                                    Not yet detected
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Severity -->
+
+                    <div class="border-t border-outline-light py-4">
+
+                        <div class="flex items-start gap-3">
+
+                            <span class="material-symbols-outlined text-secondary">
+                                warning
+                            </span>
+
+                            <div>
+
+                                <span class="text-xs text-text-muted uppercase tracking-wider">
+                                    Severity &amp; Urgency
+                                </span>
+
+                                <p
+                                    id="aiSeverity"
+                                    class="font-semibold text-text-muted mt-1"
+                                >
+                                    Will be determined by AI
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Language -->
+
+                    <div class="border-t border-outline-light py-4">
+
+                        <div class="flex items-start gap-3">
+
+                            <span class="material-symbols-outlined text-secondary">
+                                translate
+                            </span>
+
+                            <div>
+
+                                <span class="text-xs text-text-muted uppercase tracking-wider">
+                                    Input Language
+                                </span>
+
+                                <p
+                                    id="aiLanguage"
+                                    class="font-semibold mt-1"
+                                >
+                                    Automatic detection
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Confirmation -->
+
+                    <div class="mt-4 bg-surface-container p-4 border border-outline-light">
+
+                        <h3 class="font-headline text-lg font-bold mb-2">
+                            What happens next?
+                        </h3>
+
+                        <p class="text-sm text-text-muted">
+
+                            After submission, Sheher Saathi creates
+                            a ticket and routes the complaint to the
+                            appropriate municipal department.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- WARD INFO -->
+
+                <div class="bg-white border border-outline-light p-5">
+
+                    <h3 class="font-headline font-bold uppercase tracking-wider text-sm mb-4 flex items-center gap-2">
+
+                        <span class="material-symbols-outlined text-secondary">
+                            account_balance
+                        </span>
+
+                        Municipal Responsibility
+
+                    </h3>
+
+
+                    <div class="space-y-3 text-sm">
+
+                        <div class="flex justify-between gap-4 border-b border-outline-light pb-2">
+
+                            <span class="text-text-muted">
+                                Department
+                            </span>
+
+                            <span
+                                id="departmentValue"
+                                class="font-semibold text-right"
+                            >
+                                AI will identify
+                            </span>
+
+                        </div>
+
+
+                        <div class="flex justify-between gap-4 border-b border-outline-light pb-2">
+
+                            <span class="text-text-muted">
+                                Ward
+                            </span>
+
+                            <span
+                                id="wardValue"
+                                class="font-semibold text-right"
+                            >
+                                AI will identify
+                            </span>
+
+                        </div>
+
+
+                        <div class="flex justify-between gap-4">
+
+                            <span class="text-text-muted">
+                                Expected SLA
+                            </span>
+
+                            <span class="font-semibold text-secondary text-right">
+                                Based on issue severity
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </div>
+
+
+        <!-- ================= TRUST BANNER ================= -->
+
+        <section class="mt-12 border border-outline-light bg-white p-6">
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+
+                <div class="flex items-start gap-3">
+
+                    <div class="w-10 h-10 bg-surface-container flex items-center justify-center text-secondary font-bold shrink-0">
+                        01
+                    </div>
+
+                    <div>
+
+                        <h3 class="font-headline font-bold">
+                            Zero Bureaucracy
+                        </h3>
+
+                        <p class="text-sm text-text-muted mt-1">
+                            Describe your problem naturally.
+                            You don't need to know which department
+                            handles it.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="flex items-start gap-3">
+
+                    <div class="w-10 h-10 bg-surface-container flex items-center justify-center text-secondary font-bold shrink-0">
+                        02
+                    </div>
+
+                    <div>
+
+                        <h3 class="font-headline font-bold">
+                            Public Accountability
+                        </h3>
+
+                        <p class="text-sm text-text-muted mt-1">
+                            Every complaint receives a trackable
+                            ticket ID.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="flex items-start gap-3">
+
+                    <div class="w-10 h-10 bg-surface-container flex items-center justify-center text-secondary font-bold shrink-0">
+                        03
+                    </div>
+
+                    <div>
+
+                        <h3 class="font-headline font-bold">
+                            Community Support
+                        </h3>
+
+                        <p class="text-sm text-text-muted mt-1">
+                            Similar neighbourhood complaints can
+                            be grouped to highlight recurring issues.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer class="bg-white border-t border-outline-light mt-12 pb-20 md:pb-0">
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+
+
+                <div>
+
+                    <div class="flex items-center gap-2 mb-3">
+
+                        <div class="w-8 h-8 bg-secondary text-white flex items-center justify-center">
+
+                            <span class="material-symbols-outlined">
+                                account_balance
+                            </span>
+
+                        </div>
+
+                        <span class="font-headline font-bold">
+                            Sheher Saathi
+                        </span>
+
+                    </div>
+
+                    <p class="text-sm text-text-muted leading-relaxed">
+
+                        Civic technology that connects citizens
+                        with municipal authorities.
+
+                    </p>
+
+                    <p class="text-sm font-semibold mt-4">
+                        Civic Toll Free: 1916
+                    </p>
+
+                </div>
+
+
+                <div>
+
+                    <h4 class="font-bold uppercase text-sm mb-4">
+                        Citizen Services
+                    </h4>
+
+                    <ul class="space-y-2 text-sm text-text-muted">
+
+                        <li>
+                            <a href="report.html" class="hover:text-secondary">
+                                Report an Issue
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="community.html" class="hover:text-secondary">
+                                Community Issues
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="reports.html" class="hover:text-secondary">
+                                Track Report
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <div>
+
+                    <h4 class="font-bold uppercase text-sm mb-4">
+                        Municipal Zones
+                    </h4>
+
+                    <ul class="space-y-2 text-sm text-text-muted">
+
+                        <li>South Zone</li>
+                        <li>East Zone</li>
+                        <li>Mahadevapura</li>
+                        <li>Bommanahalli</li>
+
+                    </ul>
+
+                </div>
+
+
+                <div>
+
+                    <h4 class="font-bold uppercase text-sm mb-4">
+                        Civic Transparency
+                    </h4>
+
+                    <p class="text-sm text-text-muted leading-relaxed">
+                        Reports are designed to improve transparency
+                        between citizens and municipal authorities.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="border-t border-outline-light mt-8 pt-5 text-sm text-text-muted">
+
+                © 2026 Sheher Saathi Civic Tech Initiative.
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <!-- ================= MOBILE NAV ================= -->
+
+    <nav class="md:hidden fixed bottom-0 left-0 w-full z-50 bg-white border-t border-outline-light">
+
+        <div class="grid grid-cols-4">
+
+            <a
+                href="report.html"
+                class="flex flex-col items-center py-3 text-secondary font-bold"
+            >
+                <span class="material-symbols-outlined text-xl">
+                    add_circle
+                </span>
+
+                <span class="text-xs">
+                    Report
+                </span>
+            </a>
+
+
+            <a
+                href="community.html"
+                class="flex flex-col items-center py-3 text-text-muted"
+            >
+                <span class="material-symbols-outlined text-xl">
+                    list_alt
+                </span>
+
+                <span class="text-xs">
+                    Community
+                </span>
+            </a>
+
+
+            <a
+                href="reports.html"
+                class="flex flex-col items-center py-3 text-text-muted"
+            >
+                <span class="material-symbols-outlined text-xl">
+                    track_changes
+                </span>
+
+                <span class="text-xs">
+                    Track
+                </span>
+            </a>
+
+
+            <a
+                href="index.html"
+                class="flex flex-col items-center py-3 text-text-muted"
+            >
+                <span class="material-symbols-outlined text-xl">
+                    home
+                </span>
+
+                <span class="text-xs">
+                    Home
+                </span>
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script>
+
+        /*
+         * Submit complaint
+         * Backend connection will be enabled later.
+         */
+
+        async function submitComplaint(event) {
+
+            event.preventDefault();
+
+            const complaintText =
+                document.getElementById("grievance-text").value.trim();
+
+            const location =
+                document.getElementById("location-input").value.trim();
+
+            const status =
+                document.getElementById("submitStatus");
+
+            const button =
+                document.getElementById("submitButton");
+
+
+            if (!complaintText) {
+
+                alert("Please describe your issue.");
+
+                return;
+
+            }
+
+
+            if (!location) {
+
+                alert("Please enter your location.");
+
+                return;
+
+            }
+
+
+            button.disabled = true;
+
+            button.innerHTML =
+                '<span class="material-symbols-outlined animate-spin">progress_activity</span> Processing...';
+
+
+            status.className =
+                "p-4 text-sm border border-blue-200 bg-blue-50 text-blue-800";
+
+            status.textContent =
+                "Your complaint is being prepared for submission...";
+
+            status.classList.remove("hidden");
+
+
+            /*
+             * Backend connection will be added here.
+             *
+             * API:
+             * POST http://127.0.0.1:8000/complaints
+             */
+
+
+            setTimeout(function () {
+
+                status.className =
+                    "p-4 text-sm border border-green-200 bg-green-50 text-green-800";
+
+                status.innerHTML =
+                    "<strong>Report ready!</strong><br>" +
+                    "Backend connection will be activated in the next step.";
+
+                button.disabled = false;
+
+                button.innerHTML =
+                    '<span class="material-symbols-outlined">smart_toy</span> Submit Report for Dispatch';
+
+            }, 800);
+
+        }
+
+
+        /*
+         * Voice placeholder
+         */
+
+        function startVoice() {
+
+            alert(
+                "Voice reporting will be connected after the main text reporting flow is complete."
+            );
+
+        }
+
+
+        /*
+         * Location detection
+         */
+
+        function detectLocation() {
+
+            if (!navigator.geolocation) {
+
+                alert(
+                    "Location detection is not supported by this browser."
+                );
+
+                return;
+
+            }
+
+
+            navigator.geolocation.getCurrentPosition(
+
+                function(position) {
+
+                    document.getElementById("location-input").value =
+                        "Location detected (" +
+                        position.coords.latitude.toFixed(4) +
+                        ", " +
+                        position.coords.longitude.toFixed(4) +
+                        ")";
+
+                },
+
+                function() {
+
+                    alert(
+                        "Could not detect your location. Please enter it manually."
+                    );
+
+                }
+
+            );
+
+        }
+
+
+        /*
+         * Photo preview
+         */
+
+        function showSelectedPhotos() {
+
+            const input =
+                document.getElementById("photoInput");
+
+            const preview =
+                document.getElementById("photoPreview");
+
+            preview.innerHTML = "";
+
+
+            Array.from(input.files)
+                .slice(0, 3)
+                .forEach(function(file) {
+
+                    const reader =
+                        new FileReader();
+
+
+                    reader.onload = function(event) {
+
+                        const image =
+                            document.createElement("img");
+
+                        image.src =
+                            event.target.result;
+
+                        image.className =
+                            "w-full h-24 object-cover border border-outline-light";
+
+                        preview.appendChild(image);
+
+                    };
+
+
+                    reader.readAsDataURL(file);
+
+                });
+
+        }
+
+    </script>
+
+</body>
+</html>
