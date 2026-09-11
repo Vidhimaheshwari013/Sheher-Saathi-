@@ -213,7 +213,6 @@
     </div>
   </div>
 
-
   <!-- CITIZEN HEADER -->
   <header class="sticky top-0 z-40 bg-surface border-b border-outline-variant">
 
@@ -247,7 +246,6 @@
 
       </div>
 
-
       <!-- Main Navigation -->
       <nav class="hidden lg:flex items-center space-x-6 text-label-md font-label-md">
 
@@ -274,7 +272,6 @@
 
       </nav>
 
-
       <!-- Raise Ticket -->
       <div class="flex items-center gap-3">
 
@@ -294,10 +291,8 @@
     </div>
   </header>
 
-
   <!-- MAIN CANVAS -->
   <main class="flex-1 max-w-7xl w-full mx-auto px-margin py-space-xl space-y-space-xl">
-
 
     <!-- HERO & CIVIC SEARCH AREA -->
     <section class="bg-surface-container-lowest border border-outline-variant p-space-lg md:p-space-xl">
@@ -332,7 +327,6 @@
 
           </div>
 
-
           <div class="md:col-span-3">
 
             <select
@@ -348,7 +342,6 @@
             </select>
 
           </div>
-
 
           <div class="md:col-span-3">
 
@@ -368,7 +361,6 @@
       </div>
 
     </section>
-
 
     <!-- TRENDING CIVIC ISSUES -->
     <section class="bg-surface-container-high border-l-4 border-l-secondary border border-outline-variant p-space-md">
@@ -406,7 +398,6 @@
 
     </section>
 
-
     <!-- LIVE HOTSPOT MAP -->
     <section
       id="hotspots-map"
@@ -439,7 +430,6 @@
           </p>
 
         </div>
-
 
         <div class="flex items-center gap-2">
 
@@ -480,7 +470,6 @@
         </div>
 
       </div>
-
 
       <!-- Map Layers -->
       <div class="px-space-md py-2 bg-surface-container-low border-b border-outline-variant/60 flex flex-wrap items-center justify-between gap-2 text-label-sm">
@@ -533,7 +522,6 @@
 
         </div>
 
-
         <div class="flex items-center gap-2">
 
           <span class="material-symbols-outlined text-secondary text-[16px]">
@@ -551,7 +539,6 @@
         </div>
 
       </div>
-
 
       <!-- Map -->
       <div class="relative bg-[#edf2f8] h-96 w-full overflow-hidden select-none">
@@ -595,7 +582,6 @@
 
           </defs>
 
-
           <rect
             fill="#eff4fa"
             height="100%"
@@ -613,7 +599,6 @@
             height="100%"
             width="100%"
           ></rect>
-
 
           <path
             d="M-20,120 Q240,160 480,110 T1020,180"
@@ -650,7 +635,6 @@
             stroke-width="6"
           ></path>
 
-
           <polygon
             fill="#dce9ff"
             opacity="0.6"
@@ -674,7 +658,6 @@
             opacity="0.5"
             points="280,260 520,250 500,440 250,420"
           ></polygon>
-
 
           <circle
             cx="480"
@@ -707,7 +690,6 @@
             opacity="0.25"
             r="55"
           ></circle>
-
 
           <text
             fill="#76777c"
@@ -771,7 +753,6 @@
 
         </svg>
 
-
         <!-- Rajpur Road Marker -->
         <div class="absolute left-[24%] top-[34%] -translate-x-1/2 -translate-y-1/2 cursor-pointer">
 
@@ -794,7 +775,6 @@
           </div>
 
         </div>
-
 
         <!-- Prem Nagar Marker -->
         <div class="absolute left-[48%] top-[36%] -translate-x-1/2 -translate-y-1/2 z-20">
@@ -821,7 +801,6 @@
 
         </div>
 
-
         <!-- Indiranagar Marker -->
         <div class="absolute left-[70%] top-[42%] -translate-x-1/2 -translate-y-1/2 cursor-pointer">
 
@@ -838,7 +817,6 @@
           </div>
 
         </div>
-
 
         <!-- Patel Nagar Marker -->
         <div class="absolute left-[34%] top-[72%] -translate-x-1/2 -translate-y-1/2 cursor-pointer">
@@ -857,7 +835,6 @@
 
         </div>
 
-
         <!-- Koramangala Marker -->
         <div class="absolute left-[72%] top-[68%] -translate-x-1/2 -translate-y-1/2 cursor-pointer">
 
@@ -874,7 +851,6 @@
           </div>
 
         </div>
-
 
         <!-- Active Cluster Focus -->
         <div class="absolute top-4 left-4 z-10 max-w-xs bg-surface-container-lowest border-2 border-primary p-3 space-y-2">
@@ -897,7 +873,6 @@
 
           </div>
 
-
           <div>
 
             <h4 class="font-headline-sm text-body-md font-bold text-on-surface">
@@ -913,7 +888,6 @@
             </p>
 
           </div>
-
 
           <div class="flex items-center justify-between pt-1">
 
@@ -936,7 +910,6 @@
 
         </div>
 
-
         <!-- Zoom Controls -->
         <div class="absolute top-4 right-4 flex flex-col border border-outline-variant bg-surface-container-lowest z-10">
 
@@ -957,7 +930,6 @@
           </button>
 
         </div>
-
 
         <!-- Map Legend -->
         <div class="absolute bottom-3 right-4 bg-surface-container-lowest/95 border border-outline-variant p-2 z-10 flex items-center gap-4 text-body-sm">
@@ -1002,10 +974,8 @@
 
     </section>
 
-
     <!-- MAIN CONTENT GRID -->
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
-
 
       <!-- LEFT 8 COLUMNS -->
       <section
@@ -1041,460 +1011,440 @@
 
         </div>
 
+        <!-- DYNAMIC COMMUNITY ISSUES CONTAINER -->
+        <div id="communityIssuesList">
 
-        <!-- ISSUE 1 -->
-        <article class="bg-surface-container-lowest border border-outline-variant p-space-lg space-y-4 hover:border-outline transition-none">
+          <!-- ISSUE 1 -->
+          <article class="bg-surface-container-lowest border border-outline-variant p-space-lg space-y-4 hover:border-outline transition-none">
 
-          <div class="flex flex-wrap items-center justify-between gap-2">
+            <div class="flex flex-wrap items-center justify-between gap-2">
 
-            <div class="flex items-center gap-2">
+              <div class="flex items-center gap-2">
 
-              <span class="px-2.5 py-0.5 bg-error-container text-on-error-container font-label-sm font-bold">
-                High Activity • 9 Reports
-              </span>
+                <span class="px-2.5 py-0.5 bg-error-container text-on-error-container font-label-sm font-bold">
+                  High Activity • 9 Reports
+                </span>
 
-              <span class="text-label-sm text-outline">
-                Drainage &amp; Waterlogging
+                <span class="text-label-sm text-outline">
+                  Drainage &amp; Waterlogging
+                </span>
+
+              </div>
+
+              <span class="text-body-sm text-outline flex items-center gap-1">
+
+                <span class="material-symbols-outlined text-[14px]">
+                  schedule
+                </span>
+
+                14h ago
               </span>
 
             </div>
 
-            <span class="text-body-sm text-outline flex items-center gap-1">
+            <div>
 
-              <span class="material-symbols-outlined text-[14px]">
-                schedule
-              </span>
+              <h3 class="text-headline-sm font-headline-sm font-bold text-on-surface leading-snug">
+                Severe Waterlogging on Rajpur Road near Canal Crossing
+              </h3>
 
-              14h ago
-            </span>
+              <p class="text-body-sm text-outline flex items-center gap-1 mt-1">
 
-          </div>
+                <span class="material-symbols-outlined text-[16px] text-secondary">
+                  pin_drop
+                </span>
 
+                Rajpur Road, Ward 14 (Near Old Bridge Junction)
+              </p>
 
-          <div>
+            </div>
 
-            <h3 class="text-headline-sm font-headline-sm font-bold text-on-surface leading-snug">
-              Severe Waterlogging on Rajpur Road near Canal Crossing
-            </h3>
-
-            <p class="text-body-sm text-outline flex items-center gap-1 mt-1">
-
-              <span class="material-symbols-outlined text-[16px] text-secondary">
-                pin_drop
-              </span>
-
-              Rajpur Road, Ward 14 (Near Old Bridge Junction)
+            <p class="text-body-md text-on-surface-variant leading-relaxed">
+              Multiple citizens reported 1.5-foot stagnant water after recent evening showers blocking scooter commute and pedestrians. Silt accumulation near culvert #4.
             </p>
 
-          </div>
+            <div class="flex items-center gap-2 text-label-sm text-on-surface">
 
-
-          <p class="text-body-md text-on-surface-variant leading-relaxed">
-            Multiple citizens reported 1.5-foot stagnant water after recent evening showers blocking scooter commute and pedestrians. Silt accumulation near culvert #4.
-          </p>
-
-
-          <div class="flex items-center gap-2 text-label-sm text-on-surface">
-
-            <span class="w-2 h-2 rounded-full bg-secondary shrink-0"></span>
-
-            <span>
-              <strong>Status:</strong>
-              Jetting vehicle dispatched by Ward 14 Assistant Engineer
-            </span>
-
-          </div>
-
-
-          <div class="pt-3 flex flex-wrap items-center justify-between gap-3 border-t border-outline-variant/30">
-
-            <button
-              type="button"
-              class="bg-secondary text-on-secondary px-4 py-2 font-label-md font-semibold flex items-center gap-2 rounded-none hover:bg-secondary/90"
-            >
-              <span class="material-symbols-outlined text-[16px]">
-                arrow_upward
-              </span>
+              <span class="w-2 h-2 rounded-full bg-secondary shrink-0"></span>
 
               <span>
-                48 Affected (Upvote)
+                <strong>Status:</strong>
+                Jetting vehicle dispatched by Ward 14 Assistant Engineer
               </span>
-            </button>
 
+            </div>
 
-            <div class="flex items-center gap-2">
+            <div class="pt-3 flex flex-wrap items-center justify-between gap-3 border-t border-outline-variant/30">
 
               <button
                 type="button"
-                class="border border-outline-variant bg-surface px-4 py-2 font-label-md text-on-surface flex items-center gap-1.5 rounded-none hover:bg-surface-container"
+                class="bg-secondary text-on-secondary px-4 py-2 font-label-md font-semibold flex items-center gap-2 rounded-none hover:bg-secondary/90"
               >
                 <span class="material-symbols-outlined text-[16px]">
-                  forum
+                  arrow_upward
                 </span>
 
                 <span>
-                  Discussion &amp; Photos (4)
+                  48 Affected (Upvote)
                 </span>
               </button>
+
+              <div class="flex items-center gap-2">
+
+                <button
+                  type="button"
+                  class="border border-outline-variant bg-surface px-4 py-2 font-label-md text-on-surface flex items-center gap-1.5 rounded-none hover:bg-surface-container"
+                >
+                  <span class="material-symbols-outlined text-[16px]">
+                    forum
+                  </span>
+
+                  <span>
+                    Discussion &amp; Photos (4)
+                  </span>
+                </button>
+
+                <button
+                  type="button"
+                  class="border border-outline-variant bg-surface p-2 text-on-surface rounded-none hover:bg-surface-container"
+                  title="Share"
+                >
+                  <span class="material-symbols-outlined text-[18px]">
+                    share
+                  </span>
+                </button>
+
+              </div>
+
+            </div>
+
+          </article>
+
+          <!-- ISSUE 2 -->
+          <article class="bg-surface-container-lowest border border-outline-variant p-space-lg space-y-4 hover:border-outline transition-none">
+
+            <div class="flex flex-wrap items-center justify-between gap-2">
+
+              <div class="flex items-center gap-2">
+
+                <span class="px-2.5 py-0.5 bg-secondary-fixed text-on-secondary-fixed font-label-sm font-bold">
+                  Active • 6 Reports
+                </span>
+
+                <span class="text-label-sm text-outline">
+                  Roads &amp; Potholes
+                </span>
+
+              </div>
+
+              <span class="text-body-sm text-outline flex items-center gap-1">
+
+                <span class="material-symbols-outlined text-[14px]">
+                  schedule
+                </span>
+
+                Yesterday
+              </span>
+
+            </div>
+
+            <div>
+
+              <h3 class="text-headline-sm font-headline-sm font-bold text-on-surface leading-snug">
+                Deep asphalt crater &amp; caved-in road near Prem Nagar Market Gate
+              </h3>
+
+              <p class="text-body-sm text-outline flex items-center gap-1 mt-1">
+
+                <span class="material-symbols-outlined text-[16px] text-secondary">
+                  pin_drop
+                </span>
+
+                Prem Nagar Main Road, Ward 28 (Opposite State Bank)
+              </p>
+
+            </div>
+
+            <p class="text-body-md text-on-surface-variant leading-relaxed">
+              Sharp edge potholes causing severe 2-wheeler traffic slowdown during morning office peak hours. Multiple residents reported rim damage and skidding risks.
+            </p>
+
+            <div class="flex items-center gap-2 text-label-sm text-on-surface">
+
+              <span class="w-2 h-2 rounded-full bg-secondary shrink-0"></span>
+
+              <span>
+                <strong>Status:</strong>
+                Material patch work scheduled by Ward Crew for tomorrow morning
+              </span>
+
+            </div>
+
+            <div class="pt-3 flex flex-wrap items-center justify-between gap-3 border-t border-outline-variant/30">
 
               <button
                 type="button"
-                class="border border-outline-variant bg-surface p-2 text-on-surface rounded-none hover:bg-surface-container"
-                title="Share"
-              >
-                <span class="material-symbols-outlined text-[18px]">
-                  share
-                </span>
-              </button>
-
-            </div>
-
-          </div>
-
-        </article>
-
-
-        <!-- ISSUE 2 -->
-        <article class="bg-surface-container-lowest border border-outline-variant p-space-lg space-y-4 hover:border-outline transition-none">
-
-          <div class="flex flex-wrap items-center justify-between gap-2">
-
-            <div class="flex items-center gap-2">
-
-              <span class="px-2.5 py-0.5 bg-secondary-fixed text-on-secondary-fixed font-label-sm font-bold">
-                Active • 6 Reports
-              </span>
-
-              <span class="text-label-sm text-outline">
-                Roads &amp; Potholes
-              </span>
-
-            </div>
-
-            <span class="text-body-sm text-outline flex items-center gap-1">
-
-              <span class="material-symbols-outlined text-[14px]">
-                schedule
-              </span>
-
-              Yesterday
-            </span>
-
-          </div>
-
-
-          <div>
-
-            <h3 class="text-headline-sm font-headline-sm font-bold text-on-surface leading-snug">
-              Deep asphalt crater &amp; caved-in road near Prem Nagar Market Gate
-            </h3>
-
-            <p class="text-body-sm text-outline flex items-center gap-1 mt-1">
-
-              <span class="material-symbols-outlined text-[16px] text-secondary">
-                pin_drop
-              </span>
-
-              Prem Nagar Main Road, Ward 28 (Opposite State Bank)
-            </p>
-
-          </div>
-
-
-          <p class="text-body-md text-on-surface-variant leading-relaxed">
-            Sharp edge potholes causing severe 2-wheeler traffic slowdown during morning office peak hours. Multiple residents reported rim damage and skidding risks.
-          </p>
-
-
-          <div class="flex items-center gap-2 text-label-sm text-on-surface">
-
-            <span class="w-2 h-2 rounded-full bg-secondary shrink-0"></span>
-
-            <span>
-              <strong>Status:</strong>
-              Material patch work scheduled by Ward Crew for tomorrow morning
-            </span>
-
-          </div>
-
-
-          <div class="pt-3 flex flex-wrap items-center justify-between gap-3 border-t border-outline-variant/30">
-
-            <button
-              type="button"
-              class="bg-secondary text-on-secondary px-4 py-2 font-label-md font-semibold flex items-center gap-2 rounded-none hover:bg-secondary/90"
-            >
-              <span class="material-symbols-outlined text-[16px]">
-                arrow_upward
-              </span>
-
-              <span>
-                32 Affected (Upvote)
-              </span>
-            </button>
-
-
-            <div class="flex items-center gap-2">
-
-              <a
-                href="#hotspots-map"
-                class="border border-outline-variant bg-surface px-4 py-2 font-label-md text-on-surface flex items-center gap-1.5 rounded-none hover:bg-surface-container"
+                class="bg-secondary text-on-secondary px-4 py-2 font-label-md font-semibold flex items-center gap-2 rounded-none hover:bg-secondary/90"
               >
                 <span class="material-symbols-outlined text-[16px]">
-                  map
+                  arrow_upward
                 </span>
 
                 <span>
-                  View Map &amp; Updates
-                </span>
-              </a>
-
-              <button
-                type="button"
-                class="border border-outline-variant bg-surface p-2 text-on-surface rounded-none hover:bg-surface-container"
-                title="Share"
-              >
-                <span class="material-symbols-outlined text-[18px]">
-                  share
+                  32 Affected (Upvote)
                 </span>
               </button>
 
+              <div class="flex items-center gap-2">
+
+                <a
+                  href="#hotspots-map"
+                  class="border border-outline-variant bg-surface px-4 py-2 font-label-md text-on-surface flex items-center gap-1.5 rounded-none hover:bg-surface-container"
+                >
+                  <span class="material-symbols-outlined text-[16px]">
+                    map
+                  </span>
+
+                  <span>
+                    View Map &amp; Updates
+                  </span>
+                </a>
+
+                <button
+                  type="button"
+                  class="border border-outline-variant bg-surface p-2 text-on-surface rounded-none hover:bg-surface-container"
+                  title="Share"
+                >
+                  <span class="material-symbols-outlined text-[18px]">
+                    share
+                  </span>
+                </button>
+
+              </div>
+
             </div>
 
-          </div>
+          </article>
 
-        </article>
+          <!-- ISSUE 3 -->
+          <article class="bg-surface-container-lowest border border-outline-variant p-space-lg space-y-4 hover:border-outline transition-none">
 
+            <div class="flex flex-wrap items-center justify-between gap-2">
 
-        <!-- ISSUE 3 -->
-        <article class="bg-surface-container-lowest border border-outline-variant p-space-lg space-y-4 hover:border-outline transition-none">
+              <div class="flex items-center gap-2">
 
-          <div class="flex flex-wrap items-center justify-between gap-2">
+                <span class="px-2.5 py-0.5 bg-surface-container text-on-surface font-label-sm font-bold">
+                  4 Reports
+                </span>
 
-            <div class="flex items-center gap-2">
+                <span class="text-label-sm text-outline">
+                  Street Lighting &amp; Electrical
+                </span>
 
-              <span class="px-2.5 py-0.5 bg-surface-container text-on-surface font-label-sm font-bold">
-                4 Reports
-              </span>
+              </div>
 
-              <span class="text-label-sm text-outline">
-                Street Lighting &amp; Electrical
+              <span class="text-body-sm text-outline flex items-center gap-1">
+
+                <span class="material-symbols-outlined text-[14px]">
+                  schedule
+                </span>
+
+                2 days ago
               </span>
 
             </div>
 
-            <span class="text-body-sm text-outline flex items-center gap-1">
+            <div>
 
-              <span class="material-symbols-outlined text-[14px]">
-                schedule
-              </span>
+              <h3 class="text-headline-sm font-headline-sm font-bold text-on-surface leading-snug">
+                Multiple consecutive dark streetlights along Patel Nagar 80ft Road
+              </h3>
 
-              2 days ago
-            </span>
+              <p class="text-body-sm text-outline flex items-center gap-1 mt-1">
 
-          </div>
+                <span class="material-symbols-outlined text-[16px] text-secondary">
+                  pin_drop
+                </span>
 
+                Patel Nagar, Sector 4, Ward 52
+              </p>
 
-          <div>
+            </div>
 
-            <h3 class="text-headline-sm font-headline-sm font-bold text-on-surface leading-snug">
-              Multiple consecutive dark streetlights along Patel Nagar 80ft Road
-            </h3>
-
-            <p class="text-body-sm text-outline flex items-center gap-1 mt-1">
-
-              <span class="material-symbols-outlined text-[16px] text-secondary">
-                pin_drop
-              </span>
-
-              Patel Nagar, Sector 4, Ward 52
+            <p class="text-body-md text-on-surface-variant leading-relaxed">
+              Stretch of 5 sodium lights non-operational creating safety hazard for evening walkers and commuters. Feed wire break suspected near Pole #18.
             </p>
 
-          </div>
+            <div class="flex items-center gap-2 text-label-sm text-on-surface">
 
-
-          <p class="text-body-md text-on-surface-variant leading-relaxed">
-            Stretch of 5 sodium lights non-operational creating safety hazard for evening walkers and commuters. Feed wire break suspected near Pole #18.
-          </p>
-
-
-          <div class="flex items-center gap-2 text-label-sm text-on-surface">
-
-            <span class="w-2 h-2 rounded-full bg-secondary shrink-0"></span>
-
-            <span>
-              <strong>Status:</strong>
-              Lineman assigned • Bulb replacement queued on Work Order #8821
-            </span>
-
-          </div>
-
-
-          <div class="pt-3 flex flex-wrap items-center justify-between gap-3 border-t border-outline-variant/30">
-
-            <button
-              type="button"
-              class="bg-secondary text-on-secondary px-4 py-2 font-label-md font-semibold flex items-center gap-2 rounded-none hover:bg-secondary/90"
-            >
-              <span class="material-symbols-outlined text-[16px]">
-                arrow_upward
-              </span>
+              <span class="w-2 h-2 rounded-full bg-secondary shrink-0"></span>
 
               <span>
-                19 Affected (Upvote)
+                <strong>Status:</strong>
+                Lineman assigned • Bulb replacement queued on Work Order #8821
               </span>
-            </button>
 
+            </div>
 
-            <div class="flex items-center gap-2">
+            <div class="pt-3 flex flex-wrap items-center justify-between gap-3 border-t border-outline-variant/30">
 
               <button
                 type="button"
-                class="border border-outline-variant bg-surface px-4 py-2 font-label-md text-on-surface flex items-center gap-1.5 rounded-none hover:bg-surface-container"
+                class="bg-secondary text-on-secondary px-4 py-2 font-label-md font-semibold flex items-center gap-2 rounded-none hover:bg-secondary/90"
               >
                 <span class="material-symbols-outlined text-[16px]">
-                  visibility
+                  arrow_upward
                 </span>
 
                 <span>
-                  View Details
+                  19 Affected (Upvote)
                 </span>
               </button>
 
-              <button
-                type="button"
-                class="border border-outline-variant bg-surface p-2 text-on-surface rounded-none hover:bg-surface-container"
-                title="Share"
-              >
-                <span class="material-symbols-outlined text-[18px]">
-                  share
+              <div class="flex items-center gap-2">
+
+                <button
+                  type="button"
+                  class="border border-outline-variant bg-surface px-4 py-2 font-label-md text-on-surface flex items-center gap-1.5 rounded-none hover:bg-surface-container"
+                >
+                  <span class="material-symbols-outlined text-[16px]">
+                    visibility
+                  </span>
+
+                  <span>
+                    View Details
+                  </span>
+                </button>
+
+                <button
+                  type="button"
+                  class="border border-outline-variant bg-surface p-2 text-on-surface rounded-none hover:bg-surface-container"
+                  title="Share"
+                >
+                  <span class="material-symbols-outlined text-[18px]">
+                    share
+                  </span>
+                </button>
+
+              </div>
+
+            </div>
+
+          </article>
+
+          <!-- ISSUE 4 -->
+          <article class="bg-surface-container-lowest border border-outline-variant p-space-lg space-y-4 hover:border-outline transition-none">
+
+            <div class="flex flex-wrap items-center justify-between gap-2">
+
+              <div class="flex items-center gap-2">
+
+                <span class="px-2.5 py-0.5 bg-surface-container text-on-surface font-label-sm font-bold">
+                  5 Reports
                 </span>
-              </button>
 
-            </div>
+                <span class="text-label-sm text-outline">
+                  Solid Waste Management
+                </span>
 
-          </div>
+              </div>
 
-        </article>
+              <span class="text-body-sm text-outline flex items-center gap-1">
 
+                <span class="material-symbols-outlined text-[14px]">
+                  schedule
+                </span>
 
-        <!-- ISSUE 4 -->
-        <article class="bg-surface-container-lowest border border-outline-variant p-space-lg space-y-4 hover:border-outline transition-none">
-
-          <div class="flex flex-wrap items-center justify-between gap-2">
-
-            <div class="flex items-center gap-2">
-
-              <span class="px-2.5 py-0.5 bg-surface-container text-on-surface font-label-sm font-bold">
-                5 Reports
-              </span>
-
-              <span class="text-label-sm text-outline">
-                Solid Waste Management
+                1 day ago
               </span>
 
             </div>
 
-            <span class="text-body-sm text-outline flex items-center gap-1">
+            <div>
 
-              <span class="material-symbols-outlined text-[14px]">
-                schedule
-              </span>
+              <h3 class="text-headline-sm font-headline-sm font-bold text-on-surface leading-snug">
+                Overflowing secondary waste bin at Indiranagar 12th Main cross
+              </h3>
 
-              1 day ago
-            </span>
+              <p class="text-body-sm text-outline flex items-center gap-1 mt-1">
 
-          </div>
+                <span class="material-symbols-outlined text-[16px] text-secondary">
+                  pin_drop
+                </span>
 
+                Indiranagar 2nd Stage, Ward 74
+              </p>
 
-          <div>
+            </div>
 
-            <h3 class="text-headline-sm font-headline-sm font-bold text-on-surface leading-snug">
-              Overflowing secondary waste bin at Indiranagar 12th Main cross
-            </h3>
-
-            <p class="text-body-sm text-outline flex items-center gap-1 mt-1">
-
-              <span class="material-symbols-outlined text-[16px] text-secondary">
-                pin_drop
-              </span>
-
-              Indiranagar 2nd Stage, Ward 74
+            <p class="text-body-md text-on-surface-variant leading-relaxed">
+              Bins cleared irregularly for 48 hours, creating pedestrian blockage and health concerns for nearby residential apartments.
             </p>
 
-          </div>
+            <div class="flex items-center gap-2 text-label-sm text-on-surface">
 
-
-          <p class="text-body-md text-on-surface-variant leading-relaxed">
-            Bins cleared irregularly for 48 hours, creating pedestrian blockage and health concerns for nearby residential apartments.
-          </p>
-
-
-          <div class="flex items-center gap-2 text-label-sm text-on-surface">
-
-            <span class="w-2 h-2 rounded-full bg-secondary shrink-0"></span>
-
-            <span>
-              <strong>Status:</strong>
-              Sanitation compactor en route • Assigned to morning beat #4
-            </span>
-
-          </div>
-
-
-          <div class="pt-3 flex flex-wrap items-center justify-between gap-3 border-t border-outline-variant/30">
-
-            <button
-              type="button"
-              class="bg-secondary text-on-secondary px-4 py-2 font-label-md font-semibold flex items-center gap-2 rounded-none hover:bg-secondary/90"
-            >
-              <span class="material-symbols-outlined text-[16px]">
-                arrow_upward
-              </span>
+              <span class="w-2 h-2 rounded-full bg-secondary shrink-0"></span>
 
               <span>
-                27 Affected (Upvote)
+                <strong>Status:</strong>
+                Sanitation compactor en route • Assigned to morning beat #4
               </span>
-            </button>
 
+            </div>
 
-            <div class="flex items-center gap-2">
+            <div class="pt-3 flex flex-wrap items-center justify-between gap-3 border-t border-outline-variant/30">
 
               <button
                 type="button"
-                class="border border-outline-variant bg-surface px-4 py-2 font-label-md text-on-surface flex items-center gap-1.5 rounded-none hover:bg-surface-container"
+                class="bg-secondary text-on-secondary px-4 py-2 font-label-md font-semibold flex items-center gap-2 rounded-none hover:bg-secondary/90"
               >
                 <span class="material-symbols-outlined text-[16px]">
-                  visibility
+                  arrow_upward
                 </span>
 
                 <span>
-                  View Details
+                  27 Affected (Upvote)
                 </span>
               </button>
 
-              <button
-                type="button"
-                class="border border-outline-variant bg-surface p-2 text-on-surface rounded-none hover:bg-surface-container"
-                title="Share"
-              >
-                <span class="material-symbols-outlined text-[18px]">
-                  share
-                </span>
-              </button>
+              <div class="flex items-center gap-2">
+
+                <button
+                  type="button"
+                  class="border border-outline-variant bg-surface px-4 py-2 font-label-md text-on-surface flex items-center gap-1.5 rounded-none hover:bg-surface-container"
+                >
+                  <span class="material-symbols-outlined text-[16px]">
+                    visibility
+                  </span>
+
+                  <span>
+                    View Details
+                  </span>
+                </button>
+
+                <button
+                  type="button"
+                  class="border border-outline-variant bg-surface p-2 text-on-surface rounded-none hover:bg-surface-container"
+                  title="Share"
+                >
+                  <span class="material-symbols-outlined text-[18px]">
+                    share
+                  </span>
+                </button>
+
+              </div>
 
             </div>
 
-          </div>
+          </article>
 
-        </article>
+        </div>
+        <!-- END DYNAMIC COMMUNITY ISSUES CONTAINER -->
 
       </section>
 
-
       <!-- RIGHT 4 COLUMNS -->
       <aside class="lg:col-span-4 space-y-space-md">
-
 
         <!-- CITY HOTSPOTS -->
         <div class="bg-surface-container-lowest border border-outline-variant p-space-md space-y-4">
@@ -1519,7 +1469,6 @@
 
           </div>
 
-
           <ul class="space-y-2">
 
             <li class="flex items-center justify-between py-2 border-b border-outline-variant/30">
@@ -1542,7 +1491,6 @@
 
             </li>
 
-
             <li class="flex items-center justify-between py-2 border-b border-outline-variant/30">
 
               <div>
@@ -1563,7 +1511,6 @@
 
             </li>
 
-
             <li class="flex items-center justify-between py-2 border-b border-outline-variant/30">
 
               <div>
@@ -1583,7 +1530,6 @@
               </span>
 
             </li>
-
 
             <li class="flex items-center justify-between py-2">
 
@@ -1609,7 +1555,6 @@
 
         </div>
 
-
         <!-- REPORT CTA -->
         <div class="bg-primary text-on-primary p-space-lg space-y-3.5">
 
@@ -1625,11 +1570,9 @@
 
           </div>
 
-
           <p class="text-body-sm text-primary-fixed-dim leading-relaxed">
             Help your ward crew take swift action. Snap a quick photo or record a voice note in under 30 seconds.
           </p>
-
 
           <a
             href="report.html"
@@ -1654,14 +1597,12 @@
 
   </main>
 
-
   <!-- CITIZEN PORTAL FOOTER -->
   <footer class="bg-surface-container-lowest border-t border-outline-variant mt-space-2xl">
 
     <div class="max-w-7xl mx-auto px-margin py-space-xl space-y-space-lg">
 
       <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
-
 
         <!-- Left Brand & Mission -->
         <div class="md:col-span-4 space-y-2">
@@ -1687,18 +1628,15 @@
 
           </div>
 
-
           <p class="text-body-md font-body-md text-on-surface-variant">
             Your city. Your voice. Your Saathi. Empowering citizens and ward administrations to resolve civic pain points transparently.
           </p>
-
 
           <p class="text-body-sm font-body-sm text-outline">
             National Municipal Tech Initiative • Open Civic Data Standard
           </p>
 
         </div>
-
 
         <!-- Quick Civic Links -->
         <div class="md:col-span-3 space-y-2">
@@ -1749,7 +1687,6 @@
 
         </div>
 
-
         <!-- Helpline -->
         <div class="md:col-span-3 space-y-2">
 
@@ -1774,7 +1711,6 @@
           </p>
 
         </div>
-
 
         <!-- Trust & Security -->
         <div class="md:col-span-2 space-y-2">
@@ -1822,7 +1758,6 @@
 
       </div>
 
-
       <!-- Bottom Bar -->
       <div class="pt-space-md border-t border-outline-variant/40 flex flex-col sm:flex-row items-center justify-between text-body-sm font-body-sm text-outline gap-2">
 
@@ -1861,7 +1796,6 @@
 
   </footer>
 
-
   <!-- MOBILE BOTTOM NAV BAR -->
   <nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-space-xs py-1.5 bg-surface border-t border-outline-variant text-label-sm font-label-sm">
 
@@ -1879,7 +1813,6 @@
       </span>
     </a>
 
-
     <!-- Pulse -->
     <a
       class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-none px-space-md py-space-xs font-bold"
@@ -1894,7 +1827,6 @@
       </span>
     </a>
 
-
     <!-- Report -->
     <a
       class="flex flex-col items-center justify-center text-on-surface-variant px-space-md py-space-xs"
@@ -1908,7 +1840,6 @@
         Report
       </span>
     </a>
-
 
     <!-- My Issues -->
     <a
