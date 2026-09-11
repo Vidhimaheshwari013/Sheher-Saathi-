@@ -1,1312 +1,1930 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Community Issues | Sheher Saathi</title>
+  <title>Sheher Saathi - What's Happening in Your City | Citizen Municipal Portal</title>
 
-    <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300..800;1,300..800&family=Space+Grotesk:wght@400..700&display=swap"
+    rel="stylesheet"
+  >
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@600;700;800&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,0"
-        rel="stylesheet"
-    >
+  <!-- Material Symbols -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700&display=swap"
+    rel="stylesheet"
+  >
 
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: "#006B5F",
-                        "primary-dark": "#00544B",
-                        "primary-light": "#D9F2ED",
-                        background: "#F8FAF9",
-                        surface: "#FFFFFF",
-                        "surface-soft": "#F0F5F3",
-                        textmain: "#17201E",
-                        textmuted: "#66736F",
-                        border: "#DCE5E2",
-                        danger: "#C62828",
-                        warning: "#A86B00",
-                        success: "#087F5B"
-                    },
-                    fontFamily: {
-                        sans: ["Inter", "sans-serif"],
-                        display: ["Manrope", "sans-serif"]
-                    }
-                }
-            }
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary-fixed": "#dfe2ef",
+            "surface-dim": "#cbdbf5",
+            "tertiary-fixed-dim": "#c2c7cf",
+            "on-primary-fixed-variant": "#434751",
+            "surface-container-high": "#dce9ff",
+            "secondary-container": "#fe7952",
+            "secondary": "#a73918",
+            "on-error": "#ffffff",
+            "on-secondary-container": "#6c1900",
+            "tertiary": "#000000",
+            "tertiary-fixed": "#dee3ec",
+            "error-container": "#ffdad6",
+            "outline-variant": "#c6c6cc",
+            "primary": "#000000",
+            "on-primary-container": "#808390",
+            "on-tertiary-fixed": "#161c22",
+            "secondary-fixed-dim": "#ffb5a0",
+            "on-surface-variant": "#45464b",
+            "on-background": "#0b1c30",
+            "on-tertiary-fixed-variant": "#42474e",
+            "primary-container": "#181b25",
+            "on-secondary-fixed": "#3b0900",
+            "surface-tint": "#5a5e69",
+            "error": "#ba1a1a",
+            "tertiary-container": "#161c22",
+            "on-error-container": "#93000a",
+            "outline": "#76777c",
+            "inverse-primary": "#c3c6d3",
+            "surface-container-highest": "#d3e4fe",
+            "surface-variant": "#d3e4fe",
+            "surface": "#f8f9ff",
+            "on-secondary": "#ffffff",
+            "background": "#f8f9ff",
+            "on-primary": "#ffffff",
+            "on-surface": "#0b1c30",
+            "secondary-fixed": "#ffdbd1",
+            "primary-fixed-dim": "#c3c6d3",
+            "on-tertiary": "#ffffff",
+            "surface-container": "#e5eeff",
+            "surface-bright": "#f8f9ff",
+            "inverse-surface": "#213145",
+            "inverse-on-surface": "#eaf1ff",
+            "surface-container-low": "#eff4ff",
+            "on-secondary-fixed-variant": "#862201",
+            "surface-container-lowest": "#ffffff",
+            "on-tertiary-container": "#7f848c",
+            "on-primary-fixed": "#181b25"
+          },
+
+          borderRadius: {
+            DEFAULT: "0.25rem",
+            lg: "0.5rem",
+            xl: "0.75rem",
+            full: "9999px"
+          },
+
+          spacing: {
+            "space-xl": "32px",
+            "gutter": "24px",
+            "space-lg": "24px",
+            "space-sm": "12px",
+            "space-xs": "8px",
+            "margin": "32px",
+            "space-md": "16px",
+            "space-xxs": "4px",
+            "space-2xl": "48px",
+            "grid-columns": "12"
+          },
+
+          fontFamily: {
+            "label-sm": ["Public Sans"],
+            "body-md": ["Public Sans"],
+            "label-md": ["Public Sans"],
+            "headline-md": ["Space Grotesk"],
+            "body-lg": ["Public Sans"],
+            "headline-sm": ["Space Grotesk"],
+            "headline-lg": ["Space Grotesk"],
+            "body-sm": ["Public Sans"],
+            "headline-xl": ["Space Grotesk"]
+          },
+
+          fontSize: {
+            "label-sm": ["12px", {
+              lineHeight: "16px",
+              fontWeight: "500"
+            }],
+            "body-md": ["14px", {
+              lineHeight: "20px",
+              fontWeight: "400"
+            }],
+            "label-md": ["14px", {
+              lineHeight: "20px",
+              fontWeight: "500"
+            }],
+            "headline-md": ["24px", {
+              lineHeight: "32px",
+              fontWeight: "600"
+            }],
+            "body-lg": ["16px", {
+              lineHeight: "24px",
+              fontWeight: "400"
+            }],
+            "headline-sm": ["18px", {
+              lineHeight: "24px",
+              fontWeight: "600"
+            }],
+            "headline-lg": ["32px", {
+              lineHeight: "40px",
+              letterSpacing: "-0.01em",
+              fontWeight: "600"
+            }],
+            "body-sm": ["12px", {
+              lineHeight: "16px",
+              fontWeight: "400"
+            }],
+            "headline-xl": ["40px", {
+              lineHeight: "48px",
+              letterSpacing: "-0.02em",
+              fontWeight: "700"
+            }]
+          }
         }
-    </script>
+      }
+    };
+  </script>
 
-    <style>
-        body {
-            font-family: "Inter", sans-serif;
-            background: #F8FAF9;
-            color: #17201E;
-        }
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
 
-        h1,
-        h2,
-        h3,
-        h4 {
-            font-family: "Manrope", sans-serif;
-        }
-
-        .material-symbols-outlined {
-            font-variation-settings:
-                "FILL" 0,
-                "wght" 500,
-                "GRAD" 0,
-                "opsz" 24;
-        }
-
-        .cluster-card {
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .cluster-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 30px rgba(0, 80, 70, 0.10);
-        }
-
-        .pulse-dot {
-            animation: pulse 1.8s infinite;
-        }
-
-        @keyframes pulse {
-            0% {
-                box-shadow: 0 0 0 0 rgba(0, 107, 95, 0.35);
-            }
-
-            70% {
-                box-shadow: 0 0 0 8px rgba(0, 107, 95, 0);
-            }
-
-            100% {
-                box-shadow: 0 0 0 0 rgba(0, 107, 95, 0);
-            }
-        }
-
-        .hide-card {
-            display: none;
-        }
-    </style>
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
 </head>
 
-<body class="min-h-screen pb-20 md:pb-0">
+<body class="bg-background text-on-surface font-body-md min-h-screen flex flex-col antialiased selection:bg-secondary-fixed selection:text-on-secondary-fixed">
 
-    <!-- LIVE PULSE -->
-    <div class="bg-primary text-white text-sm">
-        <div class="max-w-7xl mx-auto px-4 py-2 flex items-center justify-center gap-2">
-            <span class="material-symbols-outlined text-[18px]">monitor_heart</span>
-            <span class="font-semibold">Civic Pulse Bengaluru</span>
-            <span class="opacity-80 hidden sm:inline">•</span>
-            <span class="hidden sm:inline">248 verified reports active across 198 wards</span>
-            <span class="opacity-80 hidden sm:inline">•</span>
-            <span class="hidden sm:inline">Live Community Intelligence</span>
+  <!-- TOP LIVE PULSE TICKER -->
+  <div class="bg-primary-container text-on-primary-fixed-variant py-1.5 px-space-md border-b border-outline-variant/30">
+    <div class="max-w-7xl mx-auto flex items-center justify-between text-label-sm font-label-sm">
+
+      <div class="flex items-center gap-2 overflow-hidden text-ellipsis whitespace-nowrap">
+        <span class="inline-block w-2 h-2 rounded-full bg-secondary animate-ping"></span>
+        <span class="inline-block w-2 h-2 rounded-full bg-secondary -ml-3"></span>
+
+        <span class="font-bold text-surface">
+          Civic Pulse Bengaluru
+        </span>
+
+        <span class="text-outline-variant">•</span>
+
+        <span class="text-surface-dim">
+          248 verified reports active across 198 wards
+        </span>
+
+        <span class="hidden sm:inline text-outline-variant">•</span>
+
+        <span class="hidden sm:inline text-surface-dim">
+          Live Community Intelligence
+        </span>
+      </div>
+
+      <div class="flex items-center gap-4 shrink-0">
+        <a
+          class="flex items-center gap-1 text-surface-dim hover:text-surface transition-none"
+          href="#authority-login"
+        >
+          <span class="material-symbols-outlined text-[14px]">lock</span>
+          <span>Authority Login</span>
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- CITIZEN HEADER -->
+  <header class="sticky top-0 z-40 bg-surface border-b border-outline-variant">
+
+    <div class="max-w-7xl mx-auto px-margin py-space-sm flex items-center justify-between">
+
+      <!-- Brand Logo -->
+      <div class="flex items-center gap-3">
+
+        <a
+          href="index.html"
+          class="w-10 h-10 bg-primary text-on-primary flex items-center justify-center rounded-none shadow-none"
+          aria-label="Go to Sheher Saathi homepage"
+        >
+          <span class="material-symbols-outlined text-2xl">
+            location_city
+          </span>
+        </a>
+
+        <div>
+          <a
+            class="block text-headline-sm font-headline-sm font-bold text-primary tracking-tight leading-tight"
+            href="index.html"
+          >
+            Sheher Saathi
+          </a>
+
+          <span class="block text-[10px] uppercase font-bold tracking-widest text-outline">
+            Citizen Municipal Portal
+          </span>
         </div>
+
+      </div>
+
+
+      <!-- Main Navigation -->
+      <nav class="hidden lg:flex items-center space-x-6 text-label-md font-label-md">
+
+        <a
+          class="text-primary font-bold border-b-2 border-primary pb-1"
+          href="community.html"
+        >
+          Community Issues
+        </a>
+
+        <a
+          class="text-on-surface-variant hover:text-primary transition-none py-1"
+          href="reports.html"
+        >
+          My Reports
+        </a>
+
+        <a
+          class="text-on-surface-variant hover:text-primary transition-none py-1"
+          href="index.html#how-it-works"
+        >
+          How it works
+        </a>
+
+      </nav>
+
+
+      <!-- Raise Ticket -->
+      <div class="flex items-center gap-3">
+
+        <a
+          href="report.html"
+          class="bg-secondary text-on-secondary px-space-md py-space-xs font-label-md text-label-md font-semibold rounded-none flex items-center gap-1.5 shadow-none hover:bg-secondary/90 transition-none"
+        >
+          <span class="material-symbols-outlined text-[18px]">
+            add
+          </span>
+
+          <span>Raise Ticket</span>
+        </a>
+
+      </div>
+
+    </div>
+  </header>
+
+
+  <!-- MAIN CANVAS -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-margin py-space-xl space-y-space-xl">
+
+
+    <!-- HERO & CIVIC SEARCH AREA -->
+    <section class="bg-surface-container-lowest border border-outline-variant p-space-lg md:p-space-xl">
+
+      <div class="max-w-2xl space-y-2">
+
+        <h1 class="text-headline-xl font-headline-xl text-on-surface tracking-tight leading-tight font-bold">
+          What's Happening in Your City
+        </h1>
+
+        <p class="text-body-lg font-body-lg text-on-surface-variant">
+          Track live civic clusters, upvote urgent neighborhood issues, and monitor ward resolution updates in real time.
+        </p>
+
+      </div>
+
+      <div class="mt-space-lg">
+
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-3">
+
+          <div class="md:col-span-6 relative">
+
+            <span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-outline text-[20px]">
+              search
+            </span>
+
+            <input
+              class="w-full pl-10 pr-4 py-2.5 bg-surface border border-outline-variant text-body-md font-body-md text-on-surface placeholder:text-outline focus:outline-none focus:ring-1 focus:ring-primary rounded-none"
+              placeholder="Search neighborhood, ward or issue..."
+              type="text"
+            >
+
+          </div>
+
+
+          <div class="md:col-span-3">
+
+            <select
+              class="w-full py-2.5 px-3 bg-surface border border-outline-variant text-body-md font-body-md text-on-surface focus:outline-none focus:ring-1 focus:ring-primary rounded-none"
+              title="Select a ward"
+            >
+              <option>All Wards (198 Wards)</option>
+              <option>Ward 14 - Rajpur Road</option>
+              <option>Ward 28 - Prem Nagar</option>
+              <option>Ward 52 - Patel Nagar</option>
+              <option>Ward 74 - Indiranagar</option>
+              <option>Ward 112 - Koramangala</option>
+            </select>
+
+          </div>
+
+
+          <div class="md:col-span-3">
+
+            <select
+              class="w-full py-2.5 px-3 bg-surface border border-outline-variant text-body-md font-body-md text-on-surface focus:outline-none focus:ring-1 focus:ring-primary rounded-none"
+              title="Sort reports by"
+            >
+              <option>Most Connected Reports</option>
+              <option>Most Recent</option>
+              <option>Highest Upvotes</option>
+            </select>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- TRENDING CIVIC ISSUES -->
+    <section class="bg-surface-container-high border-l-4 border-l-secondary border border-outline-variant p-space-md">
+
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+
+        <div class="flex items-center gap-2.5">
+
+          <span class="material-symbols-outlined text-secondary text-[22px]">
+            trending_up
+          </span>
+
+          <span class="text-body-md font-bold text-on-surface">
+            Trending Hotspot:
+          </span>
+
+          <span class="text-body-md text-on-surface-variant">
+            Severe waterlogging reported along Rajpur Road (9 reports clustered)
+          </span>
+
+        </div>
+
+        <a
+          class="text-label-md font-semibold text-secondary hover:underline flex items-center gap-1 shrink-0"
+          href="#hotspots-map"
+        >
+          View Ward 14 Details
+
+          <span class="material-symbols-outlined text-[16px]">
+            arrow_forward
+          </span>
+        </a>
+
+      </div>
+
+    </section>
+
+
+    <!-- LIVE HOTSPOT MAP -->
+    <section
+      id="hotspots-map"
+      class="bg-surface-container-lowest border border-outline-variant overflow-hidden"
+    >
+
+      <!-- Map Header -->
+      <div class="p-space-md border-b border-outline-variant bg-surface flex flex-wrap items-center justify-between gap-3">
+
+        <div>
+
+          <div class="flex items-center gap-2">
+
+            <span class="material-symbols-outlined text-secondary text-[22px]">
+              map
+            </span>
+
+            <h2 class="font-headline-sm text-headline-sm font-bold text-on-surface">
+              Bengaluru Ward Activity &amp; Live Hotspot Map
+            </h2>
+
+            <span class="px-2 py-0.5 bg-secondary-fixed text-on-secondary-fixed text-label-sm font-bold">
+              Live Ward Grid
+            </span>
+
+          </div>
+
+          <p class="text-body-sm text-outline mt-0.5">
+            Visual density of verified citizen tickets across 198 wards with active dispatch teams
+          </p>
+
+        </div>
+
+
+        <div class="flex items-center gap-2">
+
+          <div class="inline-flex border border-outline-variant bg-surface-container-lowest">
+
+            <button
+              type="button"
+              class="px-3 py-1.5 text-label-sm font-bold bg-primary text-on-primary flex items-center gap-1"
+            >
+              <span class="material-symbols-outlined text-[16px]">
+                map
+              </span>
+              Map &amp; Cards
+            </button>
+
+            <button
+              type="button"
+              class="px-3 py-1.5 text-label-sm font-bold text-on-surface-variant hover:text-primary flex items-center gap-1"
+            >
+              <span class="material-symbols-outlined text-[16px]">
+                splitscreen
+              </span>
+              Split View
+            </button>
+
+          </div>
+
+          <button
+            type="button"
+            class="border border-outline-variant bg-surface px-3 py-1.5 font-label-sm text-on-surface flex items-center gap-1 hover:bg-surface-container"
+          >
+            <span class="material-symbols-outlined text-[16px]">
+              my_location
+            </span>
+            Recenter
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- Map Layers -->
+      <div class="px-space-md py-2 bg-surface-container-low border-b border-outline-variant/60 flex flex-wrap items-center justify-between gap-2 text-label-sm">
+
+        <div class="flex flex-wrap items-center gap-1.5">
+
+          <span class="text-outline font-medium mr-1 flex items-center gap-1">
+
+            <span class="material-symbols-outlined text-[15px]">
+              filter_list
+            </span>
+
+            Layers:
+          </span>
+
+          <button
+            type="button"
+            class="px-2.5 py-1 bg-primary text-on-primary font-bold text-label-sm"
+          >
+            All Layers
+          </button>
+
+          <button
+            type="button"
+            class="px-2.5 py-1 bg-surface border border-outline-variant text-on-surface font-medium hover:border-primary text-label-sm"
+          >
+            Drainage (42)
+          </button>
+
+          <button
+            type="button"
+            class="px-2.5 py-1 bg-surface border border-outline-variant text-on-surface font-medium hover:border-primary text-label-sm"
+          >
+            Solid Waste (38)
+          </button>
+
+          <button
+            type="button"
+            class="px-2.5 py-1 bg-surface border border-outline-variant text-on-surface font-medium hover:border-primary text-label-sm"
+          >
+            Roads (51)
+          </button>
+
+          <button
+            type="button"
+            class="px-2.5 py-1 bg-secondary-fixed text-on-secondary-fixed font-bold text-label-sm"
+          >
+            Critical Hotspots (12)
+          </button>
+
+        </div>
+
+
+        <div class="flex items-center gap-2">
+
+          <span class="material-symbols-outlined text-secondary text-[16px]">
+            local_fire_department
+          </span>
+
+          <span class="text-on-surface font-medium">
+            Live Heatmap:
+          </span>
+
+          <span class="px-2 py-0.5 bg-surface text-secondary border border-secondary font-bold text-[10px] uppercase">
+            ON
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <!-- Map -->
+      <div class="relative bg-[#edf2f8] h-96 w-full overflow-hidden select-none">
+
+        <svg
+          class="w-full h-full object-cover"
+          preserveAspectRatio="none"
+          viewBox="0 0 1000 480"
+        >
+
+          <defs>
+
+            <pattern
+              height="40"
+              id="cityGrid"
+              patternUnits="userSpaceOnUse"
+              width="40"
+            >
+              <path
+                d="M 40 0 L 0 0 0 40"
+                fill="none"
+                stroke="#d8e2ee"
+                stroke-width="1"
+              ></path>
+            </pattern>
+
+            <pattern
+              height="120"
+              id="wardZones"
+              patternUnits="userSpaceOnUse"
+              width="120"
+            >
+              <path
+                d="M 120 0 L 0 0 0 120"
+                fill="none"
+                stroke="#cad6e4"
+                stroke-dasharray="3,3"
+                stroke-width="1.5"
+              ></path>
+            </pattern>
+
+          </defs>
+
+
+          <rect
+            fill="#eff4fa"
+            height="100%"
+            width="100%"
+          ></rect>
+
+          <rect
+            fill="url(#cityGrid)"
+            height="100%"
+            width="100%"
+          ></rect>
+
+          <rect
+            fill="url(#wardZones)"
+            height="100%"
+            width="100%"
+          ></rect>
+
+
+          <path
+            d="M-20,120 Q240,160 480,110 T1020,180"
+            fill="none"
+            stroke="#c2d5ec"
+            stroke-width="12"
+          ></path>
+
+          <path
+            d="M220,-20 Q300,220 380,500"
+            fill="none"
+            stroke="#ffffff"
+            stroke-width="8"
+          ></path>
+
+          <path
+            d="M-20,280 Q320,240 680,310 T1040,260"
+            fill="none"
+            stroke="#ffffff"
+            stroke-width="10"
+          ></path>
+
+          <path
+            d="M620,-20 Q660,180 780,500"
+            fill="none"
+            stroke="#ffffff"
+            stroke-width="7"
+          ></path>
+
+          <path
+            d="M140,240 Q400,380 840,360"
+            fill="none"
+            stroke="#d3e1f0"
+            stroke-width="6"
+          ></path>
+
+
+          <polygon
+            fill="#dce9ff"
+            opacity="0.6"
+            points="180,60 360,70 340,210 160,190"
+          ></polygon>
+
+          <polygon
+            fill="#fed7cc"
+            opacity="0.55"
+            points="400,120 590,90 560,260 380,240"
+          ></polygon>
+
+          <polygon
+            fill="#e5eeff"
+            opacity="0.65"
+            points="600,80 840,110 810,290 580,250"
+          ></polygon>
+
+          <polygon
+            fill="#dce9ff"
+            opacity="0.5"
+            points="280,260 520,250 500,440 250,420"
+          ></polygon>
+
+
+          <circle
+            cx="480"
+            cy="180"
+            fill="#fe7952"
+            opacity="0.22"
+            r="70"
+          ></circle>
+
+          <circle
+            cx="480"
+            cy="180"
+            fill="#fe7952"
+            opacity="0.35"
+            r="40"
+          ></circle>
+
+          <circle
+            cx="260"
+            cy="270"
+            fill="#fe7952"
+            opacity="0.2"
+            r="45"
+          ></circle>
+
+          <circle
+            cx="710"
+            cy="220"
+            fill="#fe7952"
+            opacity="0.25"
+            r="55"
+          ></circle>
+
+
+          <text
+            fill="#76777c"
+            font-family="Space Grotesk"
+            font-size="11"
+            font-weight="700"
+            letter-spacing="1.5"
+            x="190"
+            y="110"
+          >
+            WARD 14 • RAJPUR RD
+          </text>
+
+          <text
+            fill="#76777c"
+            font-family="Space Grotesk"
+            font-size="11"
+            font-weight="700"
+            letter-spacing="1.5"
+            x="410"
+            y="145"
+          >
+            WARD 28 • PREM NAGAR
+          </text>
+
+          <text
+            fill="#76777c"
+            font-family="Space Grotesk"
+            font-size="11"
+            font-weight="700"
+            letter-spacing="1.5"
+            x="640"
+            y="160"
+          >
+            WARD 74 • INDIRANAGAR
+          </text>
+
+          <text
+            fill="#76777c"
+            font-family="Space Grotesk"
+            font-size="11"
+            font-weight="700"
+            letter-spacing="1.5"
+            x="330"
+            y="370"
+          >
+            WARD 52 • PATEL NAGAR
+          </text>
+
+          <text
+            fill="#76777c"
+            font-family="Space Grotesk"
+            font-size="11"
+            font-weight="700"
+            letter-spacing="1.5"
+            x="700"
+            y="340"
+          >
+            WARD 112 • KORAMANGALA
+          </text>
+
+        </svg>
+
+
+        <!-- Rajpur Road Marker -->
+        <div class="absolute left-[24%] top-[34%] -translate-x-1/2 -translate-y-1/2 cursor-pointer">
+
+          <div class="relative flex items-center justify-center">
+
+            <span class="absolute inline-flex h-8 w-8 rounded-full bg-secondary opacity-40 animate-ping"></span>
+
+            <div class="relative flex items-center gap-1 bg-secondary text-on-secondary px-2.5 py-1 shadow-none border border-surface">
+
+              <span class="material-symbols-outlined text-[14px]">
+                water_damage
+              </span>
+
+              <span class="font-bold text-label-sm">
+                Rajpur Rd • 9
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- Prem Nagar Marker -->
+        <div class="absolute left-[48%] top-[36%] -translate-x-1/2 -translate-y-1/2 z-20">
+
+          <div class="relative flex flex-col items-center">
+
+            <div class="flex items-center gap-1.5 bg-primary text-on-primary px-3 py-1.5 border-2 border-secondary shadow-none">
+
+              <span class="w-2.5 h-2.5 rounded-full bg-secondary animate-ping"></span>
+
+              <span class="material-symbols-outlined text-[15px] text-secondary-container">
+                warning
+              </span>
+
+              <span class="font-bold text-label-sm">
+                Prem Nagar Crater • 6
+              </span>
+
+            </div>
+
+            <div class="w-2.5 h-2.5 bg-primary rotate-45 -mt-1.5 border-r-2 border-b-2 border-secondary"></div>
+
+          </div>
+
+        </div>
+
+
+        <!-- Indiranagar Marker -->
+        <div class="absolute left-[70%] top-[42%] -translate-x-1/2 -translate-y-1/2 cursor-pointer">
+
+          <div class="flex items-center gap-1 bg-surface-container-highest text-on-surface px-2.5 py-1 border border-outline-variant">
+
+            <span class="material-symbols-outlined text-secondary text-[14px]">
+              delete
+            </span>
+
+            <span class="font-bold text-label-sm">
+              Indiranagar • 5
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <!-- Patel Nagar Marker -->
+        <div class="absolute left-[34%] top-[72%] -translate-x-1/2 -translate-y-1/2 cursor-pointer">
+
+          <div class="flex items-center gap-1 bg-surface-container-highest text-on-surface px-2.5 py-1 border border-outline-variant">
+
+            <span class="material-symbols-outlined text-[14px]">
+              light
+            </span>
+
+            <span class="font-bold text-label-sm">
+              Patel Nagar • 4
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <!-- Koramangala Marker -->
+        <div class="absolute left-[72%] top-[68%] -translate-x-1/2 -translate-y-1/2 cursor-pointer">
+
+          <div class="flex items-center gap-1 bg-surface-container-highest text-on-surface px-2.5 py-1 border border-outline-variant">
+
+            <span class="material-symbols-outlined text-[14px]">
+              recycling
+            </span>
+
+            <span class="font-bold text-label-sm">
+              Koramangala • 7
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <!-- Active Cluster Focus -->
+        <div class="absolute top-4 left-4 z-10 max-w-xs bg-surface-container-lowest border-2 border-primary p-3 space-y-2">
+
+          <div class="flex items-center justify-between border-b border-outline-variant/40 pb-1">
+
+            <div class="flex items-center gap-1.5">
+
+              <span class="w-2 h-2 rounded-full bg-secondary"></span>
+
+              <span class="font-bold text-label-sm text-on-surface uppercase tracking-wider">
+                Active Cluster Focus
+              </span>
+
+            </div>
+
+            <span class="px-1.5 py-0.2 bg-error-container text-on-error-container text-[10px] font-bold">
+              Urgent
+            </span>
+
+          </div>
+
+
+          <div>
+
+            <h4 class="font-headline-sm text-body-md font-bold text-on-surface">
+              Prem Nagar Main Road Crater
+            </h4>
+
+            <p class="text-body-sm text-outline">
+              Ward 28 • Opposite State Bank
+            </p>
+
+            <p class="text-body-sm text-on-surface-variant mt-1">
+              6 citizen reports clustered. Sharp pothole causing severe 2-wheeler skidding risk.
+            </p>
+
+          </div>
+
+
+          <div class="flex items-center justify-between pt-1">
+
+            <span class="text-body-sm font-bold text-secondary">
+              32 Citizens Affected
+            </span>
+
+            <a
+              href="#community"
+              class="bg-primary text-on-primary px-2.5 py-1 text-label-sm font-semibold flex items-center gap-1 hover:bg-secondary"
+            >
+              Jump to issue
+
+              <span class="material-symbols-outlined text-[13px]">
+                south
+              </span>
+            </a>
+
+          </div>
+
+        </div>
+
+
+        <!-- Zoom Controls -->
+        <div class="absolute top-4 right-4 flex flex-col border border-outline-variant bg-surface-container-lowest z-10">
+
+          <button
+            type="button"
+            class="w-8 h-8 flex items-center justify-center font-bold text-lg text-on-surface hover:bg-surface-container border-b border-outline-variant"
+            title="Zoom in"
+          >
+            +
+          </button>
+
+          <button
+            type="button"
+            class="w-8 h-8 flex items-center justify-center font-bold text-lg text-on-surface hover:bg-surface-container"
+            title="Zoom out"
+          >
+            −
+          </button>
+
+        </div>
+
+
+        <!-- Map Legend -->
+        <div class="absolute bottom-3 right-4 bg-surface-container-lowest/95 border border-outline-variant p-2 z-10 flex items-center gap-4 text-body-sm">
+
+          <span class="font-bold text-on-surface text-label-sm">
+            Incident Density:
+          </span>
+
+          <div class="flex items-center gap-1.5">
+
+            <span class="w-3 h-3 bg-secondary inline-block"></span>
+
+            <span class="text-outline text-body-sm">
+              High (8+)
+            </span>
+
+          </div>
+
+          <div class="flex items-center gap-1.5">
+
+            <span class="w-3 h-3 bg-secondary-container inline-block"></span>
+
+            <span class="text-outline text-body-sm">
+              Moderate (4-7)
+            </span>
+
+          </div>
+
+          <div class="flex items-center gap-1.5">
+
+            <span class="w-3 h-3 bg-surface-container-highest inline-block border border-outline-variant"></span>
+
+            <span class="text-outline text-body-sm">
+              Queued / Monitored
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- MAIN CONTENT GRID -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
+
+
+      <!-- LEFT 8 COLUMNS -->
+      <section
+        id="community"
+        class="lg:col-span-8 space-y-space-md"
+      >
+
+        <div class="flex items-center justify-between pb-3 border-b border-outline-variant">
+
+          <div class="flex items-center gap-2.5">
+
+            <h2 class="font-headline-sm text-headline-sm font-bold text-on-surface">
+              Active Civic Clusters
+            </h2>
+
+            <span class="px-2 py-0.5 bg-secondary-fixed text-on-secondary-fixed text-label-sm font-bold">
+              4 Urgent
+            </span>
+
+          </div>
+
+          <div class="flex items-center gap-1.5 text-label-sm text-outline">
+
+            <span class="material-symbols-outlined text-[16px]">
+              sync
+            </span>
+
+            <span>
+              Live synced
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <!-- ISSUE 1 -->
+        <article class="bg-surface-container-lowest border border-outline-variant p-space-lg space-y-4 hover:border-outline transition-none">
+
+          <div class="flex flex-wrap items-center justify-between gap-2">
+
+            <div class="flex items-center gap-2">
+
+              <span class="px-2.5 py-0.5 bg-error-container text-on-error-container font-label-sm font-bold">
+                High Activity • 9 Reports
+              </span>
+
+              <span class="text-label-sm text-outline">
+                Drainage &amp; Waterlogging
+              </span>
+
+            </div>
+
+            <span class="text-body-sm text-outline flex items-center gap-1">
+
+              <span class="material-symbols-outlined text-[14px]">
+                schedule
+              </span>
+
+              14h ago
+            </span>
+
+          </div>
+
+
+          <div>
+
+            <h3 class="text-headline-sm font-headline-sm font-bold text-on-surface leading-snug">
+              Severe Waterlogging on Rajpur Road near Canal Crossing
+            </h3>
+
+            <p class="text-body-sm text-outline flex items-center gap-1 mt-1">
+
+              <span class="material-symbols-outlined text-[16px] text-secondary">
+                pin_drop
+              </span>
+
+              Rajpur Road, Ward 14 (Near Old Bridge Junction)
+            </p>
+
+          </div>
+
+
+          <p class="text-body-md text-on-surface-variant leading-relaxed">
+            Multiple citizens reported 1.5-foot stagnant water after recent evening showers blocking scooter commute and pedestrians. Silt accumulation near culvert #4.
+          </p>
+
+
+          <div class="flex items-center gap-2 text-label-sm text-on-surface">
+
+            <span class="w-2 h-2 rounded-full bg-secondary shrink-0"></span>
+
+            <span>
+              <strong>Status:</strong>
+              Jetting vehicle dispatched by Ward 14 Assistant Engineer
+            </span>
+
+          </div>
+
+
+          <div class="pt-3 flex flex-wrap items-center justify-between gap-3 border-t border-outline-variant/30">
+
+            <button
+              type="button"
+              class="bg-secondary text-on-secondary px-4 py-2 font-label-md font-semibold flex items-center gap-2 rounded-none hover:bg-secondary/90"
+            >
+              <span class="material-symbols-outlined text-[16px]">
+                arrow_upward
+              </span>
+
+              <span>
+                48 Affected (Upvote)
+              </span>
+            </button>
+
+
+            <div class="flex items-center gap-2">
+
+              <button
+                type="button"
+                class="border border-outline-variant bg-surface px-4 py-2 font-label-md text-on-surface flex items-center gap-1.5 rounded-none hover:bg-surface-container"
+              >
+                <span class="material-symbols-outlined text-[16px]">
+                  forum
+                </span>
+
+                <span>
+                  Discussion &amp; Photos (4)
+                </span>
+              </button>
+
+              <button
+                type="button"
+                class="border border-outline-variant bg-surface p-2 text-on-surface rounded-none hover:bg-surface-container"
+                title="Share"
+              >
+                <span class="material-symbols-outlined text-[18px]">
+                  share
+                </span>
+              </button>
+
+            </div>
+
+          </div>
+
+        </article>
+
+
+        <!-- ISSUE 2 -->
+        <article class="bg-surface-container-lowest border border-outline-variant p-space-lg space-y-4 hover:border-outline transition-none">
+
+          <div class="flex flex-wrap items-center justify-between gap-2">
+
+            <div class="flex items-center gap-2">
+
+              <span class="px-2.5 py-0.5 bg-secondary-fixed text-on-secondary-fixed font-label-sm font-bold">
+                Active • 6 Reports
+              </span>
+
+              <span class="text-label-sm text-outline">
+                Roads &amp; Potholes
+              </span>
+
+            </div>
+
+            <span class="text-body-sm text-outline flex items-center gap-1">
+
+              <span class="material-symbols-outlined text-[14px]">
+                schedule
+              </span>
+
+              Yesterday
+            </span>
+
+          </div>
+
+
+          <div>
+
+            <h3 class="text-headline-sm font-headline-sm font-bold text-on-surface leading-snug">
+              Deep asphalt crater &amp; caved-in road near Prem Nagar Market Gate
+            </h3>
+
+            <p class="text-body-sm text-outline flex items-center gap-1 mt-1">
+
+              <span class="material-symbols-outlined text-[16px] text-secondary">
+                pin_drop
+              </span>
+
+              Prem Nagar Main Road, Ward 28 (Opposite State Bank)
+            </p>
+
+          </div>
+
+
+          <p class="text-body-md text-on-surface-variant leading-relaxed">
+            Sharp edge potholes causing severe 2-wheeler traffic slowdown during morning office peak hours. Multiple residents reported rim damage and skidding risks.
+          </p>
+
+
+          <div class="flex items-center gap-2 text-label-sm text-on-surface">
+
+            <span class="w-2 h-2 rounded-full bg-secondary shrink-0"></span>
+
+            <span>
+              <strong>Status:</strong>
+              Material patch work scheduled by Ward Crew for tomorrow morning
+            </span>
+
+          </div>
+
+
+          <div class="pt-3 flex flex-wrap items-center justify-between gap-3 border-t border-outline-variant/30">
+
+            <button
+              type="button"
+              class="bg-secondary text-on-secondary px-4 py-2 font-label-md font-semibold flex items-center gap-2 rounded-none hover:bg-secondary/90"
+            >
+              <span class="material-symbols-outlined text-[16px]">
+                arrow_upward
+              </span>
+
+              <span>
+                32 Affected (Upvote)
+              </span>
+            </button>
+
+
+            <div class="flex items-center gap-2">
+
+              <a
+                href="#hotspots-map"
+                class="border border-outline-variant bg-surface px-4 py-2 font-label-md text-on-surface flex items-center gap-1.5 rounded-none hover:bg-surface-container"
+              >
+                <span class="material-symbols-outlined text-[16px]">
+                  map
+                </span>
+
+                <span>
+                  View Map &amp; Updates
+                </span>
+              </a>
+
+              <button
+                type="button"
+                class="border border-outline-variant bg-surface p-2 text-on-surface rounded-none hover:bg-surface-container"
+                title="Share"
+              >
+                <span class="material-symbols-outlined text-[18px]">
+                  share
+                </span>
+              </button>
+
+            </div>
+
+          </div>
+
+        </article>
+
+
+        <!-- ISSUE 3 -->
+        <article class="bg-surface-container-lowest border border-outline-variant p-space-lg space-y-4 hover:border-outline transition-none">
+
+          <div class="flex flex-wrap items-center justify-between gap-2">
+
+            <div class="flex items-center gap-2">
+
+              <span class="px-2.5 py-0.5 bg-surface-container text-on-surface font-label-sm font-bold">
+                4 Reports
+              </span>
+
+              <span class="text-label-sm text-outline">
+                Street Lighting &amp; Electrical
+              </span>
+
+            </div>
+
+            <span class="text-body-sm text-outline flex items-center gap-1">
+
+              <span class="material-symbols-outlined text-[14px]">
+                schedule
+              </span>
+
+              2 days ago
+            </span>
+
+          </div>
+
+
+          <div>
+
+            <h3 class="text-headline-sm font-headline-sm font-bold text-on-surface leading-snug">
+              Multiple consecutive dark streetlights along Patel Nagar 80ft Road
+            </h3>
+
+            <p class="text-body-sm text-outline flex items-center gap-1 mt-1">
+
+              <span class="material-symbols-outlined text-[16px] text-secondary">
+                pin_drop
+              </span>
+
+              Patel Nagar, Sector 4, Ward 52
+            </p>
+
+          </div>
+
+
+          <p class="text-body-md text-on-surface-variant leading-relaxed">
+            Stretch of 5 sodium lights non-operational creating safety hazard for evening walkers and commuters. Feed wire break suspected near Pole #18.
+          </p>
+
+
+          <div class="flex items-center gap-2 text-label-sm text-on-surface">
+
+            <span class="w-2 h-2 rounded-full bg-secondary shrink-0"></span>
+
+            <span>
+              <strong>Status:</strong>
+              Lineman assigned • Bulb replacement queued on Work Order #8821
+            </span>
+
+          </div>
+
+
+          <div class="pt-3 flex flex-wrap items-center justify-between gap-3 border-t border-outline-variant/30">
+
+            <button
+              type="button"
+              class="bg-secondary text-on-secondary px-4 py-2 font-label-md font-semibold flex items-center gap-2 rounded-none hover:bg-secondary/90"
+            >
+              <span class="material-symbols-outlined text-[16px]">
+                arrow_upward
+              </span>
+
+              <span>
+                19 Affected (Upvote)
+              </span>
+            </button>
+
+
+            <div class="flex items-center gap-2">
+
+              <button
+                type="button"
+                class="border border-outline-variant bg-surface px-4 py-2 font-label-md text-on-surface flex items-center gap-1.5 rounded-none hover:bg-surface-container"
+              >
+                <span class="material-symbols-outlined text-[16px]">
+                  visibility
+                </span>
+
+                <span>
+                  View Details
+                </span>
+              </button>
+
+              <button
+                type="button"
+                class="border border-outline-variant bg-surface p-2 text-on-surface rounded-none hover:bg-surface-container"
+                title="Share"
+              >
+                <span class="material-symbols-outlined text-[18px]">
+                  share
+                </span>
+              </button>
+
+            </div>
+
+          </div>
+
+        </article>
+
+
+        <!-- ISSUE 4 -->
+        <article class="bg-surface-container-lowest border border-outline-variant p-space-lg space-y-4 hover:border-outline transition-none">
+
+          <div class="flex flex-wrap items-center justify-between gap-2">
+
+            <div class="flex items-center gap-2">
+
+              <span class="px-2.5 py-0.5 bg-surface-container text-on-surface font-label-sm font-bold">
+                5 Reports
+              </span>
+
+              <span class="text-label-sm text-outline">
+                Solid Waste Management
+              </span>
+
+            </div>
+
+            <span class="text-body-sm text-outline flex items-center gap-1">
+
+              <span class="material-symbols-outlined text-[14px]">
+                schedule
+              </span>
+
+              1 day ago
+            </span>
+
+          </div>
+
+
+          <div>
+
+            <h3 class="text-headline-sm font-headline-sm font-bold text-on-surface leading-snug">
+              Overflowing secondary waste bin at Indiranagar 12th Main cross
+            </h3>
+
+            <p class="text-body-sm text-outline flex items-center gap-1 mt-1">
+
+              <span class="material-symbols-outlined text-[16px] text-secondary">
+                pin_drop
+              </span>
+
+              Indiranagar 2nd Stage, Ward 74
+            </p>
+
+          </div>
+
+
+          <p class="text-body-md text-on-surface-variant leading-relaxed">
+            Bins cleared irregularly for 48 hours, creating pedestrian blockage and health concerns for nearby residential apartments.
+          </p>
+
+
+          <div class="flex items-center gap-2 text-label-sm text-on-surface">
+
+            <span class="w-2 h-2 rounded-full bg-secondary shrink-0"></span>
+
+            <span>
+              <strong>Status:</strong>
+              Sanitation compactor en route • Assigned to morning beat #4
+            </span>
+
+          </div>
+
+
+          <div class="pt-3 flex flex-wrap items-center justify-between gap-3 border-t border-outline-variant/30">
+
+            <button
+              type="button"
+              class="bg-secondary text-on-secondary px-4 py-2 font-label-md font-semibold flex items-center gap-2 rounded-none hover:bg-secondary/90"
+            >
+              <span class="material-symbols-outlined text-[16px]">
+                arrow_upward
+              </span>
+
+              <span>
+                27 Affected (Upvote)
+              </span>
+            </button>
+
+
+            <div class="flex items-center gap-2">
+
+              <button
+                type="button"
+                class="border border-outline-variant bg-surface px-4 py-2 font-label-md text-on-surface flex items-center gap-1.5 rounded-none hover:bg-surface-container"
+              >
+                <span class="material-symbols-outlined text-[16px]">
+                  visibility
+                </span>
+
+                <span>
+                  View Details
+                </span>
+              </button>
+
+              <button
+                type="button"
+                class="border border-outline-variant bg-surface p-2 text-on-surface rounded-none hover:bg-surface-container"
+                title="Share"
+              >
+                <span class="material-symbols-outlined text-[18px]">
+                  share
+                </span>
+              </button>
+
+            </div>
+
+          </div>
+
+        </article>
+
+      </section>
+
+
+      <!-- RIGHT 4 COLUMNS -->
+      <aside class="lg:col-span-4 space-y-space-md">
+
+
+        <!-- CITY HOTSPOTS -->
+        <div class="bg-surface-container-lowest border border-outline-variant p-space-md space-y-4">
+
+          <div class="flex items-center justify-between pb-2 border-b border-outline-variant">
+
+            <div class="flex items-center gap-2">
+
+              <span class="material-symbols-outlined text-primary text-[20px]">
+                analytics
+              </span>
+
+              <h3 class="font-headline-sm text-headline-sm font-bold text-on-surface">
+                City Hotspots
+              </h3>
+
+            </div>
+
+            <span class="text-label-sm text-outline">
+              Today
+            </span>
+
+          </div>
+
+
+          <ul class="space-y-2">
+
+            <li class="flex items-center justify-between py-2 border-b border-outline-variant/30">
+
+              <div>
+
+                <span class="font-bold text-on-surface text-body-md block">
+                  Rajpur Road
+                </span>
+
+                <span class="text-body-sm text-outline">
+                  Drainage &amp; Culverts
+                </span>
+
+              </div>
+
+              <span class="px-2 py-0.5 bg-secondary-fixed text-on-secondary-fixed text-label-sm font-bold">
+                9 Reports
+              </span>
+
+            </li>
+
+
+            <li class="flex items-center justify-between py-2 border-b border-outline-variant/30">
+
+              <div>
+
+                <span class="font-bold text-on-surface text-body-md block">
+                  Prem Nagar
+                </span>
+
+                <span class="text-body-sm text-outline">
+                  Asphalt &amp; Potholes
+                </span>
+
+              </div>
+
+              <span class="px-2 py-0.5 bg-surface-container text-on-surface text-label-sm font-bold">
+                6 Reports
+              </span>
+
+            </li>
+
+
+            <li class="flex items-center justify-between py-2 border-b border-outline-variant/30">
+
+              <div>
+
+                <span class="font-bold text-on-surface text-body-md block">
+                  Koramangala 4th Blk
+                </span>
+
+                <span class="text-body-sm text-outline">
+                  Waste Segregation
+                </span>
+
+              </div>
+
+              <span class="px-2 py-0.5 bg-surface-container text-on-surface text-label-sm font-bold">
+                7 Reports
+              </span>
+
+            </li>
+
+
+            <li class="flex items-center justify-between py-2">
+
+              <div>
+
+                <span class="font-bold text-on-surface text-body-md block">
+                  Patel Nagar Sector 4
+                </span>
+
+                <span class="text-body-sm text-outline">
+                  Street Lighting
+                </span>
+
+              </div>
+
+              <span class="px-2 py-0.5 bg-surface-container text-on-surface text-label-sm font-bold">
+                4 Reports
+              </span>
+
+            </li>
+
+          </ul>
+
+        </div>
+
+
+        <!-- REPORT CTA -->
+        <div class="bg-primary text-on-primary p-space-lg space-y-3.5">
+
+          <div class="flex items-center gap-2 text-secondary-container">
+
+            <span class="material-symbols-outlined text-[22px]">
+              add_circle
+            </span>
+
+            <h4 class="font-headline-sm text-headline-sm font-bold text-on-primary">
+              Spotted an Issue?
+            </h4>
+
+          </div>
+
+
+          <p class="text-body-sm text-primary-fixed-dim leading-relaxed">
+            Help your ward crew take swift action. Snap a quick photo or record a voice note in under 30 seconds.
+          </p>
+
+
+          <a
+            href="report.html"
+            class="w-full bg-secondary text-on-secondary py-2.5 px-space-md font-label-md text-label-md font-semibold rounded-none flex items-center justify-center gap-2 hover:bg-secondary/90 transition-none"
+          >
+
+            <span class="material-symbols-outlined text-[18px]">
+              add
+            </span>
+
+            <span>
+              Report Civic Issue
+            </span>
+
+          </a>
+
+        </div>
+
+      </aside>
+
     </div>
 
-    <!-- HEADER -->
-    <header class="bg-white border-b border-border sticky top-0 z-40">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="h-20 flex items-center justify-between">
+  </main>
 
-                <!-- LOGO -->
-                <a href="index.html" class="flex items-center gap-3">
-                    <div class="w-11 h-11 rounded-xl bg-primary text-white flex items-center justify-center">
-                        <span class="material-symbols-outlined text-[27px]">
-                            location_city
-                        </span>
-                    </div>
 
-                    <div>
-                        <div class="font-display font-extrabold text-lg leading-tight">
-                            Sheher Saathi
-                        </div>
-                        <div class="text-xs text-textmuted">
-                            Citizen Municipal Portal
-                        </div>
-                    </div>
-                </a>
+  <!-- CITIZEN PORTAL FOOTER -->
+  <footer class="bg-surface-container-lowest border-t border-outline-variant mt-space-2xl">
 
-                <!-- DESKTOP NAV -->
-                <nav class="hidden lg:flex items-center gap-7 text-sm font-semibold">
+    <div class="max-w-7xl mx-auto px-margin py-space-xl space-y-space-lg">
 
-                    <a
-                        href="report.html"
-                        class="text-textmuted hover:text-primary transition"
-                    >
-                        Report Issue
-                    </a>
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
 
-                    <a
-                        href="community.html"
-                        class="text-primary border-b-2 border-primary py-7"
-                    >
-                        Community Issues
-                    </a>
 
-                    <a
-                        href="reports.html"
-                        class="text-textmuted hover:text-primary transition"
-                    >
-                        Track Report
-                    </a>
+        <!-- Left Brand & Mission -->
+        <div class="md:col-span-4 space-y-2">
 
-                    <a
-                        href="reports.html"
-                        class="text-textmuted hover:text-primary transition"
-                    >
-                        My Reports
-                    </a>
-
-                    <a
-                        href="index.html#how-it-works"
-                        class="text-textmuted hover:text-primary transition"
-                    >
-                        How it works
-                    </a>
-                </nav>
-
-                <!-- ACTIONS -->
-                <div class="flex items-center gap-3">
-                    <a
-                        href="report.html"
-                        class="hidden sm:flex items-center gap-2 bg-primary text-white px-5 py-2.5 rounded-xl font-bold text-sm hover:bg-primary-dark transition"
-                    >
-                        <span class="material-symbols-outlined text-[19px]">
-                            add
-                        </span>
-                        Raise Ticket
-                    </a>
-
-                    <button
-                        class="lg:hidden p-2 rounded-lg hover:bg-surface-soft"
-                        onclick="toggleMenu()"
-                    >
-                        <span class="material-symbols-outlined">
-                            menu
-                        </span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- MOBILE MENU -->
-            <div id="mobileMenu" class="hidden lg:hidden pb-5 border-t border-border">
-                <nav class="flex flex-col gap-1 pt-4">
-
-                    <a
-                        href="report.html"
-                        class="px-4 py-3 rounded-lg hover:bg-surface-soft"
-                    >
-                        Report Issue
-                    </a>
-
-                    <a
-                        href="community.html"
-                        class="px-4 py-3 rounded-lg bg-primary-light text-primary font-semibold"
-                    >
-                        Community Issues
-                    </a>
-
-                    <a
-                        href="reports.html"
-                        class="px-4 py-3 rounded-lg hover:bg-surface-soft"
-                    >
-                        Track Report
-                    </a>
-
-                    <a
-                        href="reports.html"
-                        class="px-4 py-3 rounded-lg hover:bg-surface-soft"
-                    >
-                        My Reports
-                    </a>
-
-                    <a
-                        href="index.html#how-it-works"
-                        class="px-4 py-3 rounded-lg hover:bg-surface-soft"
-                    >
-                        How it works
-                    </a>
-                </nav>
-            </div>
-        </div>
-    </header>
-
-    <!-- MAIN -->
-    <main>
-
-        <!-- HERO -->
-        <section class="bg-white border-b border-border">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-
-                <div class="max-w-3xl">
-
-                    <div class="inline-flex items-center gap-2 bg-primary-light text-primary px-3 py-1.5 rounded-full text-xs font-bold mb-5">
-                        <span class="w-2 h-2 bg-primary rounded-full pulse-dot"></span>
-                        LIVE COMMUNITY INTELLIGENCE
-                    </div>
-
-                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-display font-extrabold tracking-tight">
-                        What's Happening
-                        <span class="text-primary"> in Your City?</span>
-                    </h1>
-
-                    <p class="mt-5 text-lg text-textmuted leading-relaxed max-w-2xl">
-                        See civic issues reported by people around you.
-                        Similar reports are grouped together to help communities
-                        and authorities understand problems faster.
-                    </p>
-
-                </div>
-
-                <!-- SEARCH / FILTER -->
-                <div class="mt-10 grid grid-cols-1 lg:grid-cols-12 gap-3">
-
-                    <!-- SEARCH -->
-                    <div class="lg:col-span-6 relative">
-
-                        <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-textmuted">
-                            search
-                        </span>
-
-                        <input
-                            id="searchInput"
-                            type="text"
-                            placeholder="Search civic issues, locations or wards..."
-                            oninput="filterIssues()"
-                            class="w-full h-12 pl-12 pr-4 rounded-xl border border-border bg-background outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
-                        >
-                    </div>
-
-                    <!-- WARD -->
-                    <div class="lg:col-span-3">
-                        <select
-                            id="wardFilter"
-                            onchange="filterIssues()"
-                            class="w-full h-12 px-4 rounded-xl border border-border bg-background outline-none focus:border-primary"
-                        >
-                            <option value="">All wards</option>
-                            <option value="Ward 14">Ward 14</option>
-                            <option value="Ward 28">Ward 28</option>
-                            <option value="Ward 52">Ward 52</option>
-                            <option value="Ward 74">Ward 74</option>
-                        </select>
-                    </div>
-
-                    <!-- SORT -->
-                    <div class="lg:col-span-3">
-                        <select
-                            id="sortFilter"
-                            title="Sort issues by"
-                            class="w-full h-12 px-4 rounded-xl border border-border bg-background outline-none focus:border-primary"
-                        >
-                            <option>Most active</option>
-                            <option>Most recent</option>
-                            <option>Most reports</option>
-                        </select>
-                    </div>
-                </div>
-
-                <!-- HOT WARDS -->
-                <div class="mt-5 flex flex-wrap items-center gap-2">
-
-                    <span class="text-sm text-textmuted font-semibold mr-1">
-                        Hot wards:
-                    </span>
-
-                    <button
-                        onclick="selectWard('Ward 14')"
-                        class="px-3 py-1.5 bg-primary-light text-primary rounded-full text-sm font-semibold hover:bg-primary hover:text-white transition"
-                    >
-                        Ward 14
-                    </button>
-
-                    <button
-                        onclick="selectWard('Ward 28')"
-                        class="px-3 py-1.5 bg-primary-light text-primary rounded-full text-sm font-semibold hover:bg-primary hover:text-white transition"
-                    >
-                        Ward 28
-                    </button>
-
-                    <button
-                        onclick="selectWard('Ward 52')"
-                        class="px-3 py-1.5 bg-primary-light text-primary rounded-full text-sm font-semibold hover:bg-primary hover:text-white transition"
-                    >
-                        Ward 52
-                    </button>
-
-                    <button
-                        onclick="selectWard('Ward 74')"
-                        class="px-3 py-1.5 bg-primary-light text-primary rounded-full text-sm font-semibold hover:bg-primary hover:text-white transition"
-                    >
-                        Ward 74
-                    </button>
-
-                </div>
-            </div>
-        </section>
-
-        <!-- CONTENT -->
-        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-
-            <!-- TRENDING -->
-            <div class="bg-white border border-border rounded-2xl p-5 mb-8">
-
-                <div class="flex flex-col lg:flex-row lg:items-center gap-5">
-
-                    <div class="flex items-center gap-3 min-w-fit">
-
-                        <div class="w-10 h-10 rounded-xl bg-orange-100 text-orange-700 flex items-center justify-center">
-                            <span class="material-symbols-outlined">
-                                trending_up
-                            </span>
-                        </div>
-
-                        <div>
-                            <div class="font-bold">
-                                Trending Now
-                            </div>
-                            <div class="text-xs text-textmuted">
-                                Highest activity today
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="hidden lg:block h-10 w-px bg-border"></div>
-
-                    <div class="flex flex-wrap gap-3">
-
-                        <button
-                            onclick="searchIssue('waterlogging')"
-                            class="text-left px-4 py-2 rounded-xl bg-surface-soft hover:bg-primary-light transition"
-                        >
-                            <div class="text-sm font-bold">
-                                Waterlogging
-                            </div>
-                            <div class="text-xs text-textmuted">
-                                Rajpur Road • 9 reports
-                            </div>
-                        </button>
-
-                        <button
-                            onclick="searchIssue('road')"
-                            class="text-left px-4 py-2 rounded-xl bg-surface-soft hover:bg-primary-light transition"
-                        >
-                            <div class="text-sm font-bold">
-                                Road Damage
-                            </div>
-                            <div class="text-xs text-textmuted">
-                                Prem Nagar • 6 reports
-                            </div>
-                        </button>
-
-                        <button
-                            onclick="searchIssue('streetlight')"
-                            class="text-left px-4 py-2 rounded-xl bg-surface-soft hover:bg-primary-light transition"
-                        >
-                            <div class="text-sm font-bold">
-                                Lighting
-                            </div>
-                            <div class="text-xs text-textmuted">
-                                Patel Nagar • 4 reports
-                            </div>
-                        </button>
-
-                    </div>
-                </div>
-            </div>
-
-            <!-- GRID -->
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-
-                <!-- CLUSTERS -->
-                <div class="lg:col-span-8">
-
-                    <div class="flex items-end justify-between mb-5">
-
-                        <div>
-                            <h2 class="text-2xl font-display font-extrabold">
-                                Active Civic Clusters
-                            </h2>
-
-                            <p class="text-sm text-textmuted mt-1">
-                                Similar citizen reports grouped into one issue
-                            </p>
-                        </div>
-
-                        <span class="text-sm font-semibold text-textmuted">
-                            4 active
-                        </span>
-
-                    </div>
-
-                    <div id="clusterList" class="space-y-5">
-
-                        <!-- CARD 1 -->
-                        <article
-                            class="cluster-card issue-card bg-white border border-border rounded-2xl p-6"
-                            data-ward="Ward 14"
-                            data-search="waterlogging rajpur road canal crossing ward 14 drainage flood"
-                        >
-
-                            <div class="flex items-start justify-between gap-4">
-
-                                <div class="flex gap-4">
-
-                                    <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-700 flex items-center justify-center shrink-0">
-                                        <span class="material-symbols-outlined">
-                                            water
-                                        </span>
-                                    </div>
-
-                                    <div>
-                                        <div class="flex flex-wrap gap-2 mb-2">
-                                            <span class="px-2.5 py-1 rounded-full bg-red-50 text-red-700 text-xs font-bold">
-                                                HIGH ACTIVITY
-                                            </span>
-
-                                            <span class="px-2.5 py-1 rounded-full bg-surface-soft text-textmuted text-xs font-semibold">
-                                                Ward 14
-                                            </span>
-                                        </div>
-
-                                        <h3 class="text-lg font-bold">
-                                            Severe Waterlogging on Rajpur Road near Canal Crossing
-                                        </h3>
-
-                                        <p class="text-sm text-textmuted mt-2">
-                                            Multiple citizens have reported severe water accumulation
-                                            and blocked drainage at the same location.
-                                        </p>
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                            <div class="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-3">
-
-                                <div class="bg-surface-soft rounded-xl p-3">
-                                    <div class="text-xl font-extrabold text-primary">9</div>
-                                    <div class="text-xs text-textmuted">Reports</div>
-                                </div>
-
-                                <div class="bg-surface-soft rounded-xl p-3">
-                                    <div class="text-xl font-extrabold">2.4 km</div>
-                                    <div class="text-xs text-textmuted">Area affected</div>
-                                </div>
-
-                                <div class="bg-surface-soft rounded-xl p-3">
-                                    <div class="text-xl font-extrabold">Today</div>
-                                    <div class="text-xs text-textmuted">Latest report</div>
-                                </div>
-
-                                <div class="bg-surface-soft rounded-xl p-3">
-                                    <div class="text-sm font-bold text-warning">Inspection</div>
-                                    <div class="text-xs text-textmuted">Current status</div>
-                                </div>
-
-                            </div>
-
-                            <div class="mt-5 pt-5 border-t border-border flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-
-                                <div class="flex items-center gap-2 text-sm">
-                                    <span class="w-2.5 h-2.5 rounded-full bg-orange-500"></span>
-                                    <span class="font-semibold">
-                                        Under Municipal Inspection
-                                    </span>
-                                </div>
-
-                                <button
-                                    onclick="affected(this)"
-                                    class="flex items-center justify-center gap-2 px-4 py-2 rounded-lg border border-border text-sm font-bold hover:bg-surface-soft transition"
-                                >
-                                    <span class="material-symbols-outlined text-[18px]">
-                                        thumb_up
-                                    </span>
-                                    I am affected too
-                                </button>
-
-                            </div>
-
-                        </article>
-
-                        <!-- CARD 2 -->
-                        <article
-                            class="cluster-card issue-card bg-white border border-border rounded-2xl p-6"
-                            data-ward="Ward 28"
-                            data-search="road damage pothole prem nagar market gate asphalt crater ward 28"
-                        >
-
-                            <div class="flex items-start gap-4">
-
-                                <div class="w-12 h-12 rounded-xl bg-yellow-50 text-yellow-700 flex items-center justify-center shrink-0">
-                                    <span class="material-symbols-outlined">
-                                        construction
-                                    </span>
-                                </div>
-
-                                <div>
-                                    <div class="flex flex-wrap gap-2 mb-2">
-
-                                        <span class="px-2.5 py-1 rounded-full bg-orange-50 text-orange-700 text-xs font-bold">
-                                            HIGH PRIORITY
-                                        </span>
-
-                                        <span class="px-2.5 py-1 rounded-full bg-surface-soft text-textmuted text-xs font-semibold">
-                                            Ward 28
-                                        </span>
-
-                                    </div>
-
-                                    <h3 class="text-lg font-bold">
-                                        Deep asphalt crater &amp; caved-in road near Prem Nagar Market Gate
-                                    </h3>
-
-                                    <p class="text-sm text-textmuted mt-2">
-                                        A large road defect has been reported by several residents
-                                        and is affecting daily traffic.
-                                    </p>
-                                </div>
-
-                            </div>
-
-                            <div class="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-3">
-
-                                <div class="bg-surface-soft rounded-xl p-3">
-                                    <div class="text-xl font-extrabold text-primary">6</div>
-                                    <div class="text-xs text-textmuted">Reports</div>
-                                </div>
-
-                                <div class="bg-surface-soft rounded-xl p-3">
-                                    <div class="text-xl font-extrabold">1.1 km</div>
-                                    <div class="text-xs text-textmuted">Area affected</div>
-                                </div>
-
-                                <div class="bg-surface-soft rounded-xl p-3">
-                                    <div class="text-xl font-extrabold">2 hrs</div>
-                                    <div class="text-xs text-textmuted">Latest report</div>
-                                </div>
-
-                                <div class="bg-surface-soft rounded-xl p-3">
-                                    <div class="text-sm font-bold text-success">Scheduled</div>
-                                    <div class="text-xs text-textmuted">Current status</div>
-                                </div>
-
-                            </div>
-
-                            <div class="mt-5 pt-5 border-t border-border flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-
-                                <div class="flex items-center gap-2 text-sm">
-                                    <span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span>
-                                    <span class="font-semibold">
-                                        Material Patch Scheduled
-                                    </span>
-                                </div>
-
-                                <button
-                                    onclick="affected(this)"
-                                    class="flex items-center justify-center gap-2 px-4 py-2 rounded-lg border border-border text-sm font-bold hover:bg-surface-soft transition"
-                                >
-                                    <span class="material-symbols-outlined text-[18px]">
-                                        thumb_up
-                                    </span>
-                                    I am affected too
-                                </button>
-
-                            </div>
-
-                        </article>
-
-                        <!-- CARD 3 -->
-                        <article
-                            class="cluster-card issue-card bg-white border border-border rounded-2xl p-6"
-                            data-ward="Ward 52"
-                            data-search="streetlight lighting dark road patel nagar 80ft road ward 52"
-                        >
-
-                            <div class="flex items-start gap-4">
-
-                                <div class="w-12 h-12 rounded-xl bg-purple-50 text-purple-700 flex items-center justify-center shrink-0">
-                                    <span class="material-symbols-outlined">
-                                        lightbulb
-                                    </span>
-                                </div>
-
-                                <div>
-
-                                    <div class="flex flex-wrap gap-2 mb-2">
-
-                                        <span class="px-2.5 py-1 rounded-full bg-yellow-50 text-yellow-700 text-xs font-bold">
-                                            ACTIVE
-                                        </span>
-
-                                        <span class="px-2.5 py-1 rounded-full bg-surface-soft text-textmuted text-xs font-semibold">
-                                            Ward 52
-                                        </span>
-
-                                    </div>
-
-                                    <h3 class="text-lg font-bold">
-                                        Multiple consecutive dark streetlights along Patel Nagar 80ft Road
-                                    </h3>
-
-                                    <p class="text-sm text-textmuted mt-2">
-                                        Several streetlights are reportedly not working along
-                                        a busy stretch of road.
-                                    </p>
-
-                                </div>
-
-                            </div>
-
-                            <div class="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-3">
-
-                                <div class="bg-surface-soft rounded-xl p-3">
-                                    <div class="text-xl font-extrabold text-primary">4</div>
-                                    <div class="text-xs text-textmuted">Reports</div>
-                                </div>
-
-                                <div class="bg-surface-soft rounded-xl p-3">
-                                    <div class="text-xl font-extrabold">900 m</div>
-                                    <div class="text-xs text-textmuted">Area affected</div>
-                                </div>
-
-                                <div class="bg-surface-soft rounded-xl p-3">
-                                    <div class="text-xl font-extrabold">5 hrs</div>
-                                    <div class="text-xs text-textmuted">Latest report</div>
-                                </div>
-
-                                <div class="bg-surface-soft rounded-xl p-3">
-                                    <div class="text-sm font-bold text-success">Assigned</div>
-                                    <div class="text-xs text-textmuted">Current status</div>
-                                </div>
-
-                            </div>
-
-                            <div class="mt-5 pt-5 border-t border-border flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-
-                                <div class="flex items-center gap-2 text-sm">
-                                    <span class="w-2.5 h-2.5 rounded-full bg-green-500"></span>
-                                    <span class="font-semibold">
-                                        Lineman Assigned
-                                    </span>
-                                </div>
-
-                                <button
-                                    onclick="affected(this)"
-                                    class="flex items-center justify-center gap-2 px-4 py-2 rounded-lg border border-border text-sm font-bold hover:bg-surface-soft transition"
-                                >
-                                    <span class="material-symbols-outlined text-[18px]">
-                                        thumb_up
-                                    </span>
-                                    I am affected too
-                                </button>
-
-                            </div>
-
-                        </article>
-
-                        <!-- CARD 4 -->
-                        <article
-                            class="cluster-card issue-card bg-white border border-border rounded-2xl p-6"
-                            data-ward="Ward 74"
-                            data-search="garbage waste bin overflowing indiranagar 12th main ward 74 compactor"
-                        >
-
-                            <div class="flex items-start gap-4">
-
-                                <div class="w-12 h-12 rounded-xl bg-green-50 text-green-700 flex items-center justify-center shrink-0">
-                                    <span class="material-symbols-outlined">
-                                        delete
-                                    </span>
-                                </div>
-
-                                <div>
-
-                                    <div class="flex flex-wrap gap-2 mb-2">
-
-                                        <span class="px-2.5 py-1 rounded-full bg-green-50 text-green-700 text-xs font-bold">
-                                            RESPONSE EN ROUTE
-                                        </span>
-
-                                        <span class="px-2.5 py-1 rounded-full bg-surface-soft text-textmuted text-xs font-semibold">
-                                            Ward 74
-                                        </span>
-
-                                    </div>
-
-                                    <h3 class="text-lg font-bold">
-                                        Overflowing secondary waste bin at Indiranagar 12th Main cross
-                                    </h3>
-
-                                    <p class="text-sm text-textmuted mt-2">
-                                        Residents reported an overflowing waste collection point
-                                        requiring immediate clearance.
-                                    </p>
-
-                                </div>
-
-                            </div>
-
-                            <div class="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-3">
-
-                                <div class="bg-surface-soft rounded-xl p-3">
-                                    <div class="text-xl font-extrabold text-primary">5</div>
-                                    <div class="text-xs text-textmuted">Reports</div>
-                                </div>
-
-                                <div class="bg-surface-soft rounded-xl p-3">
-                                    <div class="text-xl font-extrabold">400 m</div>
-                                    <div class="text-xs text-textmuted">Area affected</div>
-                                </div>
-
-                                <div class="bg-surface-soft rounded-xl p-3">
-                                    <div class="text-xl font-extrabold">1 hr</div>
-                                    <div class="text-xs text-textmuted">Latest report</div>
-                                </div>
-
-                                <div class="bg-surface-soft rounded-xl p-3">
-                                    <div class="text-sm font-bold text-success">En route</div>
-                                    <div class="text-xs text-textmuted">Current status</div>
-                                </div>
-
-                            </div>
-
-                            <div class="mt-5 pt-5 border-t border-border flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-
-                                <div class="flex items-center gap-2 text-sm">
-                                    <span class="w-2.5 h-2.5 rounded-full bg-green-500"></span>
-                                    <span class="font-semibold">
-                                        Compactor En Route
-                                    </span>
-                                </div>
-
-                                <button
-                                    onclick="affected(this)"
-                                    class="flex items-center justify-center gap-2 px-4 py-2 rounded-lg border border-border text-sm font-bold hover:bg-surface-soft transition"
-                                >
-                                    <span class="material-symbols-outlined text-[18px]">
-                                        thumb_up
-                                    </span>
-                                    I am affected too
-                                </button>
-
-                            </div>
-
-                        </article>
-
-                    </div>
-
-                    <!-- NO RESULTS -->
-                    <div
-                        id="noResults"
-                        class="hidden bg-white border border-border rounded-2xl p-10 text-center"
-                    >
-                        <span class="material-symbols-outlined text-5xl text-textmuted">
-                            search_off
-                        </span>
-
-                        <h3 class="text-xl font-bold mt-4">
-                            No civic issues found
-                        </h3>
-
-                        <p class="text-sm text-textmuted mt-2">
-                            Try another search or select a different ward.
-                        </p>
-                    </div>
-
-                </div>
-
-                <!-- SIDEBAR -->
-                <aside class="lg:col-span-4 space-y-5">
-
-                    <!-- WHY CLUSTER -->
-                    <div class="bg-white border border-border rounded-2xl p-6">
-
-                        <div class="w-11 h-11 rounded-xl bg-primary-light text-primary flex items-center justify-center mb-4">
-                            <span class="material-symbols-outlined">
-                                hub
-                            </span>
-                        </div>
-
-                        <h3 class="text-xl font-display font-extrabold">
-                            Why We Cluster Reports
-                        </h3>
-
-                        <p class="text-sm text-textmuted mt-3 leading-relaxed">
-                            When multiple citizens report the same problem,
-                            Sheher Saathi groups those reports into one civic
-                            cluster.
-                        </p>
-
-                        <div class="mt-5 space-y-4">
-
-                            <div class="flex gap-3">
-                                <div class="w-7 h-7 rounded-full bg-primary-light text-primary flex items-center justify-center shrink-0 text-sm font-bold">
-                                    1
-                                </div>
-
-                                <div>
-                                    <div class="font-bold text-sm">
-                                        Detect similar reports
-                                    </div>
-                                    <div class="text-xs text-textmuted mt-1">
-                                        Location, category and issue descriptions are compared.
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="flex gap-3">
-                                <div class="w-7 h-7 rounded-full bg-primary-light text-primary flex items-center justify-center shrink-0 text-sm font-bold">
-                                    2
-                                </div>
-
-                                <div>
-                                    <div class="font-bold text-sm">
-                                        Build a civic cluster
-                                    </div>
-                                    <div class="text-xs text-textmuted mt-1">
-                                        Related reports become one stronger signal.
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="flex gap-3">
-                                <div class="w-7 h-7 rounded-full bg-primary-light text-primary flex items-center justify-center shrink-0 text-sm font-bold">
-                                    3
-                                </div>
-
-                                <div>
-                                    <div class="font-bold text-sm">
-                                        Improve accountability
-                                    </div>
-                                    <div class="text-xs text-textmuted mt-1">
-                                        Authorities can see where attention is needed most.
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <!-- HOTSPOT SUMMARY -->
-                    <div class="bg-white border border-border rounded-2xl p-6">
-
-                        <div class="flex items-center justify-between">
-
-                            <div>
-                                <h3 class="font-display font-extrabold text-lg">
-                                    Hotspot Summary
-                                </h3>
-
-                                <p class="text-xs text-textmuted mt-1">
-                                    Current community activity
-                                </p>
-                            </div>
-
-                            <span class="material-symbols-outlined text-primary">
-                                local_fire_department
-                            </span>
-
-                        </div>
-
-                        <div class="mt-5 space-y-4">
-
-                            <div>
-                                <div class="flex justify-between text-sm mb-1.5">
-                                    <span class="font-semibold">
-                                        Water &amp; Drainage
-                                    </span>
-                                    <span class="font-bold text-primary">
-                                        42%
-                                    </span>
-                                </div>
-
-                                <div class="h-2 rounded-full bg-surface-soft overflow-hidden">
-                                    <div class="h-full bg-primary rounded-full" style="width:42%"></div>
-                                </div>
-                            </div>
-
-                            <div>
-                                <div class="flex justify-between text-sm mb-1.5">
-                                    <span class="font-semibold">
-                                        Roads
-                                    </span>
-                                    <span class="font-bold text-primary">
-                                        31%
-                                    </span>
-                                </div>
-
-                                <div class="h-2 rounded-full bg-surface-soft overflow-hidden">
-                                    <div class="h-full bg-primary rounded-full" style="width:31%"></div>
-                                </div>
-                            </div>
-
-                            <div>
-                                <div class="flex justify-between text-sm mb-1.5">
-                                    <span class="font-semibold">
-                                        Waste Management
-                                    </span>
-                                    <span class="font-bold text-primary">
-                                        17%
-                                    </span>
-                                </div>
-
-                                <div class="h-2 rounded-full bg-surface-soft overflow-hidden">
-                                    <div class="h-full bg-primary rounded-full" style="width:17%"></div>
-                                </div>
-                            </div>
-
-                            <div>
-                                <div class="flex justify-between text-sm mb-1.5">
-                                    <span class="font-semibold">
-                                        Streetlighting
-                                    </span>
-                                    <span class="font-bold text-primary">
-                                        10%
-                                    </span>
-                                </div>
-
-                                <div class="h-2 rounded-full bg-surface-soft overflow-hidden">
-                                    <div class="h-full bg-primary rounded-full" style="width:10%"></div>
-                                </div>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <!-- REPORT CTA -->
-                    <div class="bg-primary text-white rounded-2xl p-6">
-
-                        <div class="w-11 h-11 rounded-xl bg-white/15 flex items-center justify-center mb-4">
-                            <span class="material-symbols-outlined">
-                                campaign
-                            </span>
-                        </div>
-
-                        <h3 class="text-xl font-display font-extrabold">
-                            Spotted an Issue?
-                        </h3>
-
-                        <p class="text-sm text-white/80 mt-2 leading-relaxed">
-                            Report it in a few simple steps. Your report can
-                            help other citizens and strengthen the civic signal.
-                        </p>
-
-                        <a
-                            href="report.html"
-                            class="mt-5 w-full flex items-center justify-center gap-2 bg-white text-primary rounded-xl py-3 font-bold hover:bg-primary-light transition"
-                        >
-                            <span class="material-symbols-outlined text-[19px]">
-                                add_circle
-                            </span>
-                            Report New Civic Issue
-                        </a>
-
-                    </div>
-
-                </aside>
-
-            </div>
-
-            <!-- ACCOUNTABILITY NOTE -->
-            <div class="mt-10 bg-surface-soft border border-border rounded-2xl p-6">
-
-                <div class="flex flex-col md:flex-row gap-4">
-
-                    <div class="w-11 h-11 rounded-xl bg-white text-primary flex items-center justify-center shrink-0">
-                        <span class="material-symbols-outlined">
-                            verified
-                        </span>
-                    </div>
-
-                    <div>
-
-                        <h3 class="font-display font-extrabold">
-                            Built for Municipal Accountability
-                        </h3>
-
-                        <p class="text-sm text-textmuted mt-2 leading-relaxed">
-                            Community clusters help make recurring civic
-                            problems easier to understand, prioritize and
-                            track from citizen reports to municipal action.
-                        </p>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-    </main>
-
-    <!-- FOOTER -->
-    <footer class="bg-white border-t border-border mt-8">
-
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-
-            <div class="flex flex-col md:flex-row items-center justify-between gap-5">
-
-                <div class="flex items-center gap-3">
-
-                    <div class="w-9 h-9 rounded-lg bg-primary text-white flex items-center justify-center">
-                        <span class="material-symbols-outlined text-[21px]">
-                            location_city
-                        </span>
-                    </div>
-
-                    <div>
-                        <div class="font-bold">
-                            Sheher Saathi
-                        </div>
-
-                        <div class="text-xs text-textmuted">
-                            Making civic participation easier.
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="flex flex-wrap items-center justify-center gap-5 text-sm text-textmuted">
-
-                    <a
-                        href="index.html"
-                        class="hover:text-primary"
-                    >
-                        Home
-                    </a>
-
-                    <a
-                        href="report.html"
-                        class="hover:text-primary"
-                    >
-                        Report Issue
-                    </a>
-
-                    <a
-                        href="community.html"
-                        class="hover:text-primary"
-                    >
-                        Community
-                    </a>
-
-                    <a
-                        href="reports.html"
-                        class="hover:text-primary"
-                    >
-                        My Reports
-                    </a>
-
-                    <a
-                        href="admin.html"
-                        class="hover:text-primary"
-                    >
-                        Authority Login
-                    </a>
-
-                </div>
-
-            </div>
-
-            <div class="border-t border-border mt-7 pt-5 text-center text-xs text-textmuted">
-                © 2026 Sheher Saathi • Citizen Municipal Portal
-            </div>
-
-        </div>
-
-    </footer>
-
-    <!-- MOBILE BOTTOM NAV -->
-    <nav class="fixed bottom-0 left-0 right-0 bg-white border-t border-border z-50 lg:hidden">
-
-        <div class="grid grid-cols-4">
+          <div class="flex items-center gap-2">
 
             <a
-                href="index.html"
-                class="flex flex-col items-center gap-1 py-3 text-textmuted"
+              href="index.html"
+              class="w-7 h-7 bg-primary text-on-primary flex items-center justify-center rounded-none"
+              aria-label="Go to homepage"
             >
-                <span class="material-symbols-outlined text-[21px]">
-                    home
-                </span>
-
-                <span class="text-[10px] font-semibold">
-                    Home
-                </span>
+              <span class="material-symbols-outlined text-lg">
+                location_city
+              </span>
             </a>
 
             <a
+              href="index.html"
+              class="text-headline-sm font-headline-sm font-bold text-primary"
+            >
+              Sheher Saathi
+            </a>
+
+          </div>
+
+
+          <p class="text-body-md font-body-md text-on-surface-variant">
+            Your city. Your voice. Your Saathi. Empowering citizens and ward administrations to resolve civic pain points transparently.
+          </p>
+
+
+          <p class="text-body-sm font-body-sm text-outline">
+            National Municipal Tech Initiative • Open Civic Data Standard
+          </p>
+
+        </div>
+
+
+        <!-- Quick Civic Links -->
+        <div class="md:col-span-3 space-y-2">
+
+          <span class="text-label-md font-label-md font-bold text-on-surface uppercase tracking-wider block">
+            Citizen Services
+          </span>
+
+          <ul class="space-y-1.5 text-body-sm font-body-sm text-on-surface-variant">
+
+            <li>
+              <a
+                class="hover:text-primary"
                 href="report.html"
-                class="flex flex-col items-center gap-1 py-3 text-textmuted"
-            >
-                <span class="material-symbols-outlined text-[21px]">
-                    add_circle
-                </span>
+              >
+                File a New Grievance
+              </a>
+            </li>
 
-                <span class="text-[10px] font-semibold">
-                    Report
-                </span>
-            </a>
+            <li>
+              <a
+                class="hover:text-primary"
+                href="#hotspots-map"
+              >
+                Ward Map &amp; Engineer Directory
+              </a>
+            </li>
 
-            <a
-                href="community.html"
-                class="flex flex-col items-center gap-1 py-3 text-primary"
-            >
-                <span class="material-symbols-outlined text-[21px]">
-                    groups
-                </span>
+            <li>
+              <a
+                class="hover:text-primary"
+                href="#hotspots-map"
+              >
+                Sanitation Truck Live Tracking
+              </a>
+            </li>
 
-                <span class="text-[10px] font-bold">
-                    Community
-                </span>
-            </a>
+            <li>
+              <a
+                class="hover:text-primary"
+                href="index.html#how-it-works"
+              >
+                Citizen Charter &amp; SLA Timelines
+              </a>
+            </li>
 
-            <a
-                href="reports.html"
-                class="flex flex-col items-center gap-1 py-3 text-textmuted"
-            >
-                <span class="material-symbols-outlined text-[21px]">
-                    assignment
-                </span>
-
-                <span class="text-[10px] font-semibold">
-                    My Reports
-                </span>
-            </a>
+          </ul>
 
         </div>
 
-    </nav>
 
-    <!-- JAVASCRIPT -->
-    <script>
+        <!-- Helpline -->
+        <div class="md:col-span-3 space-y-2">
 
-        function toggleMenu() {
-            const menu = document.getElementById("mobileMenu");
-            menu.classList.toggle("hidden");
-        }
+          <span class="text-label-md font-label-md font-bold text-on-surface uppercase tracking-wider block">
+            Municipal Helplines
+          </span>
 
+          <p class="text-body-sm font-body-sm text-on-surface-variant">
+            Toll-Free Grievance Control Room:
+            <br>
 
-        function filterIssues() {
+            <strong class="text-on-surface text-body-lg font-bold">
+              1916 / 080-22660000
+            </strong>
+          </p>
 
-            const search =
-                document.getElementById("searchInput")
-                    .value
-                    .toLowerCase()
-                    .trim();
+          <p class="text-body-sm font-body-sm text-on-surface-variant">
+            Disaster / Waterlogging Desk:
+            <strong class="text-on-surface">
+              1077
+            </strong>
+          </p>
 
-            const ward =
-                document.getElementById("wardFilter")
-                    .value;
-
-            const cards =
-                document.querySelectorAll(".issue-card");
-
-            let visible = 0;
-
-            cards.forEach(card => {
-
-                const cardSearch =
-                    card.dataset.search.toLowerCase();
-
-                const cardWard =
-                    card.dataset.ward;
-
-                const searchMatch =
-                    search === "" ||
-                    cardSearch.includes(search);
-
-                const wardMatch =
-                    ward === "" ||
-                    cardWard === ward;
-
-                if (searchMatch && wardMatch) {
-                    card.classList.remove("hide-card");
-                    visible++;
-                } else {
-                    card.classList.add("hide-card");
-                }
-
-            });
-
-            const noResults =
-                document.getElementById("noResults");
-
-            if (visible === 0) {
-                noResults.classList.remove("hidden");
-            } else {
-                noResults.classList.add("hidden");
-            }
-        }
+        </div>
 
 
-        function selectWard(ward) {
+        <!-- Trust & Security -->
+        <div class="md:col-span-2 space-y-2">
 
-            document.getElementById("wardFilter").value = ward;
+          <span class="text-label-md font-label-md font-bold text-on-surface uppercase tracking-wider block">
+            Portal Access
+          </span>
 
-            filterIssues();
+          <ul class="space-y-1.5 text-body-sm font-body-sm text-on-surface-variant">
 
-            window.scrollTo({
-                top: document.getElementById("clusterList").offsetTop - 120,
-                behavior: "smooth"
-            });
-        }
-
-
-        function searchIssue(keyword) {
-
-            document.getElementById("searchInput").value = keyword;
-
-            document.getElementById("wardFilter").value = "";
-
-            filterIssues();
-
-            window.scrollTo({
-                top: document.getElementById("clusterList").offsetTop - 120,
-                behavior: "smooth"
-            });
-        }
-
-
-        function affected(button) {
-
-            if (button.dataset.clicked === "true") {
-                return;
-            }
-
-            button.dataset.clicked = "true";
-
-            button.classList.remove(
-                "border-border",
-                "hover:bg-surface-soft"
-            );
-
-            button.classList.add(
-                "bg-primary-light",
-                "border-primary",
-                "text-primary"
-            );
-
-            button.innerHTML = `
-                <span class="material-symbols-outlined text-[18px]">
-                    check_circle
+            <li>
+              <a
+                class="flex items-center gap-1 hover:text-primary"
+                href="#authority-login"
+              >
+                <span class="material-symbols-outlined text-[14px]">
+                  lock
                 </span>
-                Added
-            `;
-        }
 
-    </script>
+                Authority Login
+              </a>
+            </li>
+
+            <li>
+              <a
+                class="hover:text-primary"
+                href="#"
+              >
+                Audited SLA Metrics
+              </a>
+            </li>
+
+            <li>
+              <a
+                class="hover:text-primary"
+                href="#"
+              >
+                Privacy &amp; Citizen Data
+              </a>
+            </li>
+
+          </ul>
+
+        </div>
+
+      </div>
+
+
+      <!-- Bottom Bar -->
+      <div class="pt-space-md border-t border-outline-variant/40 flex flex-col sm:flex-row items-center justify-between text-body-sm font-body-sm text-outline gap-2">
+
+        <p>
+          © 2025 Sheher Saathi • Open Citizen Portal. Designed for municipal accountability across Indian cities.
+        </p>
+
+        <div class="flex items-center gap-4">
+
+          <a
+            class="hover:underline"
+            href="#"
+          >
+            Right to Information
+          </a>
+
+          <a
+            class="hover:underline"
+            href="#"
+          >
+            Citizen Terms
+          </a>
+
+          <a
+            class="hover:underline"
+            href="#"
+          >
+            Contact Nodal Officer
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </footer>
+
+
+  <!-- MOBILE BOTTOM NAV BAR -->
+  <nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-space-xs py-1.5 bg-surface border-t border-outline-variant text-label-sm font-label-sm">
+
+    <!-- Home -->
+    <a
+      class="flex flex-col items-center justify-center text-on-surface-variant px-space-md py-space-xs"
+      href="index.html"
+    >
+      <span class="material-symbols-outlined text-[20px]">
+        dashboard
+      </span>
+
+      <span>
+        Home
+      </span>
+    </a>
+
+
+    <!-- Pulse -->
+    <a
+      class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-none px-space-md py-space-xs font-bold"
+      href="community.html"
+    >
+      <span class="material-symbols-outlined text-[20px]">
+        list_alt
+      </span>
+
+      <span>
+        Pulse
+      </span>
+    </a>
+
+
+    <!-- Report -->
+    <a
+      class="flex flex-col items-center justify-center text-on-surface-variant px-space-md py-space-xs"
+      href="report.html"
+    >
+      <span class="material-symbols-outlined text-[20px]">
+        add_circle
+      </span>
+
+      <span>
+        Report
+      </span>
+    </a>
+
+
+    <!-- My Issues -->
+    <a
+      class="flex flex-col items-center justify-center text-on-surface-variant px-space-md py-space-xs"
+      href="reports.html"
+    >
+      <span class="material-symbols-outlined text-[20px]">
+        person
+      </span>
+
+      <span>
+        My Issues
+      </span>
+    </a>
+
+  </nav>
 
 </body>
 </html>
