@@ -1,0 +1,1313 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>Sheher Saathi - Citizen Municipal Portal | My Reports</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Material Symbols -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+
+            theme: {
+                extend: {
+                    colors: {
+                        "on-secondary-fixed": "#3b0900",
+                        "tertiary": "#000000",
+                        "on-tertiary-fixed-variant": "#42474e",
+                        "surface": "#f8f9ff",
+                        "surface-container": "#e5eeff",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-on-surface": "#eaf1ff",
+                        "on-tertiary-fixed": "#161c22",
+                        "on-tertiary-container": "#7f848c",
+                        "secondary-fixed": "#ffdbd1",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-low": "#eff4ff",
+                        "error": "#ba1a1a",
+                        "primary-container": "#181b25",
+                        "on-secondary-fixed-variant": "#862201",
+                        "primary-fixed-dim": "#c3c6d3",
+                        "on-error": "#ffffff",
+                        "tertiary-container": "#161c22",
+                        "surface-tint": "#5a5e69",
+                        "secondary-container": "#fe7952",
+                        "surface-container-highest": "#d3e4fe",
+                        "on-secondary": "#ffffff",
+                        "outline-variant": "#c6c6cc",
+                        "surface-variant": "#d3e4fe",
+                        "on-surface": "#0b1c30",
+                        "primary": "#000000",
+                        "on-secondary-container": "#6c1900",
+                        "on-background": "#0b1c30",
+                        "tertiary-fixed": "#dee3ec",
+                        "error-container": "#ffdad6",
+                        "outline": "#76777c",
+                        "surface-bright": "#f8f9ff",
+                        "inverse-primary": "#c3c6d3",
+                        "secondary": "#a73918",
+                        "secondary-fixed-dim": "#ffb5a0",
+                        "inverse-surface": "#213145",
+                        "on-primary-container": "#808390",
+                        "on-primary-fixed": "#181b25",
+                        "on-primary": "#ffffff",
+                        "on-primary-fixed-variant": "#434751",
+                        "surface-dim": "#cbdbf5",
+                        "primary-fixed": "#dfe2ef",
+                        "tertiary-fixed-dim": "#c2c7cf",
+                        "background": "#f8f9ff",
+                        "on-surface-variant": "#45464b",
+                        "surface-container-high": "#dce9ff",
+                        "on-error-container": "#93000a"
+                    },
+
+                    borderRadius: {
+                        DEFAULT: "0.25rem",
+                        lg: "0.5rem",
+                        xl: "0.75rem",
+                        full: "9999px"
+                    },
+
+                    spacing: {
+                        margin: "32px",
+                        "space-xl": "32px",
+                        gutter: "24px",
+                        "space-xxs": "4px",
+                        "grid-columns": "12",
+                        "space-sm": "12px",
+                        "space-2xl": "48px",
+                        "space-md": "16px",
+                        "space-lg": "24px",
+                        "space-xs": "8px"
+                    },
+
+                    fontFamily: {
+                        "label-sm": ["Public Sans"],
+                        "headline-lg": ["Space Grotesk"],
+                        "headline-xl": ["Space Grotesk"],
+                        "body-lg": ["Public Sans"],
+                        "body-md": ["Public Sans"],
+                        "label-md": ["Public Sans"],
+                        "headline-md": ["Space Grotesk"],
+                        "body-sm": ["Public Sans"],
+                        "headline-sm": ["Space Grotesk"]
+                    },
+
+                    fontSize: {
+                        "label-sm": [
+                            "12px",
+                            {
+                                lineHeight: "16px",
+                                fontWeight: "500"
+                            }
+                        ],
+
+                        "headline-lg": [
+                            "32px",
+                            {
+                                lineHeight: "40px",
+                                letterSpacing: "-0.01em",
+                                fontWeight: "600"
+                            }
+                        ],
+
+                        "headline-xl": [
+                            "40px",
+                            {
+                                lineHeight: "48px",
+                                letterSpacing: "-0.02em",
+                                fontWeight: "700"
+                            }
+                        ],
+
+                        "body-lg": [
+                            "16px",
+                            {
+                                lineHeight: "24px",
+                                fontWeight: "400"
+                            }
+                        ],
+
+                        "body-md": [
+                            "14px",
+                            {
+                                lineHeight: "20px",
+                                fontWeight: "400"
+                            }
+                        ],
+
+                        "label-md": [
+                            "14px",
+                            {
+                                lineHeight: "20px",
+                                fontWeight: "500"
+                            }
+                        ],
+
+                        "headline-md": [
+                            "24px",
+                            {
+                                lineHeight: "32px",
+                                fontWeight: "600"
+                            }
+                        ],
+
+                        "body-sm": [
+                            "12px",
+                            {
+                                lineHeight: "16px",
+                                fontWeight: "400"
+                            }
+                        ],
+
+                        "headline-sm": [
+                            "18px",
+                            {
+                                lineHeight: "24px",
+                                fontWeight: "600"
+                            }
+                        ]
+                    }
+                }
+            }
+        };
+    </script>
+
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings:
+                "FILL" 0,
+                "wght" 400,
+                "GRAD" 0,
+                "opsz" 24;
+
+            display: inline-block;
+            vertical-align: middle;
+            line-height: 1;
+        }
+
+        .material-symbols-outlined.fill-icon {
+            font-variation-settings:
+                "FILL" 1;
+        }
+    </style>
+</head>
+
+
+<body class="bg-background text-on-surface font-body-md min-h-screen antialiased flex flex-col selection:bg-secondary-fixed selection:text-on-secondary-fixed">
+
+
+    <!-- =========================================================
+         TOP NAVIGATION
+    ========================================================== -->
+
+    <header class="w-full bg-surface-container-lowest border-b border-outline-variant/60 sticky top-0 z-40">
+
+        <div class="max-w-7xl mx-auto px-space-md sm:px-margin py-3 flex items-center justify-between">
+
+            <!-- Brand -->
+            <a href="index.html" class="flex items-center gap-3">
+
+                <div class="w-9 h-9 bg-primary text-on-primary flex items-center justify-center font-headline-md font-bold tracking-tight">
+                    <span class="material-symbols-outlined text-xl">
+                        account_balance
+                    </span>
+                </div>
+
+                <div>
+                    <span class="font-headline-sm text-headline-sm font-bold tracking-tight text-on-surface block leading-none">
+                        Sheher Saathi
+                    </span>
+
+                    <span class="font-label-sm text-label-sm text-outline tracking-wider uppercase block mt-0.5">
+                        Citizen Municipal Portal
+                    </span>
+                </div>
+
+            </a>
+
+
+            <!-- Desktop Navigation -->
+
+            <nav class="hidden md:flex items-center gap-6 text-label-md font-label-md">
+
+                <a
+                    class="text-on-surface-variant hover:text-primary transition-colors py-1"
+                    href="community.html"
+                >
+                    Community Issues
+                </a>
+
+                <a
+                    class="text-primary font-semibold transition-colors py-1"
+                    href="reports.html"
+                >
+                    My Reports
+                </a>
+
+                <a
+                    class="text-on-surface-variant hover:text-primary transition-colors py-1"
+                    href="index.html#how-it-works"
+                >
+                    How it works
+                </a>
+
+            </nav>
+
+
+            <!-- Right Actions -->
+
+            <div class="flex items-center gap-3">
+
+                <a
+                    class="hidden sm:inline-block font-label-sm text-label-sm text-on-surface-variant hover:text-primary px-2 py-1"
+                    href="admin.html"
+                >
+                    Authority Login
+                </a>
+
+                <a
+                    href="report.html"
+                    class="bg-secondary hover:bg-on-secondary-fixed-variant text-on-secondary font-label-md text-label-md px-space-md py-2 flex items-center gap-1.5 transition-none font-semibold"
+                >
+                    <span class="material-symbols-outlined text-lg">
+                        add
+                    </span>
+
+                    <span>
+                        + Raise Ticket
+                    </span>
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- Citizen Hub Sub-bar -->
+
+        <div class="bg-surface-container-low border-t border-outline-variant/40 px-space-md sm:px-margin py-2 text-label-sm font-label-sm text-on-surface-variant">
+
+            <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
+
+                <div class="flex items-center gap-2">
+
+                    <span class="w-2 h-2 rounded-full bg-secondary animate-pulse inline-block"></span>
+
+                    <span>
+                        Citizen Civic Activity Hub • Track real-time progress of grievances filed from your registered number
+                        <strong>
+                            +91 98450 12890
+                        </strong>
+                    </span>
+
+                </div>
+
+
+                <div class="flex items-center gap-3 text-body-sm">
+
+                    <span class="inline-flex items-center gap-1 text-outline">
+
+                        <span class="material-symbols-outlined text-sm">
+                            location_on
+                        </span>
+
+                        Ward 152, Bengaluru South
+
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =========================================================
+         MAIN CONTENT
+    ========================================================== -->
+
+    <main class="flex-grow max-w-7xl w-full mx-auto px-space-md sm:px-margin py-space-lg sm:py-space-xl">
+
+
+        <!-- Page Header -->
+
+        <section class="mb-space-lg">
+
+            <div class="max-w-3xl mb-space-md">
+
+                <h1 class="font-headline-xl text-headline-xl text-on-surface tracking-tight font-bold mb-2">
+                    Track Civic Grievance &amp; Reports
+                </h1>
+
+                <p class="text-body-lg text-on-surface-variant">
+                    Monitor your submitted civic complaints and stay updated on their progress.
+                </p>
+
+            </div>
+
+
+            <!-- Summary Cards -->
+
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-space-md max-w-3xl">
+
+
+                <!-- Total Filed -->
+
+                <div class="bg-surface-container-lowest border border-outline-variant/60 p-3 sm:p-4 shadow-sm border-l-4 border-l-primary">
+
+                    <div class="flex items-center justify-between text-outline mb-1">
+
+                        <span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant font-medium">
+                            Total Filed
+                        </span>
+
+                        <span class="material-symbols-outlined text-base text-outline">
+                            assignment
+                        </span>
+
+                    </div>
+
+                    <div class="font-headline-md text-headline-md font-bold text-on-surface tracking-tight">
+                        12
+                    </div>
+
+                    <p class="text-body-sm text-outline mt-0.5">
+                        Registered by you
+                    </p>
+
+                </div>
+
+
+                <!-- In Progress -->
+
+                <div class="bg-surface-container-lowest border border-outline-variant/60 p-3 sm:p-4 shadow-sm border-l-4 border-l-secondary-container">
+
+                    <div class="flex items-center justify-between text-outline mb-1">
+
+                        <span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary font-medium">
+                            In Progress
+                        </span>
+
+                        <span class="material-symbols-outlined text-base text-secondary">
+                            pending_actions
+                        </span>
+
+                    </div>
+
+                    <div class="font-headline-md text-headline-md font-bold text-secondary tracking-tight">
+                        03
+                    </div>
+
+                    <p class="text-body-sm text-outline mt-0.5">
+                        Crews dispatched
+                    </p>
+
+                </div>
+
+
+                <!-- Resolved -->
+
+                <div class="bg-surface-container-lowest border border-outline-variant/60 p-3 sm:p-4 shadow-sm border-l-4 border-l-[#1b7a42]">
+
+                    <div class="flex items-center justify-between text-outline mb-1">
+
+                        <span class="font-label-sm text-label-sm uppercase tracking-wider text-[#1b7a42] font-medium">
+                            Resolved
+                        </span>
+
+                        <span class="material-symbols-outlined text-base text-[#1b7a42]">
+                            task_alt
+                        </span>
+
+                    </div>
+
+                    <div class="font-headline-md text-headline-md font-bold text-[#1b7a42] tracking-tight">
+                        08
+                    </div>
+
+                    <p class="text-body-sm text-outline mt-0.5">
+                        Verified &amp; closed
+                    </p>
+
+                </div>
+
+
+                <!-- Pending -->
+
+                <div class="bg-surface-container-lowest border border-outline-variant/60 p-3 sm:p-4 shadow-sm border-l-4 border-l-[#b45309]">
+
+                    <div class="flex items-center justify-between text-outline mb-1">
+
+                        <span class="font-label-sm text-label-sm uppercase tracking-wider text-[#b45309] font-medium">
+                            Pending Sign-off
+                        </span>
+
+                        <span class="material-symbols-outlined text-base text-[#b45309]">
+                            rate_review
+                        </span>
+
+                    </div>
+
+                    <div class="font-headline-md text-headline-md font-bold text-[#b45309] tracking-tight">
+                        01
+                    </div>
+
+                    <p class="text-body-sm text-outline mt-0.5">
+                        Awaiting your rating
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Ticket Search -->
+
+            <div class="bg-surface-container-lowest border border-outline-variant/60 p-space-md sm:p-5 shadow-sm max-w-3xl">
+
+                <div class="flex flex-col sm:flex-row gap-2">
+
+                    <div class="relative flex-grow">
+
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-outline">
+
+                            <span class="material-symbols-outlined text-xl">
+                                search
+                            </span>
+
+                        </div>
+
+                        <input
+                            id="ticketSearch"
+                            class="w-full pl-10 pr-4 py-2.5 border border-outline-variant/70 text-on-surface bg-surface font-body-md text-body-md focus:outline-none focus:border-primary placeholder:text-outline/70 transition-none font-mono"
+                            placeholder="Enter Ticket ID (e.g. #SS-89432 or SS-88914)"
+                            type="text"
+                            value="#SS-89432"
+                        >
+
+                    </div>
+
+
+                    <button
+                        id="trackTicketButton"
+                        class="bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md px-6 py-2.5 flex items-center justify-center gap-2 font-medium transition-none flex-shrink-0"
+                    >
+
+                        <span class="material-symbols-outlined text-base">
+                            manage_search
+                        </span>
+
+                        <span>
+                            Track Ticket
+                        </span>
+
+                    </button>
+
+                </div>
+
+
+                <p class="text-body-md text-on-surface-variant mt-2.5 mb-1">
+                    Enter your Ticket ID or registered mobile number to view live progress,
+                    officer field notes, and resolution proof.
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================================================
+             GRIEVANCE CARD
+        ========================================================== -->
+
+        <section class="max-w-3xl space-y-space-lg">
+
+            <div class="flex items-center justify-between text-body-sm text-outline px-1">
+
+                <span class="flex items-center gap-1.5">
+
+                    <span class="material-symbols-outlined text-base text-[#1b7a42]">
+                        check_circle
+                    </span>
+
+                    <span>
+                        Showing verified report for ticket
+                        <strong class="text-on-surface font-mono">
+                            #SS-89432
+                        </strong>
+                    </span>
+
+                </span>
+
+                <span class="text-body-sm text-outline">
+                    Updated 25 mins ago
+                </span>
+
+            </div>
+
+
+
+            <article class="bg-surface-container-lowest border border-outline-variant/70 border-l-4 border-l-secondary p-5 sm:p-6 shadow-sm">
+
+
+                <!-- Ticket Header -->
+
+                <div class="flex flex-wrap items-center justify-between gap-2 pb-4 border-b border-outline-variant/40">
+
+                    <div class="flex flex-wrap items-center gap-2">
+
+                        <span class="font-label-sm text-label-sm text-outline font-mono">
+
+                            Ticket ID:
+
+                            <strong class="text-on-surface text-base font-bold">
+                                #SS-89432
+                            </strong>
+
+                        </span>
+
+
+                        <span class="px-2.5 py-0.5 bg-surface-container text-on-surface font-label-sm text-label-sm font-semibold tracking-wide border border-outline-variant/50">
+
+                            Drainage Overflow &amp; Waterlogging
+
+                        </span>
+
+                    </div>
+
+
+                    <div class="flex items-center gap-2">
+
+                        <span class="inline-flex items-center gap-1 px-2 py-0.5 bg-[#fff0ed] text-secondary font-label-sm text-label-sm font-semibold border border-secondary/20">
+
+                            <span class="material-symbols-outlined text-xs">
+                                warning
+                            </span>
+
+                            High Priority
+
+                        </span>
+
+
+                        <span class="inline-flex items-center gap-1 px-2 py-0.5 bg-[#fff8e1] text-[#b45309] font-label-sm text-label-sm font-semibold border border-[#fef08a]">
+
+                            <span class="w-1.5 h-1.5 rounded-full bg-[#b45309] animate-ping"></span>
+
+                            Field Work in Progress
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- Main Details -->
+
+                <div class="py-4">
+
+                    <h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold mb-3">
+
+                        Drainage overflow near Koramangala 4th Block,
+                        5th Main Road
+
+                    </h2>
+
+
+                    <!-- Information Grid -->
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-body-md text-on-surface-variant mb-5">
+
+
+                        <!-- Location -->
+
+                        <div class="flex items-start gap-2">
+
+                            <span class="material-symbols-outlined text-outline text-lg mt-0.5">
+                                location_on
+                            </span>
+
+                            <div>
+
+                                <span class="text-body-sm text-outline block">
+                                    Location &amp; Ward
+                                </span>
+
+                                <span class="text-on-surface font-medium">
+                                    Ward 152, Koramangala
+                                    (Sony World Signal Beat)
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Submitted -->
+
+                        <div class="flex items-start gap-2">
+
+                            <span class="material-symbols-outlined text-outline text-lg mt-0.5">
+                                history
+                            </span>
+
+                            <div>
+
+                                <span class="text-body-sm text-outline block">
+                                    Submitted
+                                </span>
+
+                                <span class="text-on-surface font-medium">
+
+                                    18 hrs ago
+
+                                    <span class="text-outline text-body-sm">
+                                        (Yesterday, 4:15 PM)
+                                    </span>
+
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Officer -->
+
+                        <div class="flex items-start gap-2">
+
+                            <span class="material-symbols-outlined text-outline text-lg mt-0.5">
+                                engineering
+                            </span>
+
+                            <div>
+
+                                <span class="text-body-sm text-outline block">
+                                    Assigned Officer
+                                </span>
+
+                                <span class="text-on-surface font-medium">
+                                    Er. Suresh Babu
+                                </span>
+
+                                <span class="text-body-sm text-outline block">
+                                    BBMP Stormwater Drains
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- Workflow -->
+
+                    <div class="bg-surface-container-low p-4 border border-outline-variant/30 mb-4">
+
+                        <span class="font-label-sm text-label-sm uppercase text-outline tracking-wider block mb-3 font-semibold">
+                            Grievance Workflow Stage
+                        </span>
+
+
+                        <div class="grid grid-cols-1 sm:grid-cols-4 gap-3">
+
+
+                            <!-- Step 1 -->
+
+                            <div class="flex items-center sm:flex-col sm:items-start gap-2.5">
+
+                                <div class="w-7 h-7 rounded-full bg-[#1b7a42] text-on-primary flex items-center justify-center flex-shrink-0">
+
+                                    <span class="material-symbols-outlined text-base">
+                                        check
+                                    </span>
+
+                                </div>
+
+                                <div>
+
+                                    <p class="font-label-sm text-label-sm font-semibold text-on-surface">
+                                        1. Submitted
+                                    </p>
+
+                                    <p class="text-body-sm text-outline hidden sm:block">
+                                        Logged &amp; geo-tagged
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- Step 2 -->
+
+                            <div class="flex items-center sm:flex-col sm:items-start gap-2.5">
+
+                                <div class="w-7 h-7 rounded-full bg-[#1b7a42] text-on-primary flex items-center justify-center flex-shrink-0">
+
+                                    <span class="material-symbols-outlined text-base">
+                                        check
+                                    </span>
+
+                                </div>
+
+                                <div>
+
+                                    <p class="font-label-sm text-label-sm font-semibold text-on-surface">
+                                        2. Triaged &amp; Assigned
+                                    </p>
+
+                                    <p class="text-body-sm text-outline hidden sm:block">
+                                        Sent to SWD Division
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- Step 3 -->
+
+                            <div class="flex items-center sm:flex-col sm:items-start gap-2.5">
+
+                                <div class="w-7 h-7 rounded-full bg-secondary-container text-on-secondary flex items-center justify-center flex-shrink-0 ring-4 ring-secondary-fixed/50">
+
+                                    <span class="material-symbols-outlined text-base">
+                                        construction
+                                    </span>
+
+                                </div>
+
+                                <div>
+
+                                    <p class="font-label-sm text-label-sm font-bold text-secondary">
+                                        3. Field Work in Progress
+                                    </p>
+
+                                    <p class="text-body-sm text-secondary font-medium hidden sm:block">
+                                        Jetting crew on site
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- Step 4 -->
+
+                            <div class="flex items-center sm:flex-col sm:items-start gap-2.5 opacity-60">
+
+                                <div class="w-7 h-7 rounded-full bg-surface-container-high text-outline flex items-center justify-center flex-shrink-0 border border-outline-variant">
+
+                                    <span class="material-symbols-outlined text-base">
+                                        photo_camera
+                                    </span>
+
+                                </div>
+
+                                <div>
+
+                                    <p class="font-label-sm text-label-sm font-medium text-on-surface-variant">
+                                        4. Resolution &amp; Sign-off
+                                    </p>
+
+                                    <p class="text-body-sm text-outline hidden sm:block">
+                                        Pending inspection
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- Latest Field Note -->
+
+                    <div class="flex items-start gap-2.5 bg-surface-container/60 p-3 border-l-2 border-secondary text-body-md text-on-surface mb-2">
+
+                        <span class="material-symbols-outlined text-secondary text-lg mt-0.5">
+                            info
+                        </span>
+
+                        <div>
+
+                            <span class="font-semibold text-label-md">
+                                Latest Field Note (11:30 AM Today):
+                            </span>
+
+                            <span>
+                                Ward Assistant Engineer visited site.
+                                De-silting machinery and suction super-sucker
+                                dispatched to clear main choke point on 5th Main.
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- Card Actions -->
+
+                <div class="pt-3 border-t border-outline-variant/40 flex flex-wrap items-center justify-between gap-3">
+
+                    <div class="flex flex-wrap items-center gap-2">
+
+                        <button
+                            id="photoButton"
+                            class="border border-outline-variant hover:bg-surface-container text-on-surface font-label-md text-label-md px-3.5 py-2 flex items-center gap-1.5 transition-none"
+                        >
+
+                            <span class="material-symbols-outlined text-base">
+                                add_a_photo
+                            </span>
+
+                            <span>
+                                Add Supplementary Photo
+                            </span>
+
+                        </button>
+
+
+                        <button
+                            id="downloadButton"
+                            class="border border-outline-variant hover:bg-surface-container text-on-surface font-label-md text-label-md px-3.5 py-2 flex items-center gap-1.5 transition-none"
+                        >
+
+                            <span class="material-symbols-outlined text-base">
+                                download
+                            </span>
+
+                            <span>
+                                Download Summary
+                            </span>
+
+                        </button>
+
+                    </div>
+
+
+                    <button
+                        id="escalateButton"
+                        class="text-secondary hover:text-on-secondary-fixed-variant font-label-sm text-label-sm flex items-center gap-1 underline underline-offset-4"
+                    >
+
+                        <span class="material-symbols-outlined text-sm">
+                            flag
+                        </span>
+
+                        <span>
+                            Escalate if delayed
+                        </span>
+
+                    </button>
+
+                </div>
+
+            </article>
+
+        </section>
+
+
+
+        <!-- =========================================================
+             SUPPORT BANNER
+        ========================================================== -->
+
+        <section class="mt-space-xl bg-surface-container border border-outline-variant/60 p-space-md sm:p-space-lg flex flex-col md:flex-row items-center justify-between gap-4 max-w-3xl">
+
+            <div class="flex items-start gap-3">
+
+                <div class="w-10 h-10 bg-secondary text-on-secondary flex items-center justify-center flex-shrink-0">
+
+                    <span class="material-symbols-outlined text-2xl">
+                        support_agent
+                    </span>
+
+                </div>
+
+
+                <div>
+
+                    <h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">
+                        Need an update on an unresolved report?
+                    </h3>
+
+                    <p class="font-body-md text-body-md text-on-surface-variant mt-0.5">
+
+                        Contact Ward 152 Citizen Facilitation Desk at
+                        <strong class="text-on-surface">
+                            080-22660000
+                        </strong>
+
+                        or SMS your Ticket ID to
+
+                        <strong class="text-on-surface">
+                            1916
+                        </strong>.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="flex items-center gap-2 flex-shrink-0 w-full md:w-auto">
+
+                <button
+                    id="helpManualButton"
+                    class="w-full md:w-auto px-4 py-2 bg-surface-container-lowest border border-outline-variant text-on-surface font-label-md text-label-md font-semibold hover:bg-surface transition-none"
+                >
+                    Citizen Help Manual
+                </button>
+
+                <button
+                    id="contactWardButton"
+                    class="w-full md:w-auto px-4 py-2 bg-secondary text-on-secondary font-label-md text-label-md font-semibold hover:bg-on-secondary-fixed-variant transition-none"
+                >
+                    Contact Ward Desk
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =========================================================
+         MOBILE BOTTOM NAVIGATION
+    ========================================================== -->
+
+    <nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-space-xs pb-safe bg-surface border-t border-outline-variant/70 shadow-lg">
+
+        <a
+            class="flex flex-col items-center justify-center text-on-surface-variant px-space-md py-space-xs hover:bg-surface-container"
+            href="index.html"
+        >
+
+            <span class="material-symbols-outlined">
+                dashboard
+            </span>
+
+            <span class="font-label-sm text-label-sm">
+                Dashboard
+            </span>
+
+        </a>
+
+
+        <a
+            class="flex flex-col items-center justify-center text-on-surface-variant px-space-md py-space-xs hover:bg-surface-container"
+            href="community.html"
+        >
+
+            <span class="material-symbols-outlined">
+                list_alt
+            </span>
+
+            <span class="font-label-sm text-label-sm">
+                Grievances
+            </span>
+
+        </a>
+
+
+        <a
+            class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container px-space-md py-space-xs"
+            href="reports.html"
+        >
+
+            <span class="material-symbols-outlined">
+                analytics
+            </span>
+
+            <span class="font-label-sm text-label-sm font-semibold">
+                Reports
+            </span>
+
+        </a>
+
+
+        <a
+            class="flex flex-col items-center justify-center text-on-surface-variant px-space-md py-space-xs hover:bg-surface-container"
+            href="index.html"
+        >
+
+            <span class="material-symbols-outlined">
+                person
+            </span>
+
+            <span class="font-label-sm text-label-sm">
+                Profile
+            </span>
+
+        </a>
+
+    </nav>
+
+
+
+    <!-- =========================================================
+         FOOTER
+    ========================================================== -->
+
+    <footer class="w-full bg-surface-container-low border-t border-outline-variant/60 py-space-lg mt-space-2xl mb-16 md:mb-0">
+
+        <div class="max-w-7xl mx-auto px-space-md sm:px-margin flex flex-col md:flex-row items-center justify-between gap-4 text-body-sm text-outline">
+
+            <div class="flex items-center gap-2">
+
+                <a
+                    href="index.html"
+                    class="font-headline-sm text-on-surface font-bold tracking-tight hover:text-secondary"
+                >
+                    Sheher Saathi
+                </a>
+
+                <span>
+                    • Public Grievance Redressal and Real-Time Civic Monitoring System
+                </span>
+
+            </div>
+
+
+            <div class="flex items-center gap-4 text-label-sm">
+
+                <a
+                    class="hover:text-primary"
+                    href="#"
+                >
+                    Right to Service Act
+                </a>
+
+                <a
+                    class="hover:text-primary"
+                    href="#"
+                >
+                    Ward Directory
+                </a>
+
+                <a
+                    class="hover:text-primary"
+                    href="#"
+                >
+                    Grievance SLA Norms
+                </a>
+
+                <a
+                    class="hover:text-primary"
+                    href="#"
+                >
+                    Privacy Policy
+                </a>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- =========================================================
+         JAVASCRIPT
+    ========================================================== -->
+
+    <script>
+
+        /* ---------------------------------------------------------
+           Track Ticket
+        --------------------------------------------------------- */
+
+        const trackTicketButton =
+            document.getElementById("trackTicketButton");
+
+        const ticketSearch =
+            document.getElementById("ticketSearch");
+
+
+        if (trackTicketButton) {
+
+            trackTicketButton.addEventListener("click", function () {
+
+                const ticketId = ticketSearch.value.trim();
+
+                if (ticketId === "") {
+
+                    alert("Please enter a Ticket ID or registered mobile number.");
+
+                    ticketSearch.focus();
+
+                    return;
+                }
+
+                alert(
+                    "Tracking ticket " +
+                    ticketId +
+                    ". Live backend tracking will be connected here."
+                );
+
+            });
+
+        }
+
+
+        /* ---------------------------------------------------------
+           Enter key for Ticket Search
+        --------------------------------------------------------- */
+
+        if (ticketSearch) {
+
+            ticketSearch.addEventListener("keydown", function (event) {
+
+                if (event.key === "Enter") {
+
+                    trackTicketButton.click();
+
+                }
+
+            });
+
+        }
+
+
+        /* ---------------------------------------------------------
+           Supplementary Photo
+        --------------------------------------------------------- */
+
+        const photoButton =
+            document.getElementById("photoButton");
+
+
+        if (photoButton) {
+
+            photoButton.addEventListener("click", function () {
+
+                alert(
+                    "Supplementary photo upload will be connected here."
+                );
+
+            });
+
+        }
+
+
+        /* ---------------------------------------------------------
+           Download Summary
+        --------------------------------------------------------- */
+
+        const downloadButton =
+            document.getElementById("downloadButton");
+
+
+        if (downloadButton) {
+
+            downloadButton.addEventListener("click", function () {
+
+                alert(
+                    "Ticket summary download will be connected here."
+                );
+
+            });
+
+        }
+
+
+        /* ---------------------------------------------------------
+           Escalate
+        --------------------------------------------------------- */
+
+        const escalateButton =
+            document.getElementById("escalateButton");
+
+
+        if (escalateButton) {
+
+            escalateButton.addEventListener("click", function () {
+
+                alert(
+                    "Escalation request will be connected to the authority workflow."
+                );
+
+            });
+
+        }
+
+
+        /* ---------------------------------------------------------
+           Help Manual
+        --------------------------------------------------------- */
+
+        const helpManualButton =
+            document.getElementById("helpManualButton");
+
+
+        if (helpManualButton) {
+
+            helpManualButton.addEventListener("click", function () {
+
+                alert(
+                    "Citizen Help Manual will be available here."
+                );
+
+            });
+
+        }
+
+
+        /* ---------------------------------------------------------
+           Contact Ward
+        --------------------------------------------------------- */
+
+        const contactWardButton =
+            document.getElementById("contactWardButton");
+
+
+        if (contactWardButton) {
+
+            contactWardButton.addEventListener("click", function () {
+
+                alert(
+                    "Ward 152 Citizen Facilitation Desk: 080-22660000"
+                );
+
+            });
+
+        }
+
+    </script>
+
+</body>
+
+</html>

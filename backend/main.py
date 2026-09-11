@@ -59,6 +59,13 @@ def create_complaint(complaint: schemas.ComplaintCreate, db: Session = Depends(g
 def get_complaints(db: Session = Depends(get_db)):
     return db.query(models.Complaint).all()
 
+@app.get("/complaints/{complaint_id}", response_model=schemas.ComplaintOut)
+def get_complaint(complaint_id: int, db: Session = Depends(get_db)):
+    c = db.query(models.Complaint).filter(models.Complaint.id == complaint_id).first()
+    if not c:
+        raise HTTPException(status_code=404, detail="Complaint not found")
+    return c
+
 @app.post("/complaints/analyze")
 def analyze_complaint(complaint: schemas.ComplaintCreate):
     result = extract_complaint(complaint.raw_text)
@@ -172,12 +179,27 @@ def get_dashboard(db: Session = Depends(get_db)):
         label = evidence_label(c)
         by_evidence_status[label] = by_evidence_status.get(label, 0) + 1
 
+    if complaints:
+        ids = [c.id for c in complaints]
+        embeddings = [get_embedding(c.raw_text) for c in complaints]
+        labels = cluster_complaints(ids, embeddings)
+        grouped = {}
+        for c in complaints:
+            if labels[c.id] != -1:
+                grouped.setdefault(labels[c.id], []).append(c)
+        high_priority_count = sum(
+            1 for members in grouped.values()
+            if calculate_priority(len(members), [m.severity for m in members if m.severity], False)["level"] == "high"
+        )
+    else:
+        high_priority_count = 0
     return {
         "total_complaints": total,
         "verified_count": verified,
         "by_category": by_category,
         "by_status": by_status,
         "by_evidence_status": by_evidence_status,
+        "high_priority_clusters": high_priority_count
     }
 
 @app.get("/memory")
