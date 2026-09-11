@@ -1,6 +1,7 @@
 from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy.orm import Session
 from typing import List
+from fastapi.middleware.cors import CORSMiddleware
 
 from ai.extraction import extract_complaint
 from . import models, schemas
@@ -16,6 +17,15 @@ from ai.extraction import summarize_cluster
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="Sheher Saathi API")
+
+# Add CORS middleware to allow Vidhi's HTML/CSS frontend to connect
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allows all origins (safe for local dev/hackathon)
+    allow_credentials=True,
+    allow_methods=["*"],  # Allows all methods (GET, POST, etc.)
+    allow_headers=["*"],  # Allows all headers
+)
 
 @app.get("/")
 def root():
@@ -135,6 +145,13 @@ def get_cluster_detail(cluster_id: int, db: Session = Depends(get_db)):
         "complaints": [schemas.ComplaintOut.model_validate(m) for m in members],
     }
 
+def evidence_label(complaint) -> str:
+    if complaint.verified:
+        return "verified"
+    if complaint.category or complaint.location or complaint.severity:
+        return "ai_inferred"
+    return "citizen_reported"
+
 @app.get("/dashboard")
 def get_dashboard(db: Session = Depends(get_db)):
     complaints = db.query(models.Complaint).all()
@@ -150,11 +167,17 @@ def get_dashboard(db: Session = Depends(get_db)):
     for c in complaints:
         by_status[c.status] = by_status.get(c.status, 0) + 1
 
+    by_evidence_status = {}
+    for c in complaints:
+        label = evidence_label(c)
+        by_evidence_status[label] = by_evidence_status.get(label, 0) + 1
+
     return {
         "total_complaints": total,
         "verified_count": verified,
         "by_category": by_category,
         "by_status": by_status,
+        "by_evidence_status": by_evidence_status,
     }
 
 @app.get("/memory")
@@ -227,3 +250,4 @@ def civic_pulse(db: Session = Depends(get_db)):
         "previous_72h_total": len(previous_window),
         "emerging_issues": emerging,
     }
+

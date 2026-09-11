@@ -30,20 +30,21 @@ def extract_complaint(raw_text: str) -> dict:
             "followup_question": "Could you describe the issue again in a bit more detail?",
         }
 
-
 def summarize_cluster(raw_texts: list) -> str:
-    client = get_groq_client()
-    combined = "\n".join(f"- {t}" for t in raw_texts)
+    try:
+        client = get_groq_client()
+        combined = "\n".join(f"- {t}" for t in raw_texts)
 
-    response = client.chat.completions.create(
-        model="openai/gpt-oss-120b",
-        messages=[
-            {"role": "system", "content": SUMMARY_SYSTEM_PROMPT},
-            {"role": "user", "content": f"Reports:\n{combined}"},
-        ],
-        temperature=0.2,
-        max_tokens=300,
-    )
-    return response.choices[0].message.content.strip()
-    
+        response = client.chat.completions.create(
+            model="openai/gpt-oss-120b",
+            messages=[
+                {"role": "system", "content": SUMMARY_SYSTEM_PROMPT},
+                {"role": "user", "content": f"Reports:\n{combined}"},
+            ],
+            temperature=0.2,
+            max_tokens=300,
+        )
+        return response.choices[0].message.content.strip()
+    except Exception:
+        return "Summary temporarily unavailable."
 
