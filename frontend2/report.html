@@ -418,7 +418,8 @@
               </label>
 
               <button
-                type="button"
+                type="button" 
+                id="voiceButton"
                 onclick="startVoiceInput()"
                 class="inline-flex items-center gap-1 text-xs font-semibold text-secondary px-3 py-1.5 border border-secondary bg-surface-low hover:bg-secondary hover:text-white"
               >
@@ -441,7 +442,7 @@
               required
               class="w-full bg-surface-bright border border-outline-variant p-4 text-sm leading-relaxed resize-y"
               placeholder="e.g. Water is overflowing near 5th Main Road since 3 days, foul smell and road blocked for school kids..."
-            >5th Main Road Koramangala 4th block mein 3 din se drainage overflow ho raha hai, smell bahut gandi hai aur pedestrians cross nahi kar pa rahe. School bachon ko daily problem ho rahi hai aur road block ho gaya hai.</textarea>
+            ></textarea>
 
 
 
@@ -506,7 +507,7 @@
                 id="location-input"
                 type="text"
                 required
-                value="Koramangala 4th Block, near Sony World Signal, 5th Main Road"
+                value=""
                 class="w-full pl-10 pr-4 py-3 bg-surface-bright border border-outline-variant text-sm"
               >
 
@@ -523,8 +524,7 @@
                 check_circle
               </span>
 
-              Detected:
-              <strong>Ward 152 (Koramangala)</strong>
+              <span id="wardStatusText">Location not detected yet. You can auto-detect or enter it manually.</span>
 
             </p>
 
@@ -537,101 +537,29 @@
           <div>
 
             <label class="block font-semibold text-sm mb-2">
-
               Add Photos
-
               <span class="font-normal text-xs text-on-surface-variant">
                 (Optional but helps swift resolution)
               </span>
-
             </label>
-
-
 
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
 
-              <!-- Existing photo -->
-
-              <div
-                id="photoPreview"
-                class="border border-outline-variant bg-surface-bright p-1 flex flex-col"
-              >
-
-                <div class="h-32 w-full bg-surface-container overflow-hidden relative">
-
-                  <img
-                    class="w-full h-full object-cover"
-                    alt="Drainage overflow on an urban road"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDpJxj-gb7eAnqR617PiKzf05ayKXvJaJsYbfGsGjP5RoBudSGTWEtoIpcXO9ljRZLIbVzbC7-omXzZaZWK8c_Xl9ciMM2tAV1YJgXSn-i1uyaX4B2x-533fx_1eEF67hoy8GfPI8b_96zUV9bANliNnCRJa4bSmRVEEiVybHzbBioozFgiFKqPkDj2OVE6dLTdvRHWXR77mTJaVWjbZGRRK0kSNpoIAyhTO0UZcShlFk6L2DQimopq0A"
-                  >
-
-                  <span class="absolute top-1 right-1 bg-black text-white text-[10px] px-2 py-1 uppercase">
-                    1 Photo Added
-                  </span>
-
-                </div>
-
-
-
-                <div class="p-2 flex items-center justify-between text-xs">
-
-                  <span class="truncate">
-                    photo_overflow.jpg
-                  </span>
-
-                  <button
-                    type="button"
-                    onclick="removePhoto()"
-                    class="text-error hover:opacity-70"
-                    title="Remove photo"
-                  >
-
-                    <span class="material-symbols-outlined text-base">
-                      close
-                    </span>
-
-                  </button>
-
-                </div>
-
+              <div id="photoPreview" class="border border-outline-variant bg-surface-bright p-3 flex flex-col items-center justify-center min-h-[140px]">
+                <span class="material-symbols-outlined text-on-surface-variant text-3xl mb-2">image</span>
+                <span class="text-xs text-on-surface-variant">No photo selected</span>
               </div>
 
-
-
-              <!-- Upload -->
-
-              <label
-                for="photoUpload"
-                class="sm:col-span-2 border-2 border-dashed border-outline-variant hover:border-secondary bg-surface-bright p-5 flex flex-col items-center justify-center text-center cursor-pointer min-h-[140px]"
-              >
-
-                <span class="material-symbols-outlined text-secondary text-3xl mb-2">
-                  add_photo_alternate
-                </span>
-
-                <span class="font-semibold text-sm">
-                  Drag & drop or tap to add more photos
-                </span>
-
-                <span class="text-xs text-on-surface-variant mt-1">
-                  PNG, JPG up to 10MB
-                </span>
-
-                <input
-                  id="photoUpload"
-                  type="file"
-                  accept="image/png,image/jpeg"
-                  multiple
-                  class="hidden"
-                  onchange="handlePhotos(event)"
-                >
-
+              <label for="photoUpload" class="sm:col-span-2 border-2 border-dashed border-outline-variant hover:border-secondary bg-surface-bright p-5 flex flex-col items-center justify-center text-center cursor-pointer min-h-[140px]">
+                <span class="material-symbols-outlined text-secondary text-3xl mb-2">add_photo_alternate</span>
+                <span class="font-semibold text-sm">Drag & drop or tap to add photos</span>
+                <span class="text-xs text-on-surface-variant mt-1">PNG, JPG up to 10MB each</span>
+                <input id="photoUpload" type="file" accept="image/png,image/jpeg" multiple class="hidden" onchange="handlePhotos(event)">
               </label>
 
             </div>
 
           </div>
-
 
 
           <!-- Contact Details -->
@@ -671,7 +599,7 @@
                     id="phone-num"
                     type="tel"
                     required
-                    value="98450 12890"
+                    value=""
                     class="w-full bg-surface-bright border border-outline-variant p-3 text-sm"
                   >
 
@@ -760,245 +688,135 @@
            STEP 2
       ================================================== -->
 
-      <section
-        id="summarySection"
-        class="bg-white border-2 border-secondary p-5 md:p-7 relative"
-      >
+      <section id="summarySection" class="bg-white border-2 border-secondary p-5 md:p-7 relative hidden">
 
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border-b border-outline-variant pb-4 mb-5">
-
           <div class="flex items-center gap-2">
-
-            <span class="w-7 h-7 bg-secondary text-white text-sm font-bold flex items-center justify-center">
-              2
-            </span>
-
+            <span class="w-7 h-7 bg-secondary text-white text-sm font-bold flex items-center justify-center">2</span>
             <div class="w-7 h-7 bg-secondary flex items-center justify-center text-white">
-
-              <span class="material-symbols-outlined text-base">
-                auto_awesome
-              </span>
-
+              <span class="material-symbols-outlined text-base">auto_awesome</span>
             </div>
-
-            <h2 class="font-headline text-xl font-bold">
-              Summary
-            </h2>
-
+            <h2 class="font-headline text-xl font-bold">Summary</h2>
           </div>
-
-
-
-          <span class="inline-flex items-center gap-1 px-2 py-1 bg-surface-container text-xs font-semibold border border-outline-variant">
-
-            <span class="material-symbols-outlined text-sm text-secondary">
-              check
-            </span>
-
-            Ready to dispatch
-
+          <span id="dispatchStatus" class="inline-flex items-center gap-1 px-2 py-1 bg-surface-container text-xs font-semibold border border-outline-variant">
+            <span class="material-symbols-outlined text-sm text-secondary">auto_awesome</span> AI analyzed
           </span>
-
         </div>
 
-
-
-        <p class="text-xs text-on-surface-variant mb-5">
-          Review the categorized information below that will be routed to the municipal ward desk and field inspector.
-        </p>
-
-
-
-        <!-- Summary Details -->
+        <p class="text-xs text-on-surface-variant mb-5">Review the information generated from your complaint before submitting it to the municipal system.</p>
 
         <div class="border-t border-b border-outline-variant divide-y divide-outline-variant">
 
-
-
-          <!-- Category -->
-
           <div class="py-4 flex items-start gap-3">
-
-            <span class="material-symbols-outlined text-secondary text-xl">
-              water_drop
-            </span>
-
+            <span class="material-symbols-outlined text-secondary text-xl">category</span>
             <div>
-
-              <span class="text-xs text-on-surface-variant block uppercase tracking-wider">
-                Detected Category
-              </span>
-
-              <span
-                id="summaryCategory"
-                class="font-headline text-lg font-bold"
-              >
-                Drainage Overflow & Waterlogging
-              </span>
-
+              <span class="text-xs text-on-surface-variant block uppercase tracking-wider">Detected Category</span>
+              <span id="summaryCategory" class="font-headline text-lg font-bold">Waiting for analysis</span>
             </div>
-
           </div>
 
-
-
-          <!-- Location -->
-
           <div class="py-4 flex items-start gap-3">
-
-            <span class="material-symbols-outlined text-secondary text-xl">
-              location_on
-            </span>
-
-            <div>
-
-              <span class="text-xs text-on-surface-variant block uppercase tracking-wider">
-                Assigned Location
-              </span>
-
-              <span class="font-semibold text-sm block">
-                Ward 152, Koramangala 4th Block
-              </span>
-
-              <span
-                id="summaryLocation"
-                class="block text-xs text-on-surface-variant mt-1"
-              >
-                Near Sony World Signal, 5th Main Road
-              </span>
-
+            <span class="material-symbols-outlined text-secondary text-xl">location_on</span>
+            <div class="min-w-0">
+              <span class="text-xs text-on-surface-variant block uppercase tracking-wider">Assigned Location</span>
+              <span id="summaryWard" class="font-semibold text-sm block">Location will be assigned from your report</span>
+              <span id="summaryLocation" class="block text-xs text-on-surface-variant mt-1 break-words">—</span>
             </div>
-
           </div>
 
-
-
-          <!-- Urgency -->
+          <div class="py-4 flex items-start gap-3">
+            <span class="material-symbols-outlined text-secondary text-xl">description</span>
+            <div class="min-w-0">
+              <span class="text-xs text-on-surface-variant block uppercase tracking-wider">Your Report</span>
+              <p id="summaryProblem" class="font-semibold text-sm whitespace-pre-wrap break-words mt-1">—</p>
+              <p id="summaryAdditional" class="text-xs text-on-surface-variant mt-2"></p>
+            </div>
+          </div>
 
           <div class="py-4 flex items-start justify-between gap-3">
-
             <div class="flex items-start gap-3">
-
-              <span class="material-symbols-outlined text-secondary text-xl">
-                warning
-              </span>
-
+              <span class="material-symbols-outlined text-secondary text-xl">warning</span>
               <div>
-
-                <span class="text-xs text-on-surface-variant block uppercase tracking-wider">
-                  Urgency Level
-                </span>
-
-                <span class="font-semibold text-sm text-error">
-                  High (Water on pedestrian route)
-                </span>
-
+                <span class="text-xs text-on-surface-variant block uppercase tracking-wider">Urgency Level</span>
+                <span id="summaryUrgency" class="font-semibold text-sm">Assessment pending</span>
               </div>
-
             </div>
-
-
-
-            <span class="bg-error-container text-error px-2 py-1 text-xs font-bold border border-error">
-              High Priority
-            </span>
-
+            <span id="summaryPriority" class="px-2 py-1 text-xs font-bold border border-outline-variant bg-surface-low">Pending</span>
           </div>
-
-
-
-          <!-- Action Window -->
 
           <div class="py-4 flex items-start gap-3">
-
-            <span class="material-symbols-outlined text-secondary text-xl">
-              schedule
-            </span>
-
+            <span class="material-symbols-outlined text-secondary text-xl">schedule</span>
             <div>
-
-              <span class="text-xs text-on-surface-variant block uppercase tracking-wider">
-                Expected Action Window
-              </span>
-
-              <span class="font-semibold text-sm">
-                Field inspection within 24–48 hours
-              </span>
-
+              <span class="text-xs text-on-surface-variant block uppercase tracking-wider">Expected Action Window</span>
+              <span id="summaryActionWindow" class="font-semibold text-sm">Will be determined after municipal assessment</span>
             </div>
-
           </div>
 
         </div>
 
-
-
-        <!-- Submission -->
+        <div id="followupBox" class="hidden mt-5 bg-surface-low border border-secondary p-5">
+          <div class="flex items-start gap-3">
+            <span class="material-symbols-outlined text-secondary text-xl">help</span>
+            <div class="flex-1">
+              <span class="text-xs text-on-surface-variant block uppercase tracking-wider">One detail is needed</span>
+              <p id="followupQuestion" class="font-semibold text-sm mt-1"></p>
+              <textarea id="followupAnswer" rows="3" class="w-full mt-3 bg-white border border-outline-variant p-3 text-sm" placeholder="Answer the question here..."></textarea>
+              <button id="followupButton" type="button" onclick="submitFollowup()" class="mt-3 py-2.5 px-5 bg-secondary text-white font-bold text-sm inline-flex items-center gap-2 hover:opacity-90">
+                <span class="material-symbols-outlined text-base">refresh</span> Update Summary
+              </button>
+              <p id="followupStatus" class="hidden text-xs mt-2"></p>
+            </div>
+          </div>
+        </div>
 
         <div class="mt-6 bg-surface-container p-5 border border-outline-variant">
-
-          <h3 class="font-headline text-lg font-bold mb-1">
-            Ready to lodge your grievance?
-          </h3>
-
-          <p class="text-xs text-on-surface-variant mb-5">
-            Verify your details carefully. You can adjust your input or submit for official dispatch.
-          </p>
-
-
-
+          <h3 class="font-headline text-lg font-bold mb-1">Ready to lodge your grievance?</h3>
+          <p id="dispatchHelp" class="text-xs text-on-surface-variant mb-5">Verify your details carefully. You can edit your input or submit for official dispatch.</p>
           <div class="flex flex-col sm:flex-row gap-2">
-
-            <button
-              type="button"
-              onclick="submitTicket()"
-              class="flex-1 py-3 px-6 bg-secondary text-white font-bold flex items-center justify-center gap-2 hover:opacity-90"
-            >
-
-              <span class="material-symbols-outlined text-xl">
-                send
-              </span>
-
-              Submit Official Ticket
-
+            <button id="submitTicketButton" type="button" onclick="submitTicket()" class="flex-1 py-3 px-6 bg-secondary text-white font-bold flex items-center justify-center gap-2 hover:bg-black disabled:opacity-50 disabled:cursor-not-allowed">
+              <span class="material-symbols-outlined text-xl">send</span> Submit Official Ticket
             </button>
-
-
-
-            <button
-              type="button"
-              onclick="editDetails()"
-              class="py-3 px-6 bg-white border border-outline-variant font-semibold flex items-center justify-center gap-2 hover:bg-surface-high"
-            >
-
-              <span class="material-symbols-outlined text-lg">
-                edit
-              </span>
-
-              Edit Details
-
+            <button type="button" onclick="editDetails()" class="py-3 px-6 bg-white border border-outline-variant font-semibold flex items-center justify-center gap-2 hover:bg-surface-high">
+              <span class="material-symbols-outlined text-lg">edit</span> Edit Details
             </button>
-
           </div>
-
         </div>
-
-
-
-        <!-- SMS -->
 
         <div class="mt-5 pt-4 border-t border-outline-variant flex items-start gap-2">
-
-          <span class="material-symbols-outlined text-secondary text-lg">
-            sms
-          </span>
-
-          <p class="text-xs text-on-surface-variant">
-            You will receive an instant SMS with your tracking ID and municipal ward officer contact upon submission.
-          </p>
-
+          <span class="material-symbols-outlined text-secondary text-lg">sms</span>
+          <p class="text-xs text-on-surface-variant">Your final ticket reference will appear here after successful registration.</p>
         </div>
+      </section>
 
+      <!-- =================================================
+           STEP 3 - CONFIRMATION
+      ================================================== -->
+
+      <section id="confirmationSection" class="hidden bg-white border-2 border-secondary p-5 md:p-7">
+        <div class="text-center py-5">
+          <div class="mx-auto w-16 h-16 bg-secondary text-white flex items-center justify-center mb-4">
+            <span class="material-symbols-outlined text-4xl">check_circle</span>
+          </div>
+          <p class="text-xs font-bold uppercase tracking-widest text-secondary">Complaint Registered</p>
+          <h2 class="font-headline text-2xl md:text-3xl font-bold mt-2">Your complaint has been submitted successfully.</h2>
+          <p class="text-sm text-on-surface-variant mt-2">Keep this ticket number for tracking updates in My Reports.</p>
+
+          <div class="mt-6 bg-surface-low border border-outline-variant p-5 max-w-md mx-auto">
+            <span class="text-xs text-on-surface-variant block uppercase tracking-wider">Ticket Number</span>
+            <span id="ticketNumber" class="block font-headline text-3xl font-bold text-secondary mt-2">—</span>
+          </div>
+
+          <div class="mt-5 flex flex-col sm:flex-row justify-center gap-3">
+            <a href="reports.html" class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-black text-white font-bold text-sm hover:bg-secondary">
+              <span class="material-symbols-outlined">track_changes</span> Track My Report
+            </a>
+            <a href="report.html" class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white border border-outline-variant font-bold text-sm hover:bg-surface-high">
+              <span class="material-symbols-outlined">add</span> Report Another Issue
+            </a>
+          </div>
+
+          <p id="confirmationDetails" class="text-xs text-on-surface-variant mt-5"></p>
+        </div>
       </section>
 
     </div>
@@ -1367,302 +1185,371 @@
   ======================================================= -->
 
   <script>
+    const API_BASE = "http://127.0.0.1:8000";
 
-    /*
-      Review button
-    */
+    let detectedLatitude = null;
+    let detectedLongitude = null;
+    let latestAnalysis = null;
+    let currentComplaintId = null;
+    let currentProblem = "";
+    let uploadedPhotos = [];
 
-    function showSummary() {
-
-      const problem = document.getElementById("grievance-text").value.trim();
-      const location = document.getElementById("location-input").value.trim();
-
-      if (!problem || !location) {
-        alert("Please fill in all required fields.");
-        return;
-      }
-
-      const summarySection =
-        document.getElementById("summarySection");
-
-      summarySection.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-      });
-
+    function getFormValues() {
+      return {
+        problem: document.getElementById("grievance-text").value.trim(),
+        location: document.getElementById("location-input").value.trim(),
+        phone: document.getElementById("phone-num").value.trim(),
+        name: document.getElementById("citizen-name").value.trim()
+      };
     }
 
+    function setText(id, value, fallback = "—") {
+      const el = document.getElementById(id);
+      if (el) el.textContent = value !== undefined && value !== null && String(value).trim() ? String(value) : fallback;
+    }
 
+    function normalizeCategory(category) {
+      const names = {
+        streetlight: "Streetlight Issue", drainage: "Drainage & Waterlogging",
+        pothole: "Road / Pothole", garbage: "Garbage & Waste",
+        water: "Water Supply Issue", sewage: "Sewage Issue",
+        solid_waste: "Solid Waste / Garbage", road: "Road Issue"
+      };
+      if (!category) return "Not detected";
+      return names[String(category).toLowerCase().trim()] || String(category).replace(/_/g, " ");
+    }
 
-    /*
-      Edit Details
-    */
+    function urgencyInfo(issue = {}) {
+      const raw = issue.urgency ?? issue.severity ?? "";
+      const text = String(raw || "Assessment pending");
+      const numeric = Number(raw);
+      const high = /critical|high|urgent|emergency/i.test(text) || (!Number.isNaN(numeric) && numeric >= 4);
+      return { text, badge: high ? "High Priority" : text, high };
+    }
+
+    function getIssue(analysis) {
+      return analysis?.issues?.[0] || analysis || {};
+    }
+
+    function getLocation(issue, analysis, entered) {
+      return issue?.location || analysis?.location || entered || (detectedLatitude && detectedLongitude ? `${detectedLatitude.toFixed(6)}, ${detectedLongitude.toFixed(6)}` : "Location not provided");
+    }
+
+    function getWard(issue, analysis, entered) {
+      return issue?.ward || issue?.ward_name || analysis?.ward || analysis?.ward_name || (entered ? entered : "Ward will be assigned by the municipal system");
+    }
+
+    function getActionWindow(issue) {
+      if (issue.action_window) return issue.action_window;
+      if (issue.expected_action_window) return issue.expected_action_window;
+      const raw = issue.urgency ?? issue.severity;
+      const n = Number(raw);
+      if (!Number.isNaN(n)) {
+        if (n >= 5) return "Immediate municipal attention recommended";
+        if (n >= 4) return "Priority field inspection recommended";
+        if (n >= 3) return "Field inspection after municipal assessment";
+      }
+      if (/critical|high|urgent/i.test(String(raw || ""))) return "Priority field inspection recommended";
+      return "Will be determined after municipal assessment";
+    }
+
+    function updateFollowupState(analysis) {
+      const q = analysis?.followup_question || getIssue(analysis)?.followup_question || "";
+      const box = document.getElementById("followupBox");
+      const submit = document.getElementById("submitTicketButton");
+      const help = document.getElementById("dispatchHelp");
+      if (!box) return;
+      if (q) {
+        setText("followupQuestion", q);
+        box.classList.remove("hidden");
+        if (submit) submit.disabled = true;
+        if (help) help.textContent = "Please answer the AI follow-up question first. Your answer will update this same complaint.";
+      } else {
+        box.classList.add("hidden");
+        if (submit) submit.disabled = false;
+        if (help) help.textContent = "Verify your details carefully. You can edit your input or submit for official dispatch.";
+      }
+    }
+
+    function renderAnalysis(analysis, enteredLocation, reportedProblem) {
+      latestAnalysis = analysis;
+      const issue = getIssue(analysis);
+      currentProblem = reportedProblem;
+      localStorage.setItem("latestAnalysis", JSON.stringify(analysis));
+      setText("summaryProblem", reportedProblem);
+      setText("summaryCategory", normalizeCategory(issue.category));
+      setText("summaryWard", getWard(issue, analysis, enteredLocation));
+      setText("summaryLocation", getLocation(issue, analysis, enteredLocation));
+
+      const u = urgencyInfo(issue);
+      setText("summaryUrgency", u.text);
+      const priority = document.getElementById("summaryPriority");
+      if (priority) {
+        priority.textContent = u.badge;
+        priority.className = u.high
+          ? "bg-error-container text-error px-2 py-1 text-xs font-bold border border-error"
+          : "px-2 py-1 text-xs font-bold border border-outline-variant bg-surface-low";
+      }
+      setText("summaryActionWindow", getActionWindow(issue));
+      const additional = issue.additional_details || issue.description || issue.details || analysis.summary || "";
+      const additionalEl = document.getElementById("summaryAdditional");
+      if (additionalEl) additionalEl.textContent = additional && additional !== reportedProblem ? `Additional detail: ${additional}` : "";
+      updateFollowupState(analysis);
+      const status = document.getElementById("dispatchStatus");
+      if (status) status.innerHTML = `<span class="material-symbols-outlined text-sm text-secondary">check_circle</span> AI analysis ready`;
+      document.getElementById("summarySection")?.classList.remove("hidden");
+      document.getElementById("summarySection")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    async function analyzeComplaint(problem, location) {
+      const payload = { raw_text: problem, location: location || null, latitude: detectedLatitude, longitude: detectedLongitude };
+      let response = await fetch(`${API_BASE}/complaints/analyze`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
+      if (!response.ok) {
+        const detail = await response.text().catch(() => "");
+        throw new Error(`Analysis failed (${response.status}) ${detail}`);
+      }
+      return response.json();
+    }
+
+    async function showSummary() {
+      const { problem, location } = getFormValues();
+      if (!problem) { alert("Please describe the problem first."); return; }
+      if (!location) { alert("Please enter a location or use Auto-detect my location."); return; }
+      const button = document.querySelector('#issueForm button[type="submit"]');
+      if (button) { button.disabled = true; button.innerHTML = '<span class="material-symbols-outlined text-xl animate-spin">progress_activity</span> Analyzing...'; }
+      try {
+        currentProblem = problem;
+        currentComplaintId = null;
+        const analysis = await analyzeComplaint(problem, location);
+        renderAnalysis(analysis, location, problem);
+      } catch (error) {
+        console.error(error);
+        alert("Unable to analyze the complaint. Please make sure Ananya's backend is running on port 8000.");
+      } finally {
+        if (button) { button.disabled = false; button.innerHTML = '<span class="material-symbols-outlined text-xl">preview</span> Review & Continue to Summary'; }
+      }
+    }
+
+    async function createComplaint() {
+      const values = getFormValues();
+      if (!values.problem || !values.location) throw new Error("Complaint and location are required.");
+      const fullPayload = { raw_text: values.problem, location: values.location, latitude: detectedLatitude, longitude: detectedLongitude, phone: values.phone, name: values.name };
+      let response = await fetch(`${API_BASE}/complaints`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(fullPayload) });
+      if (!response.ok && response.status === 422) {
+        response = await fetch(`${API_BASE}/complaints`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ raw_text: `${values.problem}\nLocation: ${values.location}` }) });
+      }
+      if (!response.ok) {
+        const detail = await response.text().catch(() => "");
+        throw new Error(`Complaint creation failed (${response.status}) ${detail}`);
+      }
+      const data = await response.json();
+      currentComplaintId = data.id ?? data.complaint_id ?? data.ticket_id ?? null;
+      localStorage.setItem("latestComplaint", JSON.stringify(data));
+      return data;
+    }
+
+    async function submitFollowup() {
+      const answer = document.getElementById("followupAnswer").value.trim();
+      if (!answer) { alert("Please answer the follow-up question."); return; }
+      const button = document.getElementById("followupButton");
+      const status = document.getElementById("followupStatus");
+      button.disabled = true;
+      button.innerHTML = '<span class="material-symbols-outlined text-base animate-spin">progress_activity</span> Updating...';
+      try {
+        // Create the original complaint once, then update that same ID.
+        if (!currentComplaintId) await createComplaint();
+        const response = await fetch(`${API_BASE}/complaints/${currentComplaintId}/followup`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ answer }) });
+        if (!response.ok) {
+          const detail = await response.text().catch(() => "");
+          throw new Error(`Follow-up failed (${response.status}) ${detail}`);
+        }
+        const updated = await response.json();
+        localStorage.setItem("latestComplaint", JSON.stringify(updated));
+        const location = getFormValues().location;
+        const updatedAnalysis = updated?.issues ? updated : await analyzeComplaint(`${currentProblem}\nAdditional information: ${answer}`, location);
+        renderAnalysis(updatedAnalysis, location, currentProblem);
+        const box = document.getElementById("followupBox");
+        if (box) box.classList.add("hidden");
+        if (status) { status.textContent = "Updated successfully."; status.className = "text-xs mt-2 text-green-700"; }
+      } catch (error) {
+        console.error(error);
+        if (status) { status.textContent = error.message; status.className = "text-xs mt-2 text-error"; status.classList.remove("hidden"); }
+        alert("I could not update the complaint. Check the backend Follow-up endpoint in Swagger.");
+      } finally {
+        button.disabled = false;
+        button.innerHTML = '<span class="material-symbols-outlined text-base">refresh</span> Update Summary';
+      }
+    }
+
+    async function submitTicket() {
+      const values = getFormValues();
+      if (!values.phone) { alert("Please enter your mobile number for ticket updates."); return; }
+      const button = document.getElementById("submitTicketButton");
+      button.disabled = true;
+      button.innerHTML = '<span class="material-symbols-outlined text-xl animate-spin">progress_activity</span> Registering...';
+      try {
+        const complaint = currentComplaintId ? JSON.parse(localStorage.getItem("latestComplaint") || "null") : await createComplaint();
+        const ticket = complaint?.id ?? complaint?.complaint_id ?? complaint?.ticket_id ?? currentComplaintId;
+        setText("ticketNumber", ticket ? `#${ticket}` : "Registered");
+        setText("confirmationDetails", `Category: ${normalizeCategory(getIssue(complaint).category || latestAnalysis?.issues?.[0]?.category)} • Location: ${values.location}`);
+        document.getElementById("summarySection")?.classList.add("hidden");
+        document.getElementById("confirmationSection")?.classList.remove("hidden");
+        document.getElementById("confirmationSection")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      } catch (error) {
+        console.error(error);
+        alert("Your complaint could not be registered. Please check that the backend is running and try again.");
+      } finally {
+        button.disabled = false;
+        button.innerHTML = '<span class="material-symbols-outlined text-xl">send</span> Submit Official Ticket';
+      }
+    }
 
     function editDetails() {
-
-      document.getElementById("report-form").scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-      });
-
+      document.getElementById("report-form")?.scrollIntoView({ behavior: "smooth", block: "start" });
     }
-
-
-
-    /*
-      Submit Ticket
-      ---------------------------------------
-      This is currently frontend-only.
-      Later, connect this function to
-      Ananya's backend API.
-    */
-
-    function submitTicket() {
-
-      const phone =
-        document.getElementById("phone-num").value.trim();
-
-      if (!phone) {
-        alert("Please enter your mobile number.");
-        return;
-      }
-
-      alert(
-        "Your report is ready for official submission.\n\n" +
-        "Backend API connection can be added here."
-      );
-
-    }
-
-
-
-    /*
-      Auto Detect Location
-      ---------------------------------------
-      Uses browser geolocation if available.
-    */
 
     function detectLocation() {
-
+      const status = document.getElementById("wardStatus");
       if (!navigator.geolocation) {
-
-        alert(
-          "Location detection is not supported by this browser."
-        );
-
+        status.innerHTML = '<span class="material-symbols-outlined text-error text-base">location_off</span><span id="wardStatusText">Auto-detection is not supported. Please enter your street, area or landmark manually.</span>';
         return;
-
       }
-
+      status.innerHTML = '<span class="material-symbols-outlined text-secondary text-base">location_searching</span><span id="wardStatusText">Detecting your location...</span>';
       navigator.geolocation.getCurrentPosition(
-
-        function(position) {
-
-          const latitude =
-            position.coords.latitude;
-
-          const longitude =
-            position.coords.longitude;
-
-          document.getElementById("wardStatus").innerHTML = `
-
-            <span class="material-symbols-outlined text-secondary text-base">
-              check_circle
-            </span>
-
-            Location detected:
-            <strong>
-              ${latitude.toFixed(5)}, ${longitude.toFixed(5)}
-            </strong>
-
-          `;
-
+        position => {
+          detectedLatitude = position.coords.latitude;
+          detectedLongitude = position.coords.longitude;
+          document.getElementById("location-input").value = `${detectedLatitude.toFixed(6)}, ${detectedLongitude.toFixed(6)}`;
+          status.innerHTML = '<span class="material-symbols-outlined text-secondary text-base">check_circle</span><span id="wardStatusText">Location detected successfully. Coordinates will be sent to the backend.</span>';
         },
-
-        function() {
-
-          alert(
-            "Unable to detect your location. Please enter it manually."
-          );
-
-        }
-
+        error => {
+          console.error("Geolocation error:", error);
+          detectedLatitude = null; detectedLongitude = null;
+          status.innerHTML = '<span class="material-symbols-outlined text-error text-base">location_off</span><span id="wardStatusText">Could not detect location. Please enter your street, area or landmark manually.</span>';
+        },
+        { enableHighAccuracy: true, timeout: 12000, maximumAge: 60000 }
       );
-
     }
 
-
-
-    /*
-      Voice Input
-      ---------------------------------------
-      Uses browser speech recognition
-      where supported.
-    */
+    let recognition = null;
+    let isListening = false;
 
     function startVoiceInput() {
-
-      const SpeechRecognition =
-        window.SpeechRecognition ||
-        window.webkitSpeechRecognition;
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      const voiceButton = document.querySelector('button[onclick="startVoiceInput()"]') || document.getElementById("voiceButton");
+      const textarea = document.getElementById("grievance-text");
 
       if (!SpeechRecognition) {
-
-        alert(
-          "Voice input is not supported by this browser."
-        );
-
+        alert("Voice input is not supported in this browser. Please use Google Chrome or Microsoft Edge.");
         return;
-
       }
 
-      const recognition =
-        new SpeechRecognition();
+      if (!textarea) {
+        console.error("Grievance textarea (#grievance-text) not found.");
+        return;
+      }
+      // Stop if already listening
+      if (isListening && recognition) {
+        recognition.stop();
+        return;
+      }
 
+      recognition = new SpeechRecognition();
+
+      // Set to hi-IN to seamlessly capture Hindi, English, and mixed Hinglish
       recognition.lang = "en-IN";
-
-      recognition.interimResults = false;
-
       recognition.continuous = false;
+      recognition.interimResults = true;
+      recognition.maxAlternatives = 3;
 
-      recognition.onresult = function(event) {
+      let finalTranscript = "";
 
-        const transcript =
-          event.results[0][0].transcript;
-
-        const textarea =
-          document.getElementById("grievance-text");
-
-        textarea.value =
-          textarea.value
-            ? textarea.value + " " + transcript
-            : transcript;
-
+      recognition.onstart = function () {
+        isListening = true;
+        if (voiceButton) {
+            voiceButton.innerHTML = '<span class="material-symbols-outlined text-base">mic</span> Listening...';
+            voiceButton.style.borderColor = "#a73918";
+            voiceButton.style.color = "#a73918";
+        }
+        console.log("🎤 Speech recognition started (hi-IN mode for multilingual support)");
       };
 
-      recognition.onerror = function() {
+      recognition.onresult = function (event) {
+        let interimTranscript = "";
 
-        alert(
-          "Could not capture your voice. Please try again."
-        );
+        for (let i = event.resultIndex; i < event.results.length; i++) {
+            const transcript = event.results[i][0].transcript;
+            if (event.results[i].isFinal) {
+                finalTranscript += transcript + " ";
+            } else {
+                interimTranscript += transcript;
+            }
+        }
 
-      };
+        const combinedText = finalTranscript + interimTranscript;
+        if (combinedText.trim()) {
+            textarea.value = combinedText.trim();
+            textarea.dispatchEvent(new Event("input", { bubbles: true }));
+            textarea.dispatchEvent(new Event("change", { bubbles: true }));
+        }
+    };
 
-      recognition.start();
+    recognition.onerror = function (event) {
+        console.error("Speech recognition error:", event.error);
+        isListening = false;
+        resetButtonState(voiceButton);
 
+        if (event.error === "no-speech") {
+            alert("I couldn't hear any speech. Please speak clearly into your mic and try again.");
+        } else if (event.error === "not-allowed") {
+            alert("Microphone permission was blocked. Allow microphone access in your browser settings and try again.");
+        } else if (event.error !== "aborted") {
+            alert("Voice input failed: " + event.error);
+        }
+    };
+
+    recognition.onend = function () {
+        isListening = false;
+        resetButtonState(voiceButton);
+        console.log("🎤 Speech recognition ended");
+    };
+
+    try {
+        recognition.start();
+    } catch (error) {
+        console.error("Could not start speech recognition:", error);
+        isListening = false;
+        resetButtonState(voiceButton);
+        alert("Could not start the microphone. Please try again.");
     }
+}
+
+function resetButtonState(button) {
+    if (button) {
+        button.innerHTML = '<span class="material-symbols-outlined text-base">mic</span> Speak';
+        button.style.borderColor = "";
+        button.style.color = "";
+    }
+}
 
 
-
-    /*
-      Photo Upload
-    */
 
     function handlePhotos(event) {
-
-      const files =
-        event.target.files;
-
-      if (!files.length) {
-        return;
-      }
-
-      const file =
-        files[0];
-
-      if (file.size > 10 * 1024 * 1024) {
-
-        alert(
-          "Each photo must be smaller than 10MB."
-        );
-
-        event.target.value = "";
-
-        return;
-
-      }
-
-      const reader =
-        new FileReader();
-
-      reader.onload = function(e) {
-
-        const preview =
-          document.getElementById("photoPreview");
-
-        preview.innerHTML = `
-
-          <div class="h-32 w-full bg-surface-container overflow-hidden relative">
-
-            <img
-              class="w-full h-full object-cover"
-              src="${e.target.result}"
-              alt="Uploaded issue photo"
-            >
-
-            <span class="absolute top-1 right-1 bg-black text-white text-[10px] px-2 py-1 uppercase">
-              Photo Added
-            </span>
-
-          </div>
-
-          <div class="p-2 flex items-center justify-between text-xs">
-
-            <span class="truncate">
-              ${file.name}
-            </span>
-
-            <button
-              type="button"
-              onclick="removePhoto()"
-              class="text-error"
-            >
-
-              <span class="material-symbols-outlined text-base">
-                close
-              </span>
-
-            </button>
-
-          </div>
-
-        `;
-
-      };
-
-      reader.readAsDataURL(file);
-
+      const files = Array.from(event.target.files || []);
+      uploadedPhotos = files;
+      const preview = document.getElementById("photoPreview");
+      const invalid = files.find(f => f.size > 10 * 1024 * 1024);
+      if (invalid) { alert(`${invalid.name} is larger than 10MB.`); event.target.value = ""; uploadedPhotos = []; return; }
+      if (!files.length) { removePhoto(); return; }
+      preview.innerHTML = `<div class="w-full bg-surface-container p-4 text-center"><span class="material-symbols-outlined text-secondary text-3xl">photo_library</span><div class="font-semibold text-sm mt-2">${files.length} photo${files.length > 1 ? "s" : ""} selected</div><div class="text-xs text-on-surface-variant mt-1">${files.map(f => f.name).join(", ")}</div></div><button type="button" onclick="removePhoto()" class="mt-2 text-error text-xs font-semibold">Remove photos</button>`;
     }
-
-
-
-    /*
-      Remove Photo
-    */
 
     function removePhoto() {
-
-      const preview =
-        document.getElementById("photoPreview");
-
-      preview.innerHTML = `
-
-        <div class="h-32 w-full bg-surface-container flex items-center justify-center">
-
-          <span class="material-symbols-outlined text-on-surface-variant text-3xl">
-            image
-          </span>
-
-        </div>
-
-        <div class="p-2 text-xs text-on-surface-variant">
-          No photo selected
-        </div>
-
-      `;
-
+      uploadedPhotos = [];
+      const input = document.getElementById("photoUpload");
+      if (input) input.value = "";
+      document.getElementById("photoPreview").innerHTML = '<span class="material-symbols-outlined text-on-surface-variant text-3xl mb-2">image</span><span class="text-xs text-on-surface-variant">No photo selected</span>';
     }
-
   </script>
 
 </body>

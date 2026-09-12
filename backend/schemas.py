@@ -4,6 +4,9 @@ from datetime import datetime
 
 class ComplaintCreate(BaseModel):
     raw_text: str
+    location: str | None = None
+    latitude: float | None = None
+    longitude: float | None = None
 
 class ComplaintOut(BaseModel):
     id: int

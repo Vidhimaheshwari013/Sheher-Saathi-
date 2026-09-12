@@ -1469,88 +1469,8 @@
 
           </div>
 
-          <ul class="space-y-2">
-
-            <li class="flex items-center justify-between py-2 border-b border-outline-variant/30">
-
-              <div>
-
-                <span class="font-bold text-on-surface text-body-md block">
-                  Rajpur Road
-                </span>
-
-                <span class="text-body-sm text-outline">
-                  Drainage &amp; Culverts
-                </span>
-
-              </div>
-
-              <span class="px-2 py-0.5 bg-secondary-fixed text-on-secondary-fixed text-label-sm font-bold">
-                9 Reports
-              </span>
-
-            </li>
-
-            <li class="flex items-center justify-between py-2 border-b border-outline-variant/30">
-
-              <div>
-
-                <span class="font-bold text-on-surface text-body-md block">
-                  Prem Nagar
-                </span>
-
-                <span class="text-body-sm text-outline">
-                  Asphalt &amp; Potholes
-                </span>
-
-              </div>
-
-              <span class="px-2 py-0.5 bg-surface-container text-on-surface text-label-sm font-bold">
-                6 Reports
-              </span>
-
-            </li>
-
-            <li class="flex items-center justify-between py-2 border-b border-outline-variant/30">
-
-              <div>
-
-                <span class="font-bold text-on-surface text-body-md block">
-                  Koramangala 4th Blk
-                </span>
-
-                <span class="text-body-sm text-outline">
-                  Waste Segregation
-                </span>
-
-              </div>
-
-              <span class="px-2 py-0.5 bg-surface-container text-on-surface text-label-sm font-bold">
-                7 Reports
-              </span>
-
-            </li>
-
-            <li class="flex items-center justify-between py-2">
-
-              <div>
-
-                <span class="font-bold text-on-surface text-body-md block">
-                  Patel Nagar Sector 4
-                </span>
-
-                <span class="text-body-sm text-outline">
-                  Street Lighting
-                </span>
-
-              </div>
-
-              <span class="px-2 py-0.5 bg-surface-container text-on-surface text-label-sm font-bold">
-                4 Reports
-              </span>
-
-            </li>
-
+          <ul id="cityHotspotsList" class="space-y-2">
+            <!-- Real live backend clusters will automatically populate here -->
           </ul>
 
         </div>
@@ -1856,6 +1776,106 @@
     </a>
 
   </nav>
+
+  <!-- ================= JAVASCRIPT ================= -->
+  <script>
+    const API_URL = "http://127.0.0.1:8000";
+
+    function priorityBadgeClasses(level) {
+        if (level === "high") return "bg-error-container text-on-error-container";
+        if (level === "medium") return "bg-secondary-fixed text-on-secondary-fixed";
+        return "bg-surface-container text-outline";
+    }
+
+    function priorityLabel(level) {
+        if (level === "high") return "High Activity";
+        if (level === "medium") return "Active";
+        return "Monitoring";
+    }
+
+    function buildIssueCard(cluster) {
+        const badgeClass = priorityBadgeClasses(cluster.priority.level);
+        const badgeLabel = priorityLabel(cluster.priority.level);
+        const locationText = cluster.locations.length
+            ? cluster.locations.join(", ")
+            : "Location not specified";
+        const categoryLabel = (cluster.category || "Civic Issue").replace(/_/g, " ");
+
+        return `
+          <article class="bg-surface-container-lowest border border-outline-variant p-space-lg space-y-4 hover:border-outline transition-none">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <div class="flex items-center gap-2">
+                <span class="px-2.5 py-0.5 ${badgeClass} font-label-sm font-bold">
+                  ${badgeLabel} • ${cluster.size} Reports
+                </span>
+                <span class="text-label-sm text-outline capitalize">${categoryLabel}</span>
+              </div>
+            </div>
+            <div>
+              <h3 class="text-headline-sm font-headline-sm font-bold text-on-surface leading-snug capitalize">
+                ${categoryLabel} — Cluster #${cluster.cluster_id}
+              </h3>
+              <p class="text-body-sm text-outline flex items-center gap-1 mt-1">
+                <span class="material-symbols-outlined text-[16px] text-secondary">pin_drop</span>
+                ${locationText}
+              </p>
+            </div>
+            <p class="text-body-md text-on-surface-variant leading-relaxed">
+              ${cluster.size} citizen reports grouped under this issue. Average severity: ${cluster.priority.avg_severity}/5.
+            </p>
+            <div class="flex items-center gap-2 text-label-sm text-on-surface">
+              <span class="w-2 h-2 rounded-full bg-secondary shrink-0"></span>
+              <span><strong>Priority score:</strong> ${cluster.priority.score} (${cluster.priority.level})</span>
+            </div>
+          </article>
+        `;
+    }
+
+    async function loadCommunityIssues() {
+    const container = document.getElementById("communityIssuesList");
+    const hotspotsContainer = document.getElementById("cityHotspotsList");
+
+    try {
+        const response = await fetch(`${API_URL}/clusters`);
+        if (!response.ok) throw new Error("Could not load community issues.");
+        const data = await response.json();
+
+        if (!data.clusters || data.clusters.length === 0) {
+            container.innerHTML = `<p class="text-body-md text-outline">No community issues clustered yet.</p>`;
+            if (hotspotsContainer) hotspotsContainer.innerHTML = `<p class="text-body-sm text-outline">No hotspots found.</p>`;
+            return;
+        }
+
+        // 1. Render main active cluster cards on the left
+        container.innerHTML = data.clusters.map(buildIssueCard).join("");
+
+        // 2. Render real data into the City Hotspots sidebar on the right
+        if (hotspotsContainer) {
+            hotspotsContainer.innerHTML = data.clusters.slice(0, 4).map(cluster => {
+                const locationText = cluster.locations.length ? cluster.locations[0] : "General Location";
+                const categoryLabel = (cluster.category || "Civic Issue").replace(/_/g, " ");
+                return `
+                    <li class="flex items-center justify-between py-2 border-b border-outline-variant/30">
+                        <div>
+                            <span class="font-bold text-on-surface text-body-md block capitalize">${locationText}</span>
+                            <span class="text-body-sm text-outline capitalize">${categoryLabel}</span>
+                        </div>
+                        <span class="px-2 py-0.5 bg-surface-container text-on-surface text-label-sm font-bold">
+                            ${cluster.size} Reports
+                        </span>
+                    </li>
+                `;
+            }).join("");
+        }
+
+    } catch (error) {
+        console.error(error);
+        container.innerHTML = `<p class="text-body-md text-error">Could not connect to backend. Is FastAPI running?</p>`;
+    }
+  }
+
+    document.addEventListener("DOMContentLoaded", loadCommunityIssues);
+  </script>
 
 </body>
 </html>
