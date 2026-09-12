@@ -66,6 +66,36 @@ def get_complaint(complaint_id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="Complaint not found")
     return c
 
+@app.patch("/complaints/{complaint_id}", response_model=schemas.ComplaintOut)
+def update_complaint(
+    complaint_id: int,
+    payload: schemas.ComplaintAdminUpdate,
+    db: Session = Depends(get_db)
+):
+    complaint = (
+        db.query(models.Complaint)
+        .filter(models.Complaint.id == complaint_id)
+        .first()
+    )
+
+    if not complaint:
+        raise HTTPException(
+            status_code=404,
+            detail="Complaint not found"
+        )
+
+    if payload.status is not None:
+        complaint.status = payload.status
+
+    if payload.verified is not None:
+        complaint.verified = payload.verified
+
+    db.commit()
+    db.refresh(complaint)
+
+    return complaint
+
+
 @app.post("/complaints/analyze")
 def analyze_complaint(complaint: schemas.ComplaintCreate):
     result = extract_complaint(complaint.raw_text)

@@ -28,3 +28,7 @@ class ComplaintOut(BaseModel):
 
 class FollowupAnswer(BaseModel):
     answer: str
+
+class ComplaintAdminUpdate(BaseModel):
+    status: Optional[str] = None
+    verified: Optional[bool] = None
