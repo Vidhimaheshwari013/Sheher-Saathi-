@@ -500,7 +500,7 @@
                             class="w-full pl-10 pr-4 py-2.5 border border-outline-variant/70 text-on-surface bg-surface font-body-md text-body-md focus:outline-none focus:border-primary placeholder:text-outline/70 transition-none font-mono"
                             placeholder="Enter Ticket ID (e.g. #SS-89432 or SS-88914)"
                             type="text"
-                            value="#SS-89432"
+                            value=""
                         >
 
                     </div>
@@ -539,7 +539,7 @@
              GRIEVANCE CARD
         ========================================================== -->
 
-        <section class="max-w-3xl space-y-space-lg">
+        <section id="grievanceSection" class="max-w-3xl space-y-space-lg hidden">
 
             <div class="flex items-center justify-between text-body-sm text-outline px-1">
 
@@ -1170,16 +1170,14 @@
 
             updateSummaryCards(complaints);
 
-            // Show newest complaint by default
-            if (complaints.length > 0) {
-                selectedComplaint = complaints[complaints.length - 1];
-                renderComplaint(selectedComplaint);
-            }
+            // Do not show a previous/newest complaint automatically.
+            // A report is displayed only after the citizen searches for a ticket.
+            selectedComplaint = null;
 
         } catch (error) {
             console.error("Backend connection error:", error);
 
-            alert(
+            console.error(
                 "Could not connect to the Sheher Saathi backend. " +
                 "Please make sure FastAPI is running on port 8000."
             );
@@ -1336,6 +1334,11 @@
     function renderComplaint(complaint) {
 
         selectedComplaint = complaint;
+
+        const grievanceSection = document.getElementById("grievanceSection");
+        if (grievanceSection) {
+            grievanceSection.classList.remove("hidden");
+        }
 
         const article = document.querySelector("main article");
 
@@ -1771,6 +1774,15 @@
         const complaint = findComplaint(input);
 
         if (!complaint) {
+            selectedComplaint = null;
+
+            const grievanceSection =
+                document.getElementById("grievanceSection");
+
+            if (grievanceSection) {
+                grievanceSection.classList.add("hidden");
+            }
+
             alert(
                 "Ticket not found.\n\n" +
                 "Try a valid Ticket ID such as SS-12 or #SS-12."

@@ -633,7 +633,7 @@
                   type="text"
                   value="Arun Krishnamurthy"
                   class="w-full bg-surface-bright border border-outline-variant p-3 text-sm"
-                >
+                />
 
               </div>
 
@@ -704,7 +704,10 @@
         </div>
 
         <p class="text-xs text-on-surface-variant mb-5">Review the information generated from your complaint before submitting it to the municipal system.</p>
-
+        <div class="flex items-center gap-1.5 text-label-sm text-secondary bg-secondary-fixed/20 px-2.5 py-1 mb-4 w-fit">
+          <span class="material-symbols-outlined text-[16px]">smart_toy</span>
+          <span>Extracted by Qwen3 27B (open-source LLM, via Groq)</span>
+        </div>
         <div class="border-t border-b border-outline-variant divide-y divide-outline-variant">
 
           <div class="py-4 flex items-start gap-3">
@@ -1194,6 +1197,22 @@
     let currentProblem = "";
     let uploadedPhotos = [];
 
+    const aiMessages = [
+      "AI is reading your complaint...",
+      "Detecting language (English/Hindi/Hinglish)...",
+      "Identifying issue category and severity...",
+      "Almost done..."
+    ];
+
+    function startAiLoadingMessages(statusEl) {
+      let i = 0;
+      if (statusEl) statusEl.textContent = aiMessages[0];
+      return setInterval(() => {
+        i = (i + 1) % aiMessages.length;
+        if (statusEl) statusEl.textContent = aiMessages[i];
+      }, 900);
+    }
+
     function getFormValues() {
       return {
         problem: document.getElementById("grievance-text").value.trim(),
@@ -1316,6 +1335,9 @@
       if (!problem) { alert("Please describe the problem first."); return; }
       if (!location) { alert("Please enter a location or use Auto-detect my location."); return; }
       const button = document.querySelector('#issueForm button[type="submit"]');
+      const statusEl = document.getElementById("dispatchStatus");
+      const messageInterval = startAiLoadingMessages(statusEl);
+
       if (button) { button.disabled = true; button.innerHTML = '<span class="material-symbols-outlined text-xl animate-spin">progress_activity</span> Analyzing...'; }
       try {
         currentProblem = problem;
@@ -1326,6 +1348,7 @@
         console.error(error);
         alert("Unable to analyze the complaint. Please make sure Ananya's backend is running on port 8000.");
       } finally {
+        clearInterval(messageInterval);
         if (button) { button.disabled = false; button.innerHTML = '<span class="material-symbols-outlined text-xl">preview</span> Review & Continue to Summary'; }
       }
     }
