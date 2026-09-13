@@ -275,7 +275,7 @@
 
                 <a
                     class="hidden sm:inline-block font-label-sm text-label-sm text-on-surface-variant hover:text-primary px-2 py-1"
-                    href="admin.html"
+                    href="admin-login.html"
                 >
                     Authority Login
                 </a>
@@ -1145,169 +1145,770 @@
     ========================================================== -->
 
     <script>
+    const API_BASE_URL = "http://127.0.0.1:8000";
 
-        /* ---------------------------------------------------------
-           Track Ticket
-        --------------------------------------------------------- */
+    let complaints = [];
+    let selectedComplaint = null;
 
-        const trackTicketButton =
-            document.getElementById("trackTicketButton");
+    const trackTicketButton = document.getElementById("trackTicketButton");
+    const ticketSearch = document.getElementById("ticketSearch");
 
-        const ticketSearch =
-            document.getElementById("ticketSearch");
+    /*
+     * ---------------------------------------------------------
+     * Load complaints from backend
+     * ---------------------------------------------------------
+     */
+    async function loadComplaints() {
+        try {
+            const response = await fetch(`${API_BASE_URL}/complaints`);
+
+            if (!response.ok) {
+                throw new Error("Failed to load complaints");
+            }
+
+            complaints = await response.json();
+
+            updateSummaryCards(complaints);
+
+            // Show newest complaint by default
+            if (complaints.length > 0) {
+                selectedComplaint = complaints[complaints.length - 1];
+                renderComplaint(selectedComplaint);
+            }
+
+        } catch (error) {
+            console.error("Backend connection error:", error);
+
+            alert(
+                "Could not connect to the Sheher Saathi backend. " +
+                "Please make sure FastAPI is running on port 8000."
+            );
+        }
+    }
 
 
-        if (trackTicketButton) {
+    /*
+     * ---------------------------------------------------------
+     * Summary cards
+     * ---------------------------------------------------------
+     */
+    function updateSummaryCards(data) {
 
-            trackTicketButton.addEventListener("click", function () {
+        const total = data.length;
 
-                const ticketId = ticketSearch.value.trim();
+        const inProgress = data.filter(
+            c => c.status === "in_progress"
+        ).length;
 
-                if (ticketId === "") {
+        const resolved = data.filter(
+            c => c.status === "resolved"
+        ).length;
 
-                    alert("Please enter a Ticket ID or registered mobile number.");
+        const pending = data.filter(
+            c => c.status === "pending"
+        ).length;
 
-                    ticketSearch.focus();
+        const cards = document.querySelectorAll(
+            "main .grid.grid-cols-2.sm\\:grid-cols-4 > div"
+        );
 
-                    return;
-                }
+        if (cards.length >= 4) {
+            cards[0].querySelector(
+                ".font-headline-md"
+            ).textContent = total;
 
-                alert(
-                    "Tracking ticket " +
-                    ticketId +
-                    ". Live backend tracking will be connected here."
-                );
+            cards[1].querySelector(
+                ".font-headline-md"
+            ).textContent = String(inProgress).padStart(2, "0");
 
-            });
+            cards[2].querySelector(
+                ".font-headline-md"
+            ).textContent = String(resolved).padStart(2, "0");
+
+            cards[3].querySelector(
+                ".font-headline-md"
+            ).textContent = String(pending).padStart(2, "0");
+        }
+    }
+
+
+    /*
+     * ---------------------------------------------------------
+     * Find complaint by Ticket ID
+     *
+     * Accepts:
+     * 12
+     * SS-12
+     * #SS-12
+     * ---------------------------------------------------------
+     */
+    function findComplaint(ticketInput) {
+
+        const cleaned = ticketInput
+            .trim()
+            .toLowerCase()
+            .replace("#", "")
+            .replace("ss-", "")
+            .trim();
+
+        const id = Number(cleaned);
+
+        if (Number.isNaN(id)) {
+            return null;
+        }
+
+        return complaints.find(
+            complaint => complaint.id === id
+        );
+    }
+
+
+    /*
+     * ---------------------------------------------------------
+     * Format status
+     * ---------------------------------------------------------
+     */
+    function formatStatus(status) {
+
+        switch (status) {
+            case "pending":
+                return "Pending";
+
+            case "in_progress":
+                return "Field Work in Progress";
+
+            case "resolved":
+                return "Resolved";
+
+            default:
+                return status || "Pending";
+        }
+    }
+
+
+    /*
+     * ---------------------------------------------------------
+     * Status styling
+     * ---------------------------------------------------------
+     */
+    function getStatusHTML(status) {
+
+        if (status === "resolved") {
+
+            return `
+                <span class="inline-flex items-center gap-1 px-2 py-0.5 bg-[#eaf7ef] text-[#1b7a42]
+                    font-label-sm text-label-sm font-semibold border border-[#b7dfc6]">
+                    <span class="material-symbols-outlined text-xs">check_circle</span>
+                    Resolved
+                </span>
+            `;
 
         }
 
+        if (status === "in_progress") {
 
-        /* ---------------------------------------------------------
-           Enter key for Ticket Search
-        --------------------------------------------------------- */
+            return `
+                <span class="inline-flex items-center gap-1 px-2 py-0.5 bg-[#fff8e1] text-[#b45309]
+                    font-label-sm text-label-sm font-semibold border border-[#fef08a]">
+                    <span class="w-1.5 h-1.5 rounded-full bg-[#b45309] animate-pulse"></span>
+                    Field Work in Progress
+                </span>
+            `;
 
-        if (ticketSearch) {
+        }
 
-            ticketSearch.addEventListener("keydown", function (event) {
+        return `
+            <span class="inline-flex items-center gap-1 px-2 py-0.5 bg-surface-container
+                text-on-surface-variant font-label-sm text-label-sm font-semibold
+                border border-outline-variant/50">
+                <span class="material-symbols-outlined text-xs">schedule</span>
+                Pending
+            </span>
+        `;
+    }
+
+
+    /*
+     * ---------------------------------------------------------
+     * Render real complaint into existing Stitch card
+     * ---------------------------------------------------------
+     */
+    function renderComplaint(complaint) {
+
+        selectedComplaint = complaint;
+
+        const article = document.querySelector("main article");
+
+        if (!article) {
+            console.error("Complaint card not found.");
+            return;
+        }
+
+        const ticketNumber = `#SS-${complaint.id}`;
+
+        const createdDate = complaint.created_at
+            ? new Date(complaint.created_at)
+            : null;
+
+        const submittedText = createdDate
+            ? createdDate.toLocaleString()
+            : "Not available";
+
+        const category = complaint.category || "Civic Issue";
+
+        const location = complaint.location || "Location not available";
+
+        const severity = complaint.severity || 0;
+
+        const priorityText =
+            severity >= 4
+                ? "High Priority"
+                : severity >= 2
+                    ? "Medium Priority"
+                    : "Normal Priority";
+
+
+        article.innerHTML = `
+            <div class="flex flex-wrap items-center justify-between gap-2 pb-4 border-b border-outline-variant/40">
+
+                <div class="flex flex-wrap items-center gap-2">
+
+                    <span class="font-label-sm text-label-sm text-outline font-mono">
+                        Ticket ID:
+                        <strong class="text-on-surface text-base font-bold">
+                            ${ticketNumber}
+                        </strong>
+                    </span>
+
+                    <span class="px-2.5 py-0.5 bg-surface-container text-on-surface
+                        font-label-sm text-label-sm font-semibold tracking-wide
+                        border border-outline-variant/50">
+                        ${category}
+                    </span>
+
+                </div>
+
+                <div class="flex items-center gap-2">
+
+                    <span class="inline-flex items-center gap-1 px-2 py-0.5
+                        bg-[#fff0ed] text-secondary font-label-sm text-label-sm
+                        font-semibold border border-secondary/20">
+
+                        <span class="material-symbols-outlined text-xs">
+                            priority_high
+                        </span>
+
+                        ${priorityText}
+
+                    </span>
+
+                    ${getStatusHTML(complaint.status)}
+
+                </div>
+
+            </div>
+
+
+            <div class="py-4">
+
+                <h2 class="font-headline-sm text-headline-sm text-on-surface
+                    font-semibold mb-3">
+
+                    ${complaint.raw_text || "Civic complaint"}
+
+                </h2>
+
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-3
+                    text-body-md text-on-surface-variant mb-5">
+
+                    <div class="flex items-start gap-2">
+
+                        <span class="material-symbols-outlined text-outline text-lg mt-0.5">
+                            location_on
+                        </span>
+
+                        <div>
+
+                            <span class="text-body-sm text-outline block">
+                                Location
+                            </span>
+
+                            <span class="text-on-surface font-medium">
+                                ${location}
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="flex items-start gap-2">
+
+                        <span class="material-symbols-outlined text-outline text-lg mt-0.5">
+                            history
+                        </span>
+
+                        <div>
+
+                            <span class="text-body-sm text-outline block">
+                                Submitted
+                            </span>
+
+                            <span class="text-on-surface font-medium">
+                                ${submittedText}
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="flex items-start gap-2">
+
+                        <span class="material-symbols-outlined text-outline text-lg mt-0.5">
+                            engineering
+                        </span>
+
+                        <div>
+
+                            <span class="text-body-sm text-outline block">
+                                Status
+                            </span>
+
+                            <span class="text-on-surface font-medium">
+                                ${formatStatus(complaint.status)}
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="bg-surface-container-low p-4
+                    border border-outline-variant/30 mb-4">
+
+                    <span class="font-label-sm text-label-sm uppercase
+                        text-outline tracking-wider block mb-3 font-semibold">
+
+                        Grievance Workflow Stage
+
+                    </span>
+
+
+                    <div class="grid grid-cols-1 sm:grid-cols-4 gap-3">
+
+                        <div class="flex items-center sm:flex-col sm:items-start gap-2.5">
+
+                            <div class="w-7 h-7 rounded-full bg-[#1b7a42]
+                                text-on-primary flex items-center justify-center flex-shrink-0">
+
+                                <span class="material-symbols-outlined text-base">
+                                    check
+                                </span>
+
+                            </div>
+
+                            <div>
+
+                                <p class="font-label-sm text-label-sm
+                                    font-semibold text-on-surface">
+
+                                    1. Submitted
+
+                                </p>
+
+                                <p class="text-body-sm text-outline hidden sm:block">
+                                    Complaint received
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="flex items-center sm:flex-col sm:items-start gap-2.5">
+
+                            <div class="w-7 h-7 rounded-full
+                                ${complaint.status !== "pending"
+                                    ? "bg-[#1b7a42] text-on-primary"
+                                    : "bg-surface-container-high text-outline border border-outline-variant"} 
+                                flex items-center justify-center flex-shrink-0">
+
+                                <span class="material-symbols-outlined text-base">
+                                    ${complaint.status !== "pending" ? "check" : "schedule"}
+                                </span>
+
+                            </div>
+
+                            <div>
+
+                                <p class="font-label-sm text-label-sm
+                                    font-semibold text-on-surface">
+
+                                    2. Triaged & Assigned
+
+                                </p>
+
+                                <p class="text-body-sm text-outline hidden sm:block">
+
+                                    ${complaint.status !== "pending"
+                                        ? "Sent to authority"
+                                        : "Awaiting action"}
+
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="flex items-center sm:flex-col sm:items-start gap-2.5">
+
+                            <div class="w-7 h-7 rounded-full
+                                ${complaint.status === "in_progress" || complaint.status === "resolved"
+                                    ? "bg-secondary-container text-on-secondary"
+                                    : "bg-surface-container-high text-outline border border-outline-variant"}
+                                flex items-center justify-center flex-shrink-0">
+
+                                <span class="material-symbols-outlined text-base">
+                                    ${complaint.status === "in_progress"
+                                        ? "construction"
+                                        : complaint.status === "resolved"
+                                            ? "check"
+                                            : "schedule"}
+                                </span>
+
+                            </div>
+
+                            <div>
+
+                                <p class="font-label-sm text-label-sm
+                                    font-bold
+                                    ${complaint.status === "in_progress"
+                                        ? "text-secondary"
+                                        : "text-on-surface"}">
+
+                                    3. Field Work in Progress
+
+                                </p>
+
+                                <p class="text-body-sm text-outline hidden sm:block">
+
+                                    ${complaint.status === "in_progress"
+                                        ? "Work underway"
+                                        : complaint.status === "resolved"
+                                            ? "Work completed"
+                                            : "Pending dispatch"}
+
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="flex items-center sm:flex-col sm:items-start gap-2.5
+                            ${complaint.status === "resolved" ? "" : "opacity-60"}">
+
+                            <div class="w-7 h-7 rounded-full
+                                ${complaint.status === "resolved"
+                                    ? "bg-[#1b7a42] text-on-primary"
+                                    : "bg-surface-container-high text-outline border border-outline-variant"}
+                                flex items-center justify-center flex-shrink-0">
+
+                                <span class="material-symbols-outlined text-base">
+                                    ${complaint.status === "resolved"
+                                        ? "check"
+                                        : "photo_camera"}
+                                </span>
+
+                            </div>
+
+                            <div>
+
+                                <p class="font-label-sm text-label-sm
+                                    font-medium text-on-surface-variant">
+
+                                    4. Resolution & Sign-off
+
+                                </p>
+
+                                <p class="text-body-sm text-outline hidden sm:block">
+
+                                    ${complaint.status === "resolved"
+                                        ? "Resolved"
+                                        : "Pending resolution"}
+
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="flex items-start gap-2.5
+                    bg-surface-container/60 p-3 border-l-2 border-secondary
+                    text-body-md text-on-surface mb-2">
+
+                    <span class="material-symbols-outlined text-secondary text-lg mt-0.5">
+                        info
+                    </span>
+
+                    <div>
+
+                        <span class="font-semibold text-label-md">
+                            Backend Status:
+                        </span>
+
+                        <span>
+                            ${formatStatus(complaint.status)}
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="pt-3 border-t border-outline-variant/40
+                flex flex-wrap items-center justify-between gap-3">
+
+                <div class="flex flex-wrap items-center gap-2">
+
+                    <button
+                        id="photoButton"
+                        class="border border-outline-variant hover:bg-surface-container
+                        text-on-surface font-label-md text-label-md px-3.5 py-2
+                        flex items-center gap-1.5 transition-none">
+
+                        <span class="material-symbols-outlined text-base">
+                            add_a_photo
+                        </span>
+
+                        <span>
+                            Add Supplementary Photo
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        id="downloadButton"
+                        class="border border-outline-variant hover:bg-surface-container
+                        text-on-surface font-label-md text-label-md px-3.5 py-2
+                        flex items-center gap-1.5 transition-none">
+
+                        <span class="material-symbols-outlined text-base">
+                            download
+                        </span>
+
+                        <span>
+                            Download Summary
+                        </span>
+
+                    </button>
+
+                </div>
+
+
+                <button
+                    id="escalateButton"
+                    class="text-secondary hover:text-on-secondary-fixed-variant
+                    font-label-sm text-label-sm flex items-center gap-1
+                    underline underline-offset-4">
+
+                    <span class="material-symbols-outlined text-sm">
+                        flag
+                    </span>
+
+                    <span>
+                        Escalate if delayed
+                    </span>
+
+                </button>
+
+            </div>
+        `;
+
+
+        document.querySelector(
+            "main section:nth-of-type(2) > div:first-child strong"
+        ).textContent = ticketNumber;
+
+
+        document.querySelector(
+            "main section:nth-of-type(2) > div:first-child span:last-child"
+        ).textContent = "Live from backend";
+
+
+        attachCardButtons();
+    }
+
+
+    /*
+     * ---------------------------------------------------------
+     * Track ticket
+     * ---------------------------------------------------------
+     */
+    function trackTicket() {
+
+        const input = ticketSearch.value.trim();
+
+        if (!input) {
+            alert("Please enter a Ticket ID.");
+            ticketSearch.focus();
+            return;
+        }
+
+        const complaint = findComplaint(input);
+
+        if (!complaint) {
+            alert(
+                "Ticket not found.\n\n" +
+                "Try a valid Ticket ID such as SS-12 or #SS-12."
+            );
+            return;
+        }
+
+        renderComplaint(complaint);
+    }
+
+
+    if (trackTicketButton) {
+        trackTicketButton.addEventListener(
+            "click",
+            trackTicket
+        );
+    }
+
+
+    if (ticketSearch) {
+
+        ticketSearch.addEventListener(
+            "keydown",
+            function (event) {
 
                 if (event.key === "Enter") {
-
-                    trackTicketButton.click();
-
+                    trackTicket();
                 }
 
-            });
+            }
+        );
 
-        }
+    }
 
 
-        /* ---------------------------------------------------------
-           Supplementary Photo
-        --------------------------------------------------------- */
+    /*
+     * ---------------------------------------------------------
+     * Existing card buttons
+     * ---------------------------------------------------------
+     */
+    function attachCardButtons() {
 
         const photoButton =
             document.getElementById("photoButton");
 
-
         if (photoButton) {
-
             photoButton.addEventListener("click", function () {
-
                 alert(
-                    "Supplementary photo upload will be connected here."
+                    "Supplementary photo upload is not connected to the backend yet."
                 );
-
             });
-
         }
 
-
-        /* ---------------------------------------------------------
-           Download Summary
-        --------------------------------------------------------- */
 
         const downloadButton =
             document.getElementById("downloadButton");
 
-
         if (downloadButton) {
-
             downloadButton.addEventListener("click", function () {
 
-                alert(
-                    "Ticket summary download will be connected here."
+                if (!selectedComplaint) {
+                    return;
+                }
+
+                const summary =
+                    `Sheher Saathi Ticket #SS-${selectedComplaint.id}\n\n` +
+                    `Issue: ${selectedComplaint.raw_text}\n` +
+                    `Category: ${selectedComplaint.category || "N/A"}\n` +
+                    `Location: ${selectedComplaint.location || "N/A"}\n` +
+                    `Severity: ${selectedComplaint.severity || "N/A"}\n` +
+                    `Status: ${formatStatus(selectedComplaint.status)}\n`;
+
+                const blob = new Blob(
+                    [summary],
+                    { type: "text/plain" }
                 );
 
-            });
+                const url = URL.createObjectURL(blob);
 
+                const link = document.createElement("a");
+                link.href = url;
+                link.download =
+                    `Sheher-Saathi-Ticket-${selectedComplaint.id}.txt`;
+
+                link.click();
+
+                URL.revokeObjectURL(url);
+            });
         }
 
-
-        /* ---------------------------------------------------------
-           Escalate
-        --------------------------------------------------------- */
 
         const escalateButton =
             document.getElementById("escalateButton");
 
-
         if (escalateButton) {
-
             escalateButton.addEventListener("click", function () {
-
                 alert(
-                    "Escalation request will be connected to the authority workflow."
+                    "Escalation workflow is not connected to the backend yet."
                 );
-
             });
-
         }
+    }
 
 
-        /* ---------------------------------------------------------
-           Help Manual
-        --------------------------------------------------------- */
+    /*
+     * ---------------------------------------------------------
+     * Support buttons
+     * ---------------------------------------------------------
+     */
+    const helpManualButton =
+        document.getElementById("helpManualButton");
 
-        const helpManualButton =
-            document.getElementById("helpManualButton");
-
-
-        if (helpManualButton) {
-
-            helpManualButton.addEventListener("click", function () {
-
-                alert(
-                    "Citizen Help Manual will be available here."
-                );
-
-            });
-
-        }
+    if (helpManualButton) {
+        helpManualButton.addEventListener("click", function () {
+            alert(
+                "Citizen Help Manual will be available here."
+            );
+        });
+    }
 
 
-        /* ---------------------------------------------------------
-           Contact Ward
-        --------------------------------------------------------- */
+    const contactWardButton =
+        document.getElementById("contactWardButton");
 
-        const contactWardButton =
-            document.getElementById("contactWardButton");
+    if (contactWardButton) {
+        contactWardButton.addEventListener("click", function () {
+            alert(
+                "Ward Citizen Facilitation Desk contact will be available here."
+            );
+        });
+    }
 
 
-        if (contactWardButton) {
+    /*
+     * ---------------------------------------------------------
+     * Start
+     * ---------------------------------------------------------
+     */
+    loadComplaints();
 
-            contactWardButton.addEventListener("click", function () {
-
-                alert(
-                    "Ward 152 Citizen Facilitation Desk: 080-22660000"
-                );
-
-            });
-
-        }
-
-    </script>
-
-</body>
-
-</html>
+</script>
