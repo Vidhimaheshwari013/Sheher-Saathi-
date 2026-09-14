@@ -18,6 +18,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700&display=swap"
         rel="stylesheet">
 
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
     <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 
@@ -201,10 +204,10 @@
 
                 <!-- Authority Login stays in navigation -->
                 <a class="hidden sm:inline-flex items-center gap-space-xxs text-label-md font-label-md text-on-surface-variant hover:text-primary transition-colors border border-outline-variant px-space-md py-space-xs rounded-0"
-                    href="admin-login.html"
+                    href="admin-login.html">
 
                     <span class="material-symbols-outlined text-sm">
-                
+                        admin_panel_settings
                     </span>
 
                     Authority Login
@@ -234,7 +237,7 @@
                         </span>
 
                         <span>
-                            Citizen Municipal Portal
+                            Citizen Municipal Portal (Delhi)
                         </span>
 
                     </div>
@@ -302,7 +305,7 @@
                                 </span>
 
                                 <span class="text-label-md font-label-md font-bold">
-                                    Live Civic Pulse
+                                    Live Civic Pulse Delhi
                                 </span>
 
                             </div>
@@ -313,44 +316,10 @@
 
                         </div>
 
-                        <div class="space-y-space-md">
-
+                        <div id="heroLivePulse" class="space-y-space-md">
                             <div class="border-l-4 border-secondary pl-space-md">
-
-                                <div class="text-headline-sm font-headline-sm">
-                                    Waterlogging
-                                </div>
-
-                                <div class="text-body-sm text-on-surface-variant mt-space-xxs">
-                                    9 reports · Rajpur Road
-                                </div>
-
+                                <div class="text-headline-sm font-headline-sm">Loading live pulses...</div>
                             </div>
-
-                            <div class="border-l-4 border-primary pl-space-md">
-
-                                <div class="text-headline-sm font-headline-sm">
-                                    Road Damage
-                                </div>
-
-                                <div class="text-body-sm text-on-surface-variant mt-space-xxs">
-                                    6 reports · Prem Nagar
-                                </div>
-
-                            </div>
-
-                            <div class="border-l-4 border-primary pl-space-md">
-
-                                <div class="text-headline-sm font-headline-sm">
-                                    Streetlights
-                                </div>
-
-                                <div class="text-body-sm text-on-surface-variant mt-space-xxs">
-                                    4 reports · Patel Nagar
-                                </div>
-
-                            </div>
-
                         </div>
 
                         <a href="community.html"
@@ -697,12 +666,12 @@
 
                 <div class="px-space-md pt-space-md md:pt-0">
 
-                    <div class="text-headline-xl font-headline-xl text-secondary-fixed">
-                        1,42,850+
+                    <div id="statTotalReports" class="text-headline-xl font-headline-xl text-secondary-fixed">
+                        —
                     </div>
 
                     <div class="text-label-md font-label-md text-surface-variant mt-space-xxs">
-                        Reports Successfully Resolved
+                        Total Reports Filed
                     </div>
 
                 </div>
@@ -710,12 +679,12 @@
 
                 <div class="px-space-md pt-space-md md:pt-0">
 
-                    <div class="text-headline-xl font-headline-xl text-secondary-fixed">
-                        88,300+
+                    <div id="statActiveClusters" class="text-headline-xl font-headline-xl text-secondary-fixed">
+                        —
                     </div>
 
                     <div class="text-label-md font-label-md text-surface-variant mt-space-xxs">
-                        Citizens Connected
+                        Active Civic Clusters
                     </div>
 
                 </div>
@@ -723,12 +692,12 @@
 
                 <div class="px-space-md pt-space-md md:pt-0">
 
-                    <div class="text-headline-xl font-headline-xl text-secondary-fixed">
-                        198
+                    <div id="statAreasCovered" class="text-headline-xl font-headline-xl text-secondary-fixed">
+                        —
                     </div>
 
                     <div class="text-label-md font-label-md text-surface-variant mt-space-xxs">
-                        Wards Covered
+                        Areas Covered (Delhi)
                     </div>
 
                 </div>
@@ -784,164 +753,8 @@
                 </div>
 
 
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-space-lg">
-
-
-                    <!-- ISSUE CARD -->
-
-                    <div class="bg-surface-container-low border border-outline-variant p-space-lg">
-
-                        <div class="flex items-center justify-between">
-
-                            <span class="text-label-sm text-secondary font-bold uppercase">
-                                Waterlogging
-                            </span>
-
-                            <span class="text-label-sm text-on-surface-variant">
-                                Ward 14
-                            </span>
-
-                        </div>
-
-                        <h3 class="text-headline-sm font-headline-sm mt-space-md">
-                            Severe waterlogging near Canal Crossing
-                        </h3>
-
-                        <p class="text-body-sm text-on-surface-variant mt-space-xs">
-                            9 citizen reports clustered in the same location.
-                        </p>
-
-                        <div class="flex items-center justify-between mt-space-lg pt-space-md border-t border-outline-variant">
-
-                            <span class="text-label-sm text-on-surface-variant">
-                                48 affected
-                            </span>
-
-                            <span class="text-label-sm text-secondary font-bold">
-                                Active
-                            </span>
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- ISSUE CARD -->
-
-                    <div class="bg-surface-container-low border border-outline-variant p-space-lg">
-
-                        <div class="flex items-center justify-between">
-
-                            <span class="text-label-sm text-secondary font-bold uppercase">
-                                Roads
-                            </span>
-
-                            <span class="text-label-sm text-on-surface-variant">
-                                Ward 28
-                            </span>
-
-                        </div>
-
-                        <h3 class="text-headline-sm font-headline-sm mt-space-md">
-                            Deep asphalt crater near Prem Nagar Market
-                        </h3>
-
-                        <p class="text-body-sm text-on-surface-variant mt-space-xs">
-                            6 citizen reports clustered in the same area.
-                        </p>
-
-                        <div class="flex items-center justify-between mt-space-lg pt-space-md border-t border-outline-variant">
-
-                            <span class="text-label-sm text-on-surface-variant">
-                                32 affected
-                            </span>
-
-                            <span class="text-label-sm text-secondary font-bold">
-                                Scheduled
-                            </span>
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- ISSUE CARD -->
-
-                    <div class="bg-surface-container-low border border-outline-variant p-space-lg">
-
-                        <div class="flex items-center justify-between">
-
-                            <span class="text-label-sm text-secondary font-bold uppercase">
-                                Streetlights
-                            </span>
-
-                            <span class="text-label-sm text-on-surface-variant">
-                                Ward 52
-                            </span>
-
-                        </div>
-
-                        <h3 class="text-headline-sm font-headline-sm mt-space-md">
-                            Multiple dark streetlights on 80ft Road
-                        </h3>
-
-                        <p class="text-body-sm text-on-surface-variant mt-space-xs">
-                            4 citizen reports clustered together.
-                        </p>
-
-                        <div class="flex items-center justify-between mt-space-lg pt-space-md border-t border-outline-variant">
-
-                            <span class="text-label-sm text-on-surface-variant">
-                                19 affected
-                            </span>
-
-                            <span class="text-label-sm text-secondary font-bold">
-                                Assigned
-                            </span>
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- ISSUE CARD -->
-
-                    <div class="bg-surface-container-low border border-outline-variant p-space-lg">
-
-                        <div class="flex items-center justify-between">
-
-                            <span class="text-label-sm text-secondary font-bold uppercase">
-                                Garbage
-                            </span>
-
-                            <span class="text-label-sm text-on-surface-variant">
-                                Ward 74
-                            </span>
-
-                        </div>
-
-                        <h3 class="text-headline-sm font-headline-sm mt-space-md">
-                            Overflowing secondary waste bin
-                        </h3>
-
-                        <p class="text-body-sm text-on-surface-variant mt-space-xs">
-                            5 citizen reports clustered around the crossing.
-                        </p>
-
-                        <div class="flex items-center justify-between mt-space-lg pt-space-md border-t border-outline-variant">
-
-                            <span class="text-label-sm text-on-surface-variant">
-                                27 affected
-                            </span>
-
-                            <span class="text-label-sm text-secondary font-bold">
-                                En route
-                            </span>
-
-                        </div>
-
-                    </div>
-
+                <div id="indexIssueCards" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-space-lg">
+                    <!-- populated dynamically -->
                 </div>
 
 
@@ -1021,44 +834,6 @@
 
                     </div>
 
-
-                    <div class="flex flex-wrap items-center gap-space-xs">
-
-                        <button class="px-space-md py-space-xs text-label-sm font-label-sm font-medium bg-primary text-on-primary border border-primary transition-colors">
-                            All Wards
-                        </button>
-
-                        <button class="px-space-md py-space-xs text-label-sm font-label-sm font-medium bg-surface text-on-surface border border-outline-variant hover:bg-surface-container transition-colors">
-                            Waterlogging
-                        </button>
-
-                        <button class="px-space-md py-space-xs text-label-sm font-label-sm font-medium bg-surface text-on-surface border border-outline-variant hover:bg-surface-container transition-colors">
-                            Potholes &amp; Roads
-                        </button>
-
-                        <button class="px-space-md py-space-xs text-label-sm font-label-sm font-medium bg-surface text-on-surface border border-outline-variant hover:bg-surface-container transition-colors">
-                            Streetlights
-                        </button>
-
-                        <button class="px-space-md py-space-xs text-label-sm font-label-sm font-medium bg-surface text-on-surface border border-outline-variant hover:bg-surface-container transition-colors">
-                            Garbage Hotspots
-                        </button>
-
-                        <a href="community.html"
-                            class="px-space-md py-space-xs text-label-sm font-label-sm font-medium text-secondary hover:underline inline-flex items-center gap-space-xxs ml-space-xs">
-
-                            <span>
-                                Full Map View
-                            </span>
-
-                            <span class="material-symbols-outlined text-sm">
-                                open_in_full
-                            </span>
-
-                        </a>
-
-                    </div>
-
                 </div>
 
 
@@ -1079,27 +854,17 @@
                                 </span>
 
                                 <span>
-                                    Bengaluru Civic Grid
+                                    Delhi Civic Grid
                                 </span>
 
                             </div>
 
-                            <div class="flex items-center gap-space-xs">
+                            <div id="mapClusterCount" class="flex items-center gap-space-xs">
 
                                 <span class="w-2 h-2 bg-secondary rounded-full"></span>
 
                                 <span>
-                                    30 active clusters
-                                </span>
-
-                            </div>
-
-                            <div class="flex items-center gap-space-xs">
-
-                                <span class="w-2 h-2 bg-primary rounded-full"></span>
-
-                                <span>
-                                    198 wards monitored
+                                    — active clusters
                                 </span>
 
                             </div>
@@ -1122,268 +887,7 @@
 
                     <!-- MAP AREA -->
 
-                    <div class="relative min-h-[500px] bg-[#edf3fb] overflow-hidden">
-
-                        <!-- MAP GRID -->
-
-                        <div class="absolute inset-0 opacity-40"
-                            style="background-image: linear-gradient(#c5d2e2 1px, transparent 1px), linear-gradient(90deg, #c5d2e2 1px, transparent 1px); background-size: 50px 50px;">
-                        </div>
-
-
-                        <!-- DECORATIVE ROADS -->
-
-                        <div class="absolute left-[8%] top-0 bottom-0 w-[2px] bg-white rotate-[12deg] origin-top"></div>
-
-                        <div class="absolute left-[28%] top-0 bottom-0 w-[3px] bg-white rotate-[-20deg] origin-top"></div>
-
-                        <div class="absolute left-[53%] top-0 bottom-0 w-[2px] bg-white rotate-[30deg] origin-top"></div>
-
-                        <div class="absolute left-[75%] top-0 bottom-0 w-[3px] bg-white rotate-[-15deg] origin-top"></div>
-
-                        <div class="absolute left-0 right-0 top-[30%] h-[3px] bg-white rotate-[8deg]"></div>
-
-                        <div class="absolute left-0 right-0 top-[65%] h-[2px] bg-white rotate-[-5deg]"></div>
-
-
-                        <!-- HOTSPOT 1 -->
-
-                        <div class="absolute left-[20%] top-[28%]">
-
-                            <div class="relative">
-
-                                <div class="absolute -inset-6 bg-secondary/10 rounded-full"></div>
-
-                                <div class="relative w-12 h-12 bg-secondary text-on-secondary rounded-full flex items-center justify-center shadow-lg border-4 border-white">
-
-                                    <span class="material-symbols-outlined">
-                                        water
-                                    </span>
-
-                                </div>
-
-                                <div class="absolute left-14 top-0 bg-surface border border-outline-variant p-space-sm shadow-md whitespace-nowrap">
-
-                                    <div class="text-label-sm font-bold">
-                                        Ward 14 • Rajpur Rd
-                                    </div>
-
-                                    <div class="text-body-sm text-secondary mt-1">
-                                        9 active reports
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-
-                        <!-- HOTSPOT 2 -->
-
-                        <div class="absolute left-[42%] top-[54%]">
-
-                            <div class="relative">
-
-                                <div class="absolute -inset-5 bg-secondary/10 rounded-full"></div>
-
-                                <div class="relative w-12 h-12 bg-secondary text-on-secondary rounded-full flex items-center justify-center shadow-lg border-4 border-white">
-
-                                    <span class="material-symbols-outlined">
-                                        construction
-                                    </span>
-
-                                </div>
-
-                                <div class="absolute left-14 top-0 bg-surface border border-outline-variant p-space-sm shadow-md whitespace-nowrap">
-
-                                    <div class="text-label-sm font-bold">
-                                        Ward 28 • Prem Nagar
-                                    </div>
-
-                                    <div class="text-body-sm text-secondary mt-1">
-                                        6 active reports
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-
-                        <!-- HOTSPOT 3 -->
-
-                        <div class="absolute left-[68%] top-[23%]">
-
-                            <div class="relative">
-
-                                <div class="absolute -inset-4 bg-secondary/10 rounded-full"></div>
-
-                                <div class="relative w-11 h-11 bg-secondary text-on-secondary rounded-full flex items-center justify-center shadow-lg border-4 border-white">
-
-                                    <span class="material-symbols-outlined">
-                                        lightbulb
-                                    </span>
-
-                                </div>
-
-                                <div class="absolute left-13 top-0 bg-surface border border-outline-variant p-space-sm shadow-md whitespace-nowrap">
-
-                                    <div class="text-label-sm font-bold">
-                                        Ward 52 • Patel Nagar
-                                    </div>
-
-                                    <div class="text-body-sm text-secondary mt-1">
-                                        4 active reports
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-
-                        <!-- HOTSPOT 4 -->
-
-                        <div class="absolute left-[72%] top-[65%]">
-
-                            <div class="relative">
-
-                                <div class="absolute -inset-4 bg-secondary/10 rounded-full"></div>
-
-                                <div class="relative w-11 h-11 bg-secondary text-on-secondary rounded-full flex items-center justify-center shadow-lg border-4 border-white">
-
-                                    <span class="material-symbols-outlined">
-                                        delete
-                                    </span>
-
-                                </div>
-
-                                <div class="absolute right-14 top-0 bg-surface border border-outline-variant p-space-sm shadow-md whitespace-nowrap">
-
-                                    <div class="text-label-sm font-bold">
-                                        Ward 74 • Indiranagar
-                                    </div>
-
-                                    <div class="text-body-sm text-secondary mt-1">
-                                        5 active reports
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-
-                        <!-- HOTSPOT 5 -->
-
-                        <div class="absolute left-[52%] top-[80%]">
-
-                            <div class="relative">
-
-                                <div class="w-10 h-10 bg-secondary text-on-secondary rounded-full flex items-center justify-center shadow-lg border-4 border-white">
-
-                                    <span class="material-symbols-outlined">
-                                        report_problem
-                                    </span>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-
-                        <!-- MAP LABELS -->
-
-                        <div class="absolute left-[10%] top-[45%] text-label-sm font-bold text-on-surface-variant opacity-60">
-                            CENTRAL ZONE
-                        </div>
-
-                        <div class="absolute left-[35%] top-[15%] text-label-sm font-bold text-on-surface-variant opacity-60">
-                            NORTH ZONE
-                        </div>
-
-                        <div class="absolute left-[61%] top-[45%] text-label-sm font-bold text-on-surface-variant opacity-60">
-                            EAST ZONE
-                        </div>
-
-                        <div class="absolute left-[32%] top-[85%] text-label-sm font-bold text-on-surface-variant opacity-60">
-                            SOUTH ZONE
-                        </div>
-
-
-                        <!-- MAP CONTROLS -->
-
-                        <div class="absolute right-space-md bottom-space-md flex flex-col gap-space-xs">
-
-                            <button class="w-10 h-10 bg-surface border border-outline-variant flex items-center justify-center hover:bg-surface-container shadow-sm">
-
-                                <span class="material-symbols-outlined">
-                                    add
-                                </span>
-
-                            </button>
-
-                            <button class="w-10 h-10 bg-surface border border-outline-variant flex items-center justify-center hover:bg-surface-container shadow-sm">
-
-                                <span class="material-symbols-outlined">
-                                    remove
-                                </span>
-
-                            </button>
-
-                        </div>
-
-
-                        <!-- MAP LEGEND -->
-
-                        <div class="absolute left-space-md bottom-space-md bg-surface border border-outline-variant p-space-md shadow-sm">
-
-                            <div class="text-label-sm font-bold mb-space-xs">
-                                Incident Density
-                            </div>
-
-                            <div class="flex items-center gap-space-sm">
-
-                                <div class="flex items-center gap-space-xxs">
-
-                                    <span class="w-3 h-3 bg-secondary/30 rounded-full"></span>
-
-                                    <span class="text-body-sm">
-                                        Low
-                                    </span>
-
-                                </div>
-
-                                <div class="flex items-center gap-space-xxs">
-
-                                    <span class="w-3 h-3 bg-secondary/60 rounded-full"></span>
-
-                                    <span class="text-body-sm">
-                                        Medium
-                                    </span>
-
-                                </div>
-
-                                <div class="flex items-center gap-space-xxs">
-
-                                    <span class="w-3 h-3 bg-secondary rounded-full"></span>
-
-                                    <span class="text-body-sm">
-                                        High
-                                    </span>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </div>
+                    <div id="indexHotspotsMap" style="height: 480px;" class="w-full"></div>
 
                 </div>
 
@@ -1633,6 +1137,157 @@
         </div>
 
     </footer>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <!-- Shared Geocoding and Map Logic -->
+    <script>
+        const API_URL = "http://127.0.0.1:8000";
+        const DELHI_CENTER = [28.6139, 77.2090];
+        const DELHI_VIEWBOX = "76.80,28.90,77.40,28.40";
+
+        const geocodeCache = JSON.parse(localStorage.getItem("delhiGeocodeCache") || "{}");
+
+        function saveGeocodeCache() {
+            localStorage.setItem("delhiGeocodeCache", JSON.stringify(geocodeCache));
+        }
+
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        async function geocodeLocation(locationText) {
+            if (!locationText) return null;
+            const key = locationText.trim().toLowerCase();
+
+            if (geocodeCache[key]) return geocodeCache[key];
+
+            const query = encodeURIComponent(`${locationText}, Delhi, India`);
+            const url = `https://nominatim.openstreetmap.org/search?q=${query}&format=json&limit=1&countrycodes=in&viewbox=${DELHI_VIEWBOX}&bounded=1`;
+
+            try {
+                const response = await fetch(url);
+                const results = await response.json();
+                if (results.length > 0) {
+                    const coords = [parseFloat(results[0].lat), parseFloat(results[0].lon)];
+                    geocodeCache[key] = coords;
+                    saveGeocodeCache();
+                    return coords;
+                }
+            } catch (error) {
+                console.error("Geocoding failed for:", locationText, error);
+            }
+            return null;
+        }
+
+        const PRIORITY_COLOR = { high: "#dc2626", medium: "#f59e0b", low: "#6b7280" };
+
+        async function renderClustersOnMap(mapInstance, clusters, maxMarkers = 15) {
+            mapInstance.eachLayer(layer => {
+                if (layer instanceof L.CircleMarker) mapInstance.removeLayer(layer);
+            });
+
+            for (const cluster of clusters.slice(0, maxMarkers)) {
+                let coords = null;
+                for (const loc of cluster.locations) {
+                    coords = await geocodeLocation(loc);
+                    if (coords) break;
+                    await sleep(1100);
+                }
+
+                if (!coords) {
+                    coords = [
+                        DELHI_CENTER[0] + (Math.random() - 0.5) * 0.1,
+                        DELHI_CENTER[1] + (Math.random() - 0.5) * 0.1,
+                    ];
+                }
+
+                const color = PRIORITY_COLOR[cluster.priority.level] || "#6b7280";
+                const categoryLabel = (cluster.category || "Issue").replace(/_/g, " ");
+
+                L.circleMarker(coords, {
+                    radius: 8 + Math.min(cluster.size, 10),
+                    fillColor: color,
+                    color: color,
+                    fillOpacity: 0.6,
+                    weight: 2,
+                })
+                .bindPopup(`<strong>${categoryLabel}</strong><br>${cluster.size} reports · Priority: ${cluster.priority.level}<br>${cluster.locations[0] || ""}`)
+                .addTo(mapInstance);
+
+                await sleep(1100);
+            }
+        }
+
+        function statusFromPriority(level) {
+            if (level === "high") return "Active";
+            if (level === "medium") return "Assigned";
+            return "Monitoring";
+        }
+
+        function buildMiniCard(cluster) {
+            const categoryLabel = (cluster.category || "Issue").replace(/_/g, " ");
+            const location = cluster.locations[0] || "Multiple areas";
+            return `
+                <div class="bg-surface-container-low border border-outline-variant p-space-lg">
+                    <div class="flex items-center justify-between">
+                        <span class="text-label-sm text-secondary font-bold uppercase">${categoryLabel}</span>
+                        <span class="text-label-sm text-on-surface-variant">Cluster #${cluster.cluster_id}</span>
+                    </div>
+                    <h3 class="text-headline-sm font-headline-sm mt-space-md capitalize">${categoryLabel} near ${location}</h3>
+                    <p class="text-body-sm text-on-surface-variant mt-space-xs">${cluster.size} citizen reports clustered in this area.</p>
+                    <div class="flex items-center justify-between mt-space-lg pt-space-md border-t border-outline-variant">
+                        <span class="text-label-sm text-on-surface-variant">Severity ${cluster.priority.avg_severity}/5</span>
+                        <span class="text-label-sm text-secondary font-bold">${statusFromPriority(cluster.priority.level)}</span>
+                    </div>
+                </div>
+            `;
+        }
+
+        async function initHomepage() {
+            try {
+                const [dashboardRes, clustersRes] = await Promise.all([
+                    fetch(`${API_URL}/dashboard`),
+                    fetch(`${API_URL}/clusters`)
+                ]);
+                const dashboard = await dashboardRes.json();
+                const { clusters } = await clustersRes.json();
+
+                const uniqueAreas = new Set(clusters.flatMap(c => c.locations));
+                document.getElementById("statTotalReports").textContent = dashboard.total_complaints + "+";
+                document.getElementById("statActiveClusters").textContent = clusters.length;
+                document.getElementById("statAreasCovered").textContent = uniqueAreas.size;
+
+                const cardsContainer = document.getElementById("indexIssueCards");
+                const topClusters = [...clusters].sort((a, b) => b.size - a.size).slice(0, 4);
+                cardsContainer.innerHTML = topClusters.length ? topClusters.map(buildMiniCard).join("") : `<p class="text-body-sm text-on-surface-variant">No clusters yet — be the first to report an issue.</p>`;
+
+                const heroPulse = document.getElementById("heroLivePulse");
+                if (heroPulse) {
+                    heroPulse.innerHTML = topClusters.slice(0, 3).map(c => `
+                        <div class="border-l-4 border-secondary pl-space-md">
+                            <div class="text-headline-sm font-headline-sm capitalize">${(c.category || "Issue").replace(/_/g, " ")}</div>
+                            <div class="text-body-sm text-on-surface-variant mt-space-xxs">${c.size} reports · ${c.locations[0] || "Delhi"}</div>
+                        </div>
+                    `).join("");
+                }
+
+                document.getElementById("mapClusterCount").innerHTML = `<span class="w-2 h-2 bg-secondary rounded-full"></span> ${clusters.length} active clusters`;
+
+                const map = L.map("indexHotspotsMap").setView(DELHI_CENTER, 11);
+                L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+                    attribution: "&copy; OpenStreetMap contributors",
+                }).addTo(map);
+
+                await renderClustersOnMap(map, clusters, 8);
+            } catch (error) {
+                console.error("Homepage data load failed:", error);
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", initHomepage);
+    </script>
 
 </body>
 

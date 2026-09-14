@@ -20,6 +20,9 @@
     rel="stylesheet"
   >
 
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 
@@ -184,13 +187,13 @@
         <span class="inline-block w-2 h-2 rounded-full bg-secondary -ml-3"></span>
 
         <span class="font-bold text-surface">
-          Civic Pulse Bengaluru
+          Civic Pulse Delhi
         </span>
 
         <span class="text-outline-variant">•</span>
 
-        <span class="text-surface-dim">
-          248 verified reports active across 198 wards
+        <span id="topBarStats" class="text-surface-dim">
+          Loading live reports...
         </span>
 
         <span class="hidden sm:inline text-outline-variant">•</span>
@@ -320,8 +323,9 @@
             </span>
 
             <input
+              id="citySearchInput"
               class="w-full pl-10 pr-4 py-2.5 bg-surface border border-outline-variant text-body-md font-body-md text-on-surface placeholder:text-outline focus:outline-none focus:ring-1 focus:ring-primary rounded-none"
-              placeholder="Search neighborhood, ward or issue..."
+              placeholder="Search area or issue (Delhi)..."
               type="text"
             >
 
@@ -330,15 +334,11 @@
           <div class="md:col-span-3">
 
             <select
+              id="areaFilter"
               class="w-full py-2.5 px-3 bg-surface border border-outline-variant text-body-md font-body-md text-on-surface focus:outline-none focus:ring-1 focus:ring-primary rounded-none"
-              title="Select a ward"
+              title="Filter by area"
             >
-              <option>All Wards (198 Wards)</option>
-              <option>Ward 14 - Rajpur Road</option>
-              <option>Ward 28 - Prem Nagar</option>
-              <option>Ward 52 - Patel Nagar</option>
-              <option>Ward 74 - Indiranagar</option>
-              <option>Ward 112 - Koramangala</option>
+              <option value="">All Areas (Delhi)</option>
             </select>
 
           </div>
@@ -346,12 +346,12 @@
           <div class="md:col-span-3">
 
             <select
+              id="sortFilter"
               class="w-full py-2.5 px-3 bg-surface border border-outline-variant text-body-md font-body-md text-on-surface focus:outline-none focus:ring-1 focus:ring-primary rounded-none"
               title="Sort reports by"
             >
-              <option>Most Connected Reports</option>
-              <option>Most Recent</option>
-              <option>Highest Upvotes</option>
+              <option value="reports">Most Reports</option>
+              <option value="priority">Highest Priority</option>
             </select>
 
           </div>
@@ -378,16 +378,16 @@
           </span>
 
           <span class="text-body-md text-on-surface-variant">
-            Severe waterlogging reported along Rajpur Road (9 reports clustered)
+            Loading trending issue...
           </span>
 
         </div>
 
         <a
           class="text-label-md font-semibold text-secondary hover:underline flex items-center gap-1 shrink-0"
-          href="#hotspots-map"
+          href="#community"
         >
-          View Ward 14 Details
+          View Community Issues
 
           <span class="material-symbols-outlined text-[16px]">
             arrow_forward
@@ -399,579 +399,12 @@
     </section>
 
     <!-- LIVE HOTSPOT MAP -->
-    <section
-      id="hotspots-map"
-      class="bg-surface-container-lowest border border-outline-variant overflow-hidden"
-    >
-
-      <!-- Map Header -->
-      <div class="p-space-md border-b border-outline-variant bg-surface flex flex-wrap items-center justify-between gap-3">
-
-        <div>
-
-          <div class="flex items-center gap-2">
-
-            <span class="material-symbols-outlined text-secondary text-[22px]">
-              map
-            </span>
-
-            <h2 class="font-headline-sm text-headline-sm font-bold text-on-surface">
-              Bengaluru Ward Activity &amp; Live Hotspot Map
-            </h2>
-
-            <span class="px-2 py-0.5 bg-secondary-fixed text-on-secondary-fixed text-label-sm font-bold">
-              Live Ward Grid
-            </span>
-
-          </div>
-
-          <p class="text-body-sm text-outline mt-0.5">
-            Visual density of verified citizen tickets across 198 wards with active dispatch teams
-          </p>
-
-        </div>
-
-        <div class="flex items-center gap-2">
-
-          <div class="inline-flex border border-outline-variant bg-surface-container-lowest">
-
-            <button
-              type="button"
-              class="px-3 py-1.5 text-label-sm font-bold bg-primary text-on-primary flex items-center gap-1"
-            >
-              <span class="material-symbols-outlined text-[16px]">
-                map
-              </span>
-              Map &amp; Cards
-            </button>
-
-            <button
-              type="button"
-              class="px-3 py-1.5 text-label-sm font-bold text-on-surface-variant hover:text-primary flex items-center gap-1"
-            >
-              <span class="material-symbols-outlined text-[16px]">
-                splitscreen
-              </span>
-              Split View
-            </button>
-
-          </div>
-
-          <button
-            type="button"
-            class="border border-outline-variant bg-surface px-3 py-1.5 font-label-sm text-on-surface flex items-center gap-1 hover:bg-surface-container"
-          >
-            <span class="material-symbols-outlined text-[16px]">
-              my_location
-            </span>
-            Recenter
-          </button>
-
-        </div>
-
-      </div>
-
-      <!-- Map Layers -->
-      <div class="px-space-md py-2 bg-surface-container-low border-b border-outline-variant/60 flex flex-wrap items-center justify-between gap-2 text-label-sm">
-
-        <div class="flex flex-wrap items-center gap-1.5">
-
-          <span class="text-outline font-medium mr-1 flex items-center gap-1">
-
-            <span class="material-symbols-outlined text-[15px]">
-              filter_list
-            </span>
-
-            Layers:
-          </span>
-
-          <button
-            type="button"
-            class="px-2.5 py-1 bg-primary text-on-primary font-bold text-label-sm"
-          >
-            All Layers
-          </button>
-
-          <button
-            type="button"
-            class="px-2.5 py-1 bg-surface border border-outline-variant text-on-surface font-medium hover:border-primary text-label-sm"
-          >
-            Drainage (42)
-          </button>
-
-          <button
-            type="button"
-            class="px-2.5 py-1 bg-surface border border-outline-variant text-on-surface font-medium hover:border-primary text-label-sm"
-          >
-            Solid Waste (38)
-          </button>
-
-          <button
-            type="button"
-            class="px-2.5 py-1 bg-surface border border-outline-variant text-on-surface font-medium hover:border-primary text-label-sm"
-          >
-            Roads (51)
-          </button>
-
-          <button
-            type="button"
-            class="px-2.5 py-1 bg-secondary-fixed text-on-secondary-fixed font-bold text-label-sm"
-          >
-            Critical Hotspots (12)
-          </button>
-
-        </div>
-
-        <div class="flex items-center gap-2">
-
-          <span class="material-symbols-outlined text-secondary text-[16px]">
-            local_fire_department
-          </span>
-
-          <span class="text-on-surface font-medium">
-            Live Heatmap:
-          </span>
-
-          <span class="px-2 py-0.5 bg-surface text-secondary border border-secondary font-bold text-[10px] uppercase">
-            ON
-          </span>
-
-        </div>
-
-      </div>
-
-      <!-- Map -->
-      <div class="relative bg-[#edf2f8] h-96 w-full overflow-hidden select-none">
-
-        <svg
-          class="w-full h-full object-cover"
-          preserveAspectRatio="none"
-          viewBox="0 0 1000 480"
-        >
-
-          <defs>
-
-            <pattern
-              height="40"
-              id="cityGrid"
-              patternUnits="userSpaceOnUse"
-              width="40"
-            >
-              <path
-                d="M 40 0 L 0 0 0 40"
-                fill="none"
-                stroke="#d8e2ee"
-                stroke-width="1"
-              ></path>
-            </pattern>
-
-            <pattern
-              height="120"
-              id="wardZones"
-              patternUnits="userSpaceOnUse"
-              width="120"
-            >
-              <path
-                d="M 120 0 L 0 0 0 120"
-                fill="none"
-                stroke="#cad6e4"
-                stroke-dasharray="3,3"
-                stroke-width="1.5"
-              ></path>
-            </pattern>
-
-          </defs>
-
-          <rect
-            fill="#eff4fa"
-            height="100%"
-            width="100%"
-          ></rect>
-
-          <rect
-            fill="url(#cityGrid)"
-            height="100%"
-            width="100%"
-          ></rect>
-
-          <rect
-            fill="url(#wardZones)"
-            height="100%"
-            width="100%"
-          ></rect>
-
-          <path
-            d="M-20,120 Q240,160 480,110 T1020,180"
-            fill="none"
-            stroke="#c2d5ec"
-            stroke-width="12"
-          ></path>
-
-          <path
-            d="M220,-20 Q300,220 380,500"
-            fill="none"
-            stroke="#ffffff"
-            stroke-width="8"
-          ></path>
-
-          <path
-            d="M-20,280 Q320,240 680,310 T1040,260"
-            fill="none"
-            stroke="#ffffff"
-            stroke-width="10"
-          ></path>
-
-          <path
-            d="M620,-20 Q660,180 780,500"
-            fill="none"
-            stroke="#ffffff"
-            stroke-width="7"
-          ></path>
-
-          <path
-            d="M140,240 Q400,380 840,360"
-            fill="none"
-            stroke="#d3e1f0"
-            stroke-width="6"
-          ></path>
-
-          <polygon
-            fill="#dce9ff"
-            opacity="0.6"
-            points="180,60 360,70 340,210 160,190"
-          ></polygon>
-
-          <polygon
-            fill="#fed7cc"
-            opacity="0.55"
-            points="400,120 590,90 560,260 380,240"
-          ></polygon>
-
-          <polygon
-            fill="#e5eeff"
-            opacity="0.65"
-            points="600,80 840,110 810,290 580,250"
-          ></polygon>
-
-          <polygon
-            fill="#dce9ff"
-            opacity="0.5"
-            points="280,260 520,250 500,440 250,420"
-          ></polygon>
-
-          <circle
-            cx="480"
-            cy="180"
-            fill="#fe7952"
-            opacity="0.22"
-            r="70"
-          ></circle>
-
-          <circle
-            cx="480"
-            cy="180"
-            fill="#fe7952"
-            opacity="0.35"
-            r="40"
-          ></circle>
-
-          <circle
-            cx="260"
-            cy="270"
-            fill="#fe7952"
-            opacity="0.2"
-            r="45"
-          ></circle>
-
-          <circle
-            cx="710"
-            cy="220"
-            fill="#fe7952"
-            opacity="0.25"
-            r="55"
-          ></circle>
-
-          <text
-            fill="#76777c"
-            font-family="Space Grotesk"
-            font-size="11"
-            font-weight="700"
-            letter-spacing="1.5"
-            x="190"
-            y="110"
-          >
-            WARD 14 • RAJPUR RD
-          </text>
-
-          <text
-            fill="#76777c"
-            font-family="Space Grotesk"
-            font-size="11"
-            font-weight="700"
-            letter-spacing="1.5"
-            x="410"
-            y="145"
-          >
-            WARD 28 • PREM NAGAR
-          </text>
-
-          <text
-            fill="#76777c"
-            font-family="Space Grotesk"
-            font-size="11"
-            font-weight="700"
-            letter-spacing="1.5"
-            x="640"
-            y="160"
-          >
-            WARD 74 • INDIRANAGAR
-          </text>
-
-          <text
-            fill="#76777c"
-            font-family="Space Grotesk"
-            font-size="11"
-            font-weight="700"
-            letter-spacing="1.5"
-            x="330"
-            y="370"
-          >
-            WARD 52 • PATEL NAGAR
-          </text>
-
-          <text
-            fill="#76777c"
-            font-family="Space Grotesk"
-            font-size="11"
-            font-weight="700"
-            letter-spacing="1.5"
-            x="700"
-            y="340"
-          >
-            WARD 112 • KORAMANGALA
-          </text>
-
-        </svg>
-
-        <!-- Rajpur Road Marker -->
-        <div class="absolute left-[24%] top-[34%] -translate-x-1/2 -translate-y-1/2 cursor-pointer">
-
-          <div class="relative flex items-center justify-center">
-
-            <span class="absolute inline-flex h-8 w-8 rounded-full bg-secondary opacity-40 animate-ping"></span>
-
-            <div class="relative flex items-center gap-1 bg-secondary text-on-secondary px-2.5 py-1 shadow-none border border-surface">
-
-              <span class="material-symbols-outlined text-[14px]">
-                water_damage
-              </span>
-
-              <span class="font-bold text-label-sm">
-                Rajpur Rd • 9
-              </span>
-
-            </div>
-
-          </div>
-
-        </div>
-
-        <!-- Prem Nagar Marker -->
-        <div class="absolute left-[48%] top-[36%] -translate-x-1/2 -translate-y-1/2 z-20">
-
-          <div class="relative flex flex-col items-center">
-
-            <div class="flex items-center gap-1.5 bg-primary text-on-primary px-3 py-1.5 border-2 border-secondary shadow-none">
-
-              <span class="w-2.5 h-2.5 rounded-full bg-secondary animate-ping"></span>
-
-              <span class="material-symbols-outlined text-[15px] text-secondary-container">
-                warning
-              </span>
-
-              <span class="font-bold text-label-sm">
-                Prem Nagar Crater • 6
-              </span>
-
-            </div>
-
-            <div class="w-2.5 h-2.5 bg-primary rotate-45 -mt-1.5 border-r-2 border-b-2 border-secondary"></div>
-
-          </div>
-
-        </div>
-
-        <!-- Indiranagar Marker -->
-        <div class="absolute left-[70%] top-[42%] -translate-x-1/2 -translate-y-1/2 cursor-pointer">
-
-          <div class="flex items-center gap-1 bg-surface-container-highest text-on-surface px-2.5 py-1 border border-outline-variant">
-
-            <span class="material-symbols-outlined text-secondary text-[14px]">
-              delete
-            </span>
-
-            <span class="font-bold text-label-sm">
-              Indiranagar • 5
-            </span>
-
-          </div>
-
-        </div>
-
-        <!-- Patel Nagar Marker -->
-        <div class="absolute left-[34%] top-[72%] -translate-x-1/2 -translate-y-1/2 cursor-pointer">
-
-          <div class="flex items-center gap-1 bg-surface-container-highest text-on-surface px-2.5 py-1 border border-outline-variant">
-
-            <span class="material-symbols-outlined text-[14px]">
-              light
-            </span>
-
-            <span class="font-bold text-label-sm">
-              Patel Nagar • 4
-            </span>
-
-          </div>
-
-        </div>
-
-        <!-- Koramangala Marker -->
-        <div class="absolute left-[72%] top-[68%] -translate-x-1/2 -translate-y-1/2 cursor-pointer">
-
-          <div class="flex items-center gap-1 bg-surface-container-highest text-on-surface px-2.5 py-1 border border-outline-variant">
-
-            <span class="material-symbols-outlined text-[14px]">
-              recycling
-            </span>
-
-            <span class="font-bold text-label-sm">
-              Koramangala • 7
-            </span>
-
-          </div>
-
-        </div>
-
-        <!-- Active Cluster Focus -->
-        <div class="absolute top-4 left-4 z-10 max-w-xs bg-surface-container-lowest border-2 border-primary p-3 space-y-2">
-
-          <div class="flex items-center justify-between border-b border-outline-variant/40 pb-1">
-
-            <div class="flex items-center gap-1.5">
-
-              <span class="w-2 h-2 rounded-full bg-secondary"></span>
-
-              <span class="font-bold text-label-sm text-on-surface uppercase tracking-wider">
-                Active Cluster Focus
-              </span>
-
-            </div>
-
-            <span class="px-1.5 py-0.2 bg-error-container text-on-error-container text-[10px] font-bold">
-              Urgent
-            </span>
-
-          </div>
-
-          <div>
-
-            <h4 class="font-headline-sm text-body-md font-bold text-on-surface">
-              Prem Nagar Main Road Crater
-            </h4>
-
-            <p class="text-body-sm text-outline">
-              Ward 28 • Opposite State Bank
-            </p>
-
-            <p class="text-body-sm text-on-surface-variant mt-1">
-              6 citizen reports clustered. Sharp pothole causing severe 2-wheeler skidding risk.
-            </p>
-
-          </div>
-
-          <div class="flex items-center justify-between pt-1">
-
-            <span class="text-body-sm font-bold text-secondary">
-              32 Citizens Affected
-            </span>
-
-            <a
-              href="#community"
-              class="bg-primary text-on-primary px-2.5 py-1 text-label-sm font-semibold flex items-center gap-1 hover:bg-secondary"
-            >
-              Jump to issue
-
-              <span class="material-symbols-outlined text-[13px]">
-                south
-              </span>
-            </a>
-
-          </div>
-
-        </div>
-
-        <!-- Zoom Controls -->
-        <div class="absolute top-4 right-4 flex flex-col border border-outline-variant bg-surface-container-lowest z-10">
-
-          <button
-            type="button"
-            class="w-8 h-8 flex items-center justify-center font-bold text-lg text-on-surface hover:bg-surface-container border-b border-outline-variant"
-            title="Zoom in"
-          >
-            +
-          </button>
-
-          <button
-            type="button"
-            class="w-8 h-8 flex items-center justify-center font-bold text-lg text-on-surface hover:bg-surface-container"
-            title="Zoom out"
-          >
-            −
-          </button>
-
-        </div>
-
-        <!-- Map Legend -->
-        <div class="absolute bottom-3 right-4 bg-surface-container-lowest/95 border border-outline-variant p-2 z-10 flex items-center gap-4 text-body-sm">
-
-          <span class="font-bold text-on-surface text-label-sm">
-            Incident Density:
-          </span>
-
-          <div class="flex items-center gap-1.5">
-
-            <span class="w-3 h-3 bg-secondary inline-block"></span>
-
-            <span class="text-outline text-body-sm">
-              High (8+)
-            </span>
-
-          </div>
-
-          <div class="flex items-center gap-1.5">
-
-            <span class="w-3 h-3 bg-secondary-container inline-block"></span>
-
-            <span class="text-outline text-body-sm">
-              Moderate (4-7)
-            </span>
-
-          </div>
-
-          <div class="flex items-center gap-1.5">
-
-            <span class="w-3 h-3 bg-surface-container-highest inline-block border border-outline-variant"></span>
-
-            <span class="text-outline text-body-sm">
-              Queued / Monitored
-            </span>
-
-          </div>
-
-        </div>
-
-      </div>
-
+    <section class="bg-surface-container-lowest border border-outline-variant p-space-md">
+      <h2 class="font-headline-sm text-headline-sm font-bold text-on-surface mb-3 flex items-center gap-2">
+        <span class="material-symbols-outlined text-secondary text-[22px]">map</span>
+        Delhi Civic Hotspot Map
+      </h2>
+      <div id="hotspotsMap" style="height: 420px;" class="border border-outline-variant"></div>
     </section>
 
     <!-- MAIN CONTENT GRID -->
@@ -992,7 +425,7 @@
             </h2>
 
             <span class="px-2 py-0.5 bg-secondary-fixed text-on-secondary-fixed text-label-sm font-bold">
-              4 Urgent
+              Live Delhi Triage
             </span>
 
           </div>
@@ -1012,432 +445,8 @@
         </div>
 
         <!-- DYNAMIC COMMUNITY ISSUES CONTAINER -->
-        <div id="communityIssuesList">
-
-          <!-- ISSUE 1 -->
-          <article class="bg-surface-container-lowest border border-outline-variant p-space-lg space-y-4 hover:border-outline transition-none">
-
-            <div class="flex flex-wrap items-center justify-between gap-2">
-
-              <div class="flex items-center gap-2">
-
-                <span class="px-2.5 py-0.5 bg-error-container text-on-error-container font-label-sm font-bold">
-                  High Activity • 9 Reports
-                </span>
-
-                <span class="text-label-sm text-outline">
-                  Drainage &amp; Waterlogging
-                </span>
-
-              </div>
-
-              <span class="text-body-sm text-outline flex items-center gap-1">
-
-                <span class="material-symbols-outlined text-[14px]">
-                  schedule
-                </span>
-
-                14h ago
-              </span>
-
-            </div>
-
-            <div>
-
-              <h3 class="text-headline-sm font-headline-sm font-bold text-on-surface leading-snug">
-                Severe Waterlogging on Rajpur Road near Canal Crossing
-              </h3>
-
-              <p class="text-body-sm text-outline flex items-center gap-1 mt-1">
-
-                <span class="material-symbols-outlined text-[16px] text-secondary">
-                  pin_drop
-                </span>
-
-                Rajpur Road, Ward 14 (Near Old Bridge Junction)
-              </p>
-
-            </div>
-
-            <p class="text-body-md text-on-surface-variant leading-relaxed">
-              Multiple citizens reported 1.5-foot stagnant water after recent evening showers blocking scooter commute and pedestrians. Silt accumulation near culvert #4.
-            </p>
-
-            <div class="flex items-center gap-2 text-label-sm text-on-surface">
-
-              <span class="w-2 h-2 rounded-full bg-secondary shrink-0"></span>
-
-              <span>
-                <strong>Status:</strong>
-                Jetting vehicle dispatched by Ward 14 Assistant Engineer
-              </span>
-
-            </div>
-
-            <div class="pt-3 flex flex-wrap items-center justify-between gap-3 border-t border-outline-variant/30">
-
-              <button
-                type="button"
-                class="bg-secondary text-on-secondary px-4 py-2 font-label-md font-semibold flex items-center gap-2 rounded-none hover:bg-secondary/90"
-              >
-                <span class="material-symbols-outlined text-[16px]">
-                  arrow_upward
-                </span>
-
-                <span>
-                  48 Affected (Upvote)
-                </span>
-              </button>
-
-              <div class="flex items-center gap-2">
-
-                <button
-                  type="button"
-                  class="border border-outline-variant bg-surface px-4 py-2 font-label-md text-on-surface flex items-center gap-1.5 rounded-none hover:bg-surface-container"
-                >
-                  <span class="material-symbols-outlined text-[16px]">
-                    forum
-                  </span>
-
-                  <span>
-                    Discussion &amp; Photos (4)
-                  </span>
-                </button>
-
-                <button
-                  type="button"
-                  class="border border-outline-variant bg-surface p-2 text-on-surface rounded-none hover:bg-surface-container"
-                  title="Share"
-                >
-                  <span class="material-symbols-outlined text-[18px]">
-                    share
-                  </span>
-                </button>
-
-              </div>
-
-            </div>
-
-          </article>
-
-          <!-- ISSUE 2 -->
-          <article class="bg-surface-container-lowest border border-outline-variant p-space-lg space-y-4 hover:border-outline transition-none">
-
-            <div class="flex flex-wrap items-center justify-between gap-2">
-
-              <div class="flex items-center gap-2">
-
-                <span class="px-2.5 py-0.5 bg-secondary-fixed text-on-secondary-fixed font-label-sm font-bold">
-                  Active • 6 Reports
-                </span>
-
-                <span class="text-label-sm text-outline">
-                  Roads &amp; Potholes
-                </span>
-
-              </div>
-
-              <span class="text-body-sm text-outline flex items-center gap-1">
-
-                <span class="material-symbols-outlined text-[14px]">
-                  schedule
-                </span>
-
-                Yesterday
-              </span>
-
-            </div>
-
-            <div>
-
-              <h3 class="text-headline-sm font-headline-sm font-bold text-on-surface leading-snug">
-                Deep asphalt crater &amp; caved-in road near Prem Nagar Market Gate
-              </h3>
-
-              <p class="text-body-sm text-outline flex items-center gap-1 mt-1">
-
-                <span class="material-symbols-outlined text-[16px] text-secondary">
-                  pin_drop
-                </span>
-
-                Prem Nagar Main Road, Ward 28 (Opposite State Bank)
-              </p>
-
-            </div>
-
-            <p class="text-body-md text-on-surface-variant leading-relaxed">
-              Sharp edge potholes causing severe 2-wheeler traffic slowdown during morning office peak hours. Multiple residents reported rim damage and skidding risks.
-            </p>
-
-            <div class="flex items-center gap-2 text-label-sm text-on-surface">
-
-              <span class="w-2 h-2 rounded-full bg-secondary shrink-0"></span>
-
-              <span>
-                <strong>Status:</strong>
-                Material patch work scheduled by Ward Crew for tomorrow morning
-              </span>
-
-            </div>
-
-            <div class="pt-3 flex flex-wrap items-center justify-between gap-3 border-t border-outline-variant/30">
-
-              <button
-                type="button"
-                class="bg-secondary text-on-secondary px-4 py-2 font-label-md font-semibold flex items-center gap-2 rounded-none hover:bg-secondary/90"
-              >
-                <span class="material-symbols-outlined text-[16px]">
-                  arrow_upward
-                </span>
-
-                <span>
-                  32 Affected (Upvote)
-                </span>
-              </button>
-
-              <div class="flex items-center gap-2">
-
-                <a
-                  href="#hotspots-map"
-                  class="border border-outline-variant bg-surface px-4 py-2 font-label-md text-on-surface flex items-center gap-1.5 rounded-none hover:bg-surface-container"
-                >
-                  <span class="material-symbols-outlined text-[16px]">
-                    map
-                  </span>
-
-                  <span>
-                    View Map &amp; Updates
-                  </span>
-                </a>
-
-                <button
-                  type="button"
-                  class="border border-outline-variant bg-surface p-2 text-on-surface rounded-none hover:bg-surface-container"
-                  title="Share"
-                >
-                  <span class="material-symbols-outlined text-[18px]">
-                    share
-                  </span>
-                </button>
-
-              </div>
-
-            </div>
-
-          </article>
-
-          <!-- ISSUE 3 -->
-          <article class="bg-surface-container-lowest border border-outline-variant p-space-lg space-y-4 hover:border-outline transition-none">
-
-            <div class="flex flex-wrap items-center justify-between gap-2">
-
-              <div class="flex items-center gap-2">
-
-                <span class="px-2.5 py-0.5 bg-surface-container text-on-surface font-label-sm font-bold">
-                  4 Reports
-                </span>
-
-                <span class="text-label-sm text-outline">
-                  Street Lighting &amp; Electrical
-                </span>
-
-              </div>
-
-              <span class="text-body-sm text-outline flex items-center gap-1">
-
-                <span class="material-symbols-outlined text-[14px]">
-                  schedule
-                </span>
-
-                2 days ago
-              </span>
-
-            </div>
-
-            <div>
-
-              <h3 class="text-headline-sm font-headline-sm font-bold text-on-surface leading-snug">
-                Multiple consecutive dark streetlights along Patel Nagar 80ft Road
-              </h3>
-
-              <p class="text-body-sm text-outline flex items-center gap-1 mt-1">
-
-                <span class="material-symbols-outlined text-[16px] text-secondary">
-                  pin_drop
-                </span>
-
-                Patel Nagar, Sector 4, Ward 52
-              </p>
-
-            </div>
-
-            <p class="text-body-md text-on-surface-variant leading-relaxed">
-              Stretch of 5 sodium lights non-operational creating safety hazard for evening walkers and commuters. Feed wire break suspected near Pole #18.
-            </p>
-
-            <div class="flex items-center gap-2 text-label-sm text-on-surface">
-
-              <span class="w-2 h-2 rounded-full bg-secondary shrink-0"></span>
-
-              <span>
-                <strong>Status:</strong>
-                Lineman assigned • Bulb replacement queued on Work Order #8821
-              </span>
-
-            </div>
-
-            <div class="pt-3 flex flex-wrap items-center justify-between gap-3 border-t border-outline-variant/30">
-
-              <button
-                type="button"
-                class="bg-secondary text-on-secondary px-4 py-2 font-label-md font-semibold flex items-center gap-2 rounded-none hover:bg-secondary/90"
-              >
-                <span class="material-symbols-outlined text-[16px]">
-                  arrow_upward
-                </span>
-
-                <span>
-                  19 Affected (Upvote)
-                </span>
-              </button>
-
-              <div class="flex items-center gap-2">
-
-                <button
-                  type="button"
-                  class="border border-outline-variant bg-surface px-4 py-2 font-label-md text-on-surface flex items-center gap-1.5 rounded-none hover:bg-surface-container"
-                >
-                  <span class="material-symbols-outlined text-[16px]">
-                    visibility
-                  </span>
-
-                  <span>
-                    View Details
-                  </span>
-                </button>
-
-                <button
-                  type="button"
-                  class="border border-outline-variant bg-surface p-2 text-on-surface rounded-none hover:bg-surface-container"
-                  title="Share"
-                >
-                  <span class="material-symbols-outlined text-[18px]">
-                    share
-                  </span>
-                </button>
-
-              </div>
-
-            </div>
-
-          </article>
-
-          <!-- ISSUE 4 -->
-          <article class="bg-surface-container-lowest border border-outline-variant p-space-lg space-y-4 hover:border-outline transition-none">
-
-            <div class="flex flex-wrap items-center justify-between gap-2">
-
-              <div class="flex items-center gap-2">
-
-                <span class="px-2.5 py-0.5 bg-surface-container text-on-surface font-label-sm font-bold">
-                  5 Reports
-                </span>
-
-                <span class="text-label-sm text-outline">
-                  Solid Waste Management
-                </span>
-
-              </div>
-
-              <span class="text-body-sm text-outline flex items-center gap-1">
-
-                <span class="material-symbols-outlined text-[14px]">
-                  schedule
-                </span>
-
-                1 day ago
-              </span>
-
-            </div>
-
-            <div>
-
-              <h3 class="text-headline-sm font-headline-sm font-bold text-on-surface leading-snug">
-                Overflowing secondary waste bin at Indiranagar 12th Main cross
-              </h3>
-
-              <p class="text-body-sm text-outline flex items-center gap-1 mt-1">
-
-                <span class="material-symbols-outlined text-[16px] text-secondary">
-                  pin_drop
-                </span>
-
-                Indiranagar 2nd Stage, Ward 74
-              </p>
-
-            </div>
-
-            <p class="text-body-md text-on-surface-variant leading-relaxed">
-              Bins cleared irregularly for 48 hours, creating pedestrian blockage and health concerns for nearby residential apartments.
-            </p>
-
-            <div class="flex items-center gap-2 text-label-sm text-on-surface">
-
-              <span class="w-2 h-2 rounded-full bg-secondary shrink-0"></span>
-
-              <span>
-                <strong>Status:</strong>
-                Sanitation compactor en route • Assigned to morning beat #4
-              </span>
-
-            </div>
-
-            <div class="pt-3 flex flex-wrap items-center justify-between gap-3 border-t border-outline-variant/30">
-
-              <button
-                type="button"
-                class="bg-secondary text-on-secondary px-4 py-2 font-label-md font-semibold flex items-center gap-2 rounded-none hover:bg-secondary/90"
-              >
-                <span class="material-symbols-outlined text-[16px]">
-                  arrow_upward
-                </span>
-
-                <span>
-                  27 Affected (Upvote)
-                </span>
-              </button>
-
-              <div class="flex items-center gap-2">
-
-                <button
-                  type="button"
-                  class="border border-outline-variant bg-surface px-4 py-2 font-label-md text-on-surface flex items-center gap-1.5 rounded-none hover:bg-surface-container"
-                >
-                  <span class="material-symbols-outlined text-[16px]">
-                    visibility
-                  </span>
-
-                  <span>
-                    View Details
-                  </span>
-                </button>
-
-                <button
-                  type="button"
-                  class="border border-outline-variant bg-surface p-2 text-on-surface rounded-none hover:bg-surface-container"
-                  title="Share"
-                >
-                  <span class="material-symbols-outlined text-[18px]">
-                    share
-                  </span>
-                </button>
-
-              </div>
-
-            </div>
-
-          </article>
-
+        <div id="communityIssuesList" class="space-y-space-md">
+          <!-- Dynamic cluster cards with real LLM summaries will load here automatically -->
         </div>
         <!-- END DYNAMIC COMMUNITY ISSUES CONTAINER -->
 
@@ -1579,18 +588,18 @@
             <li>
               <a
                 class="hover:text-primary"
-                href="#hotspots-map"
+                href="community.html"
               >
-                Ward Map &amp; Engineer Directory
+                Community Civic Clusters
               </a>
             </li>
 
             <li>
               <a
                 class="hover:text-primary"
-                href="#hotspots-map"
+                href="reports.html"
               >
-                Sanitation Truck Live Tracking
+                Track Existing Reports
               </a>
             </li>
 
@@ -1619,12 +628,12 @@
             <br>
 
             <strong class="text-on-surface text-body-lg font-bold">
-              1916 / 080-22660000
+              1916 / 011-23320000
             </strong>
           </p>
 
           <p class="text-body-sm font-body-sm text-on-surface-variant">
-            Disaster / Waterlogging Desk:
+            Delhi Disaster Management Desk:
             <strong class="text-on-surface">
               1077
             </strong>
@@ -1777,9 +786,27 @@
 
   </nav>
 
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <!-- Shared Geocoding and Map Logic -->
+  <script src="js/geo-map.js"></script>
+
   <!-- ================= JAVASCRIPT ================= -->
   <script>
     const API_URL = "http://127.0.0.1:8000";
+    let allClusters = [];
+    let map = null;
+
+    async function renderMap(clusters) {
+        if (!map) {
+            map = L.map("hotspotsMap").setView(DELHI_CENTER, 11);
+            L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+                attribution: "&copy; OpenStreetMap contributors",
+            }).addTo(map);
+        }
+        await renderClustersOnMap(map, clusters, 20);
+    }
 
     function priorityBadgeClasses(level) {
         if (level === "high") return "bg-error-container text-on-error-container";
@@ -1820,61 +847,157 @@
                 ${locationText}
               </p>
             </div>
-            <p class="text-body-md text-on-surface-variant leading-relaxed">
-              ${cluster.size} citizen reports grouped under this issue. Average severity: ${cluster.priority.avg_severity}/5.
-            </p>
+
+            <div class="bg-secondary-fixed/10 border-l-2 border-secondary p-3">
+              <span class="text-label-sm text-secondary flex items-center gap-1 mb-1 font-bold">
+                <span class="material-symbols-outlined text-[14px]">smart_toy</span>
+                AI-Generated Summary (open-source LLM, grounded in citizen reports)
+              </span>
+              <p class="text-body-md text-on-surface leading-relaxed">${cluster.summary}</p>
+            </div>
+
             <div class="flex items-center gap-2 text-label-sm text-on-surface">
               <span class="w-2 h-2 rounded-full bg-secondary shrink-0"></span>
-              <span><strong>Priority score:</strong> ${cluster.priority.score} (${cluster.priority.level})</span>
+              <span><strong>${cluster.size} citizens</strong> reported this issue • Avg severity ${cluster.priority.avg_severity}/5 • Priority score ${cluster.priority.score} (${cluster.priority.level})</span>
             </div>
           </article>
         `;
     }
 
-    async function loadCommunityIssues() {
-    const container = document.getElementById("communityIssuesList");
-    const hotspotsContainer = document.getElementById("cityHotspotsList");
+    function populateAreaFilter(clusters) {
+        const select = document.getElementById("areaFilter");
+        if (!select) return;
+        const areas = [...new Set(clusters.flatMap(c => c.locations))].sort();
+        select.innerHTML = `<option value="">All Areas (Delhi)</option>` +
+            areas.map(a => `<option value="${a}">${a}</option>`).join("");
+    }
 
-    try {
-        const response = await fetch(`${API_URL}/clusters`);
-        if (!response.ok) throw new Error("Could not load community issues.");
-        const data = await response.json();
+    function renderTopBarAndTrending(clusters) {
+        const totalReports = clusters.reduce((sum, c) => sum + c.size, 0);
+        const topBarStatsEl = document.getElementById("topBarStats");
+        if (topBarStatsEl) {
+            topBarStatsEl.textContent = `${totalReports} verified reports across ${clusters.length} active clusters`;
+        }
 
-        if (!data.clusters || data.clusters.length === 0) {
-            container.innerHTML = `<p class="text-body-md text-outline">No community issues clustered yet.</p>`;
-            if (hotspotsContainer) hotspotsContainer.innerHTML = `<p class="text-body-sm text-outline">No hotspots found.</p>`;
+        const trendingSection = document.querySelector("section.bg-surface-container-high");
+        if (trendingSection) {
+            if (clusters.length > 0) {
+                const top = [...clusters].sort((a, b) => b.size - a.size)[0];
+                const label = (top.category || "issue").replace(/_/g, " ");
+                const loc = top.locations[0] || "multiple areas";
+                const trendingTextEl = trendingSection.querySelector("span.text-on-surface-variant");
+                if (trendingTextEl) {
+                    trendingTextEl.textContent = `${label} reported in ${loc} (${top.size} reports clustered)`;
+                }
+            } else {
+                trendingSection.style.display = "none";
+            }
+        }
+    }
+
+    function renderCityHotspots(clusters) {
+        const hotspotsContainer = document.getElementById("cityHotspotsList");
+        if (!hotspotsContainer) return;
+
+        const sorted = [...clusters].sort((a, b) => b.size - a.size).slice(0, 4);
+        if (sorted.length === 0) {
+            hotspotsContainer.innerHTML = `<li class="text-body-sm text-outline py-2">No hotspots yet.</li>`;
             return;
         }
 
-        // 1. Render main active cluster cards on the left
-        container.innerHTML = data.clusters.map(buildIssueCard).join("");
+        hotspotsContainer.innerHTML = sorted.map(cluster => {
+            const topLocation = cluster.locations[0] || "Delhi Area";
+            const categoryLabel = (cluster.category || "Civic Issue").replace(/_/g, " ");
+            const badgeClass = cluster.priority.level === "high" ? "bg-secondary-fixed text-on-secondary-fixed" : "bg-surface-container text-on-surface";
+            return `
+                <li class="flex items-center justify-between py-2 border-b border-outline-variant/30">
+                    <div>
+                        <span class="font-bold text-on-surface text-body-md block capitalize">${topLocation}</span>
+                        <span class="text-body-sm text-outline capitalize">${categoryLabel}</span>
+                    </div>
+                    <span class="px-2 py-0.5 ${badgeClass} text-label-sm font-bold">${cluster.size} Reports</span>
+                </li>
+            `;
+        }).join("");
+    }
 
-        // 2. Render real data into the City Hotspots sidebar on the right
-        if (hotspotsContainer) {
-            hotspotsContainer.innerHTML = data.clusters.slice(0, 4).map(cluster => {
-                const locationText = cluster.locations.length ? cluster.locations[0] : "General Location";
-                const categoryLabel = (cluster.category || "Civic Issue").replace(/_/g, " ");
-                return `
-                    <li class="flex items-center justify-between py-2 border-b border-outline-variant/30">
-                        <div>
-                            <span class="font-bold text-on-surface text-body-md block capitalize">${locationText}</span>
-                            <span class="text-body-sm text-outline capitalize">${categoryLabel}</span>
-                        </div>
-                        <span class="px-2 py-0.5 bg-surface-container text-on-surface text-label-sm font-bold">
-                            ${cluster.size} Reports
-                        </span>
-                    </li>
-                `;
-            }).join("");
+    function applyFiltersAndRender() {
+        const searchInput = document.getElementById("citySearchInput");
+        const areaFilter = document.getElementById("areaFilter");
+        const sortFilter = document.getElementById("sortFilter");
+        const container = document.getElementById("communityIssuesList");
+        if (!container) return;
+
+        const search = searchInput ? searchInput.value.toLowerCase() : "";
+        const area = areaFilter ? areaFilter.value : "";
+        const sort = sortFilter ? sortFilter.value : "reports";
+
+        let filtered = allClusters.filter(c => {
+            const matchesSearch = !search ||
+                (c.category && c.category.toLowerCase().includes(search)) ||
+                c.locations.some(l => l.toLowerCase().includes(search));
+            const matchesArea = !area || c.locations.includes(area);
+            return matchesSearch && matchesArea;
+        });
+
+        filtered.sort((a, b) =>
+            sort === "priority" ? b.priority.score - a.priority.score : b.size - a.size
+        );
+
+        if (filtered.length === 0) {
+            container.innerHTML = `<p class="text-body-md text-outline">No matching civic clusters found.</p>`;
+            return;
         }
 
-    } catch (error) {
-        console.error(error);
-        container.innerHTML = `<p class="text-body-md text-error">Could not connect to backend. Is FastAPI running?</p>`;
+        container.innerHTML = filtered.map(buildIssueCard).join("");
     }
-  }
 
-    document.addEventListener("DOMContentLoaded", loadCommunityIssues);
+    async function loadCommunityIssues() {
+        const container = document.getElementById("communityIssuesList");
+        try {
+            const listResponse = await fetch(`${API_URL}/clusters`);
+            if (!listResponse.ok) throw new Error("Could not load community issues.");
+            const listData = await listResponse.json();
+
+            if (!listData.clusters || listData.clusters.length === 0) {
+                container.innerHTML = `<p class="text-body-md text-outline">No community issues clustered yet.</p>`;
+                renderCityHotspots([]);
+                return;
+            }
+
+            // Fetch full detail (including AI summary) for every cluster in parallel
+            const detailPromises = listData.clusters.map(c =>
+                fetch(`${API_URL}/clusters/${c.cluster_id}`).then(r => r.json())
+            );
+            const details = await Promise.all(detailPromises);
+
+            // Merge: basic cluster + detail (has summary)
+            const merged = listData.clusters.map((c, i) => ({ ...c, summary: details[i].summary }));
+
+            allClusters = merged;
+            populateAreaFilter(merged);
+            renderTopBarAndTrending(merged);
+            renderCityHotspots(merged);
+            await renderMap(merged);
+
+            applyFiltersAndRender();
+        } catch (error) {
+            console.error(error);
+            container.innerHTML = `<p class="text-body-md text-error">Could not connect to backend. Is FastAPI running?</p>`;
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+        loadCommunityIssues();
+
+        const searchInput = document.getElementById("citySearchInput");
+        const areaFilter = document.getElementById("areaFilter");
+        const sortFilter = document.getElementById("sortFilter");
+
+        if (searchInput) searchInput.addEventListener("input", applyFiltersAndRender);
+        if (areaFilter) areaFilter.addEventListener("change", applyFiltersAndRender);
+        if (sortFilter) sortFilter.addEventListener("change", applyFiltersAndRender);
+    });
   </script>
 
 </body>
