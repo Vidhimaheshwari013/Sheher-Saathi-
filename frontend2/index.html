@@ -1,0 +1,1639 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>Sheher Saathi - Your city. Your voice. Your Saathi.</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Material Symbols -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-primary-container": "#808390",
+                        "on-secondary": "#ffffff",
+                        "surface-container-high": "#dce9ff",
+                        "background": "#f8f9ff",
+                        "secondary-fixed": "#ffdbd1",
+                        "surface-dim": "#cbdbf5",
+                        "secondary-fixed-dim": "#ffb5a0",
+                        "tertiary-fixed": "#dee3ec",
+                        "on-primary-fixed-variant": "#434751",
+                        "outline-variant": "#c6c6cc",
+                        "on-primary-fixed": "#181b25",
+                        "tertiary": "#000000",
+                        "error": "#ba1a1a",
+                        "surface-tint": "#5a5e69",
+                        "error-container": "#ffdad6",
+                        "on-tertiary": "#ffffff",
+                        "on-tertiary-container": "#7f848c",
+                        "tertiary-fixed-dim": "#c2c7cf",
+                        "inverse-on-surface": "#eaf1ff",
+                        "surface-variant": "#d3e4fe",
+                        "on-error": "#ffffff",
+                        "on-tertiary-fixed-variant": "#42474e",
+                        "tertiary-container": "#161c22",
+                        "on-tertiary-fixed": "#161c22",
+                        "primary": "#000000",
+                        "primary-fixed": "#dfe2ef",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-container": "#6c1900",
+                        "secondary": "#a73918",
+                        "on-primary": "#ffffff",
+                        "primary-fixed-dim": "#c3c6d3",
+                        "inverse-surface": "#213145",
+                        "on-surface": "#0b1c30",
+                        "on-background": "#0b1c30",
+                        "surface": "#f8f9ff",
+                        "on-secondary-fixed": "#3b0900",
+                        "secondary-container": "#fe7952",
+                        "primary-container": "#181b25",
+                        "surface-bright": "#f8f9ff",
+                        "inverse-primary": "#c3c6d3",
+                        "on-surface-variant": "#45464b",
+                        "on-error-container": "#93000a",
+                        "surface-container": "#e5eeff"
+                    },
+
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+
+                    spacing: {
+                        "gutter": "24px",
+                        "space-xxs": "4px",
+                        "space-sm": "12px",
+                        "margin": "32px",
+                        "space-xl": "32px",
+                        "space-xs": "8px",
+                        "space-lg": "24px",
+                        "space-2xl": "48px",
+                        "space-md": "16px",
+                        "grid-columns": "12"
+                    },
+
+                    fontFamily: {
+                        "label-md": ["Public Sans"],
+                        "headline-lg": ["Space Grotesk"],
+                        "body-lg": ["Public Sans"],
+                        "headline-xl": ["Space Grotesk"],
+                        "headline-md": ["Space Grotesk"],
+                        "body-sm": ["Public Sans"],
+                        "headline-sm": ["Space Grotesk"],
+                        "body-md": ["Public Sans"],
+                        "label-sm": ["Public Sans"]
+                    },
+
+                    fontSize: {
+                        "label-md": ["14px", {
+                            lineHeight: "20px",
+                            fontWeight: "500"
+                        }],
+                        "headline-lg": ["32px", {
+                            lineHeight: "40px",
+                            letterSpacing: "-0.01em",
+                            fontWeight: "600"
+                        }],
+                        "body-lg": ["16px", {
+                            lineHeight: "24px",
+                            fontWeight: "400"
+                        }],
+                        "headline-xl": ["40px", {
+                            lineHeight: "48px",
+                            letterSpacing: "-0.02em",
+                            fontWeight: "700"
+                        }],
+                        "headline-md": ["24px", {
+                            lineHeight: "32px",
+                            fontWeight: "600"
+                        }],
+                        "body-sm": ["12px", {
+                            lineHeight: "16px",
+                            fontWeight: "400"
+                        }],
+                        "headline-sm": ["18px", {
+                            lineHeight: "24px",
+                            fontWeight: "600"
+                        }],
+                        "body-md": ["14px", {
+                            lineHeight: "20px",
+                            fontWeight: "400"
+                        }],
+                        "label-sm": ["12px", {
+                            lineHeight: "16px",
+                            fontWeight: "500"
+                        }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-background text-on-background font-body-md antialiased selection:bg-secondary selection:text-on-secondary">
+
+    <!-- ========================= -->
+    <!-- TOP NAVIGATION -->
+    <!-- ========================= -->
+
+    <header class="bg-surface sticky top-0 z-50 border-b border-outline-variant">
+
+        <div class="max-w-7xl mx-auto px-margin py-space-md flex justify-between items-center w-full">
+
+            <div class="flex items-center gap-space-lg">
+
+                <!-- Logo -> Homepage -->
+                <a class="text-headline-md font-headline-md font-bold text-primary flex items-center gap-space-xs"
+                    href="index.html">
+
+                    <span class="material-symbols-outlined text-secondary"
+                        style="font-variation-settings: 'FILL' 1;">
+                        location_city
+                    </span>
+
+                    Sheher Saathi
+                </a>
+
+                <nav class="hidden md:flex items-center gap-space-lg">
+
+                    <!-- Community Page -->
+                    <a class="text-label-md font-label-md text-on-surface-variant hover:text-primary transition-colors"
+                        href="community.html">
+                        Community Issues
+                    </a>
+
+                    <!-- Reports Page -->
+                    <a class="text-label-md font-label-md text-on-surface-variant hover:text-primary transition-colors"
+                        href="reports.html">
+                        My Reports
+                    </a>
+
+                    <!-- Homepage Section -->
+                    <a class="text-label-md font-label-md text-on-surface-variant hover:text-primary transition-colors"
+                        href="index.html#how-it-works">
+                        How it works
+                    </a>
+
+                </nav>
+            </div>
+
+            <div class="flex items-center gap-space-md">
+
+                <!-- Authority Login stays in navigation -->
+                <a class="hidden sm:inline-flex items-center gap-space-xxs text-label-md font-label-md text-on-surface-variant hover:text-primary transition-colors border border-outline-variant px-space-md py-space-xs rounded-0"
+                    href="admin-login.html"
+
+                    <span class="material-symbols-outlined text-sm">
+                
+                    </span>
+
+                    Authority Login
+                </a>
+
+            </div>
+        </div>
+    </header>
+
+
+    <main>
+
+        <!-- ========================= -->
+        <!-- HERO SECTION -->
+        <!-- ========================= -->
+
+        <section class="bg-surface py-space-2xl px-margin border-b border-outline-variant">
+
+            <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-space-2xl items-center">
+
+                <div class="lg:col-span-7">
+
+                    <div class="inline-flex items-center gap-space-xs text-secondary font-bold text-label-sm uppercase tracking-wider mb-space-sm">
+
+                        <span class="material-symbols-outlined text-sm">
+                            location_city
+                        </span>
+
+                        <span>
+                            Citizen Municipal Portal
+                        </span>
+
+                    </div>
+
+                    <h1 class="text-headline-xl font-headline-xl text-on-background">
+                        Your city.
+                        <br>
+                        Your voice.
+                        <br>
+                        <span class="text-secondary">Your Saathi.</span>
+                    </h1>
+
+                    <p class="text-body-lg text-on-surface-variant max-w-2xl mt-space-lg">
+                        Report civic issues, track resolutions, and stay informed about what is happening in your neighbourhood.
+                        Sheher Saathi connects citizens directly with local civic systems.
+                    </p>
+
+                    <div class="flex flex-wrap gap-space-md mt-space-xl">
+
+                        <!-- RAISE TICKET -->
+                        <a href="report.html"
+                            class="inline-flex items-center justify-center gap-space-xs bg-secondary text-on-secondary px-space-xl py-space-md font-label-md text-label-md font-medium rounded-0 hover:opacity-90 transition-opacity">
+
+                            <span class="material-symbols-outlined text-sm">
+                                add_circle
+                            </span>
+
+                            Raise a Ticket
+
+                            <span class="material-symbols-outlined text-sm">
+                                arrow_forward
+                            </span>
+
+                        </a>
+
+                        <!-- COMMUNITY -->
+                        <a href="community.html"
+                            class="inline-flex items-center justify-center gap-space-xs bg-surface text-on-surface px-space-xl py-space-md font-label-md text-label-md font-medium border border-outline-variant rounded-0 hover:bg-surface-container transition-colors">
+
+                            View Community Issues
+
+                            <span class="material-symbols-outlined text-sm">
+                                arrow_forward
+                            </span>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <!-- HERO CARD -->
+
+                <div class="lg:col-span-5">
+
+                    <div class="border border-outline-variant bg-surface-container-low p-space-xl">
+
+                        <div class="flex items-center justify-between mb-space-lg">
+
+                            <div class="flex items-center gap-space-xs">
+
+                                <span class="material-symbols-outlined text-secondary">
+                                    campaign
+                                </span>
+
+                                <span class="text-label-md font-label-md font-bold">
+                                    Live Civic Pulse
+                                </span>
+
+                            </div>
+
+                            <span class="text-label-sm text-secondary font-bold">
+                                LIVE
+                            </span>
+
+                        </div>
+
+                        <div class="space-y-space-md">
+
+                            <div class="border-l-4 border-secondary pl-space-md">
+
+                                <div class="text-headline-sm font-headline-sm">
+                                    Waterlogging
+                                </div>
+
+                                <div class="text-body-sm text-on-surface-variant mt-space-xxs">
+                                    9 reports · Rajpur Road
+                                </div>
+
+                            </div>
+
+                            <div class="border-l-4 border-primary pl-space-md">
+
+                                <div class="text-headline-sm font-headline-sm">
+                                    Road Damage
+                                </div>
+
+                                <div class="text-body-sm text-on-surface-variant mt-space-xxs">
+                                    6 reports · Prem Nagar
+                                </div>
+
+                            </div>
+
+                            <div class="border-l-4 border-primary pl-space-md">
+
+                                <div class="text-headline-sm font-headline-sm">
+                                    Streetlights
+                                </div>
+
+                                <div class="text-body-sm text-on-surface-variant mt-space-xxs">
+                                    4 reports · Patel Nagar
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <a href="community.html"
+                            class="mt-space-xl inline-flex items-center gap-space-xs text-secondary font-label-md text-label-md font-bold hover:underline">
+
+                            Explore Civic Pulse
+
+                            <span class="material-symbols-outlined text-sm">
+                                arrow_forward
+                            </span>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ========================= -->
+        <!-- QUICK ACTIONS -->
+        <!-- ========================= -->
+
+        <section class="bg-background py-space-2xl px-margin">
+
+            <div class="max-w-7xl mx-auto">
+
+                <div class="mb-space-xl">
+
+                    <div class="text-secondary font-bold text-label-sm uppercase tracking-wider">
+                        Citizen Services
+                    </div>
+
+                    <h2 class="text-headline-lg font-headline-lg text-on-background mt-space-xxs">
+                        What would you like to do?
+                    </h2>
+
+                </div>
+
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-space-lg">
+
+
+                    <!-- REPORT -->
+
+                    <a href="report.html"
+                        class="group bg-surface border border-outline-variant p-space-xl hover:border-secondary transition-colors">
+
+                        <div class="flex items-start justify-between">
+
+                            <div class="w-12 h-12 bg-secondary-fixed flex items-center justify-center">
+
+                                <span class="material-symbols-outlined text-secondary">
+                                    campaign
+                                </span>
+
+                            </div>
+
+                            <span class="material-symbols-outlined text-on-surface-variant group-hover:text-secondary transition-colors">
+                                arrow_forward
+                            </span>
+
+                        </div>
+
+                        <h3 class="text-headline-md font-headline-md mt-space-lg">
+                            Report an Issue
+                        </h3>
+
+                        <p class="text-body-md text-on-surface-variant mt-space-xs">
+                            Report potholes, garbage, waterlogging, broken streetlights, and other civic issues.
+                        </p>
+
+                    </a>
+
+
+                    <!-- COMMUNITY -->
+
+                    <a href="community.html"
+                        class="group bg-surface border border-outline-variant p-space-xl hover:border-secondary transition-colors">
+
+                        <div class="flex items-start justify-between">
+
+                            <div class="w-12 h-12 bg-surface-container-high flex items-center justify-center">
+
+                                <span class="material-symbols-outlined">
+                                    groups
+                                </span>
+
+                            </div>
+
+                            <span class="material-symbols-outlined text-on-surface-variant group-hover:text-secondary transition-colors">
+                                arrow_forward
+                            </span>
+
+                        </div>
+
+                        <h3 class="text-headline-md font-headline-md mt-space-lg">
+                            Community Issues
+                        </h3>
+
+                        <p class="text-body-md text-on-surface-variant mt-space-xs">
+                            See issues reported by citizens around the city and discover active civic hotspots.
+                        </p>
+
+                    </a>
+
+
+                    <!-- REPORTS -->
+
+                    <a href="reports.html"
+                        class="group bg-surface border border-outline-variant p-space-xl hover:border-secondary transition-colors">
+
+                        <div class="flex items-start justify-between">
+
+                            <div class="w-12 h-12 bg-surface-container-high flex items-center justify-center">
+
+                                <span class="material-symbols-outlined">
+                                    receipt_long
+                                </span>
+
+                            </div>
+
+                            <span class="material-symbols-outlined text-on-surface-variant group-hover:text-secondary transition-colors">
+                                arrow_forward
+                            </span>
+
+                        </div>
+
+                        <h3 class="text-headline-md font-headline-md mt-space-lg">
+                            My Reports
+                        </h3>
+
+                        <p class="text-body-md text-on-surface-variant mt-space-xs">
+                            Track the status of issues you have submitted and follow their resolution progress.
+                        </p>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ========================= -->
+        <!-- HOW IT WORKS -->
+        <!-- ========================= -->
+
+        <section id="how-it-works"
+            class="bg-surface-container-low py-space-2xl px-margin border-y border-outline-variant">
+
+            <div class="max-w-7xl mx-auto">
+
+                <div class="max-w-3xl mb-space-2xl">
+
+                    <div class="text-secondary font-bold text-label-sm uppercase tracking-wider">
+                        Simple. Transparent. Accountable.
+                    </div>
+
+                    <h2 class="text-headline-lg font-headline-lg text-on-background mt-space-xxs">
+                        How Sheher Saathi works
+                    </h2>
+
+                    <p class="text-body-lg text-on-surface-variant mt-space-sm">
+                        From reporting an issue to seeing it resolved, every step is designed to keep citizens informed.
+                    </p>
+
+                </div>
+
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-space-xl">
+
+
+                    <!-- STEP 1 -->
+
+                    <div class="relative">
+
+                        <div class="text-headline-xl font-headline-xl text-secondary-fixed-dim">
+                            01
+                        </div>
+
+                        <h3 class="text-headline-md font-headline-md mt-space-sm">
+                            Report
+                        </h3>
+
+                        <p class="text-body-md text-on-surface-variant mt-space-xs">
+                            Submit a civic grievance using text, voice, photos, or your preferred language.
+                        </p>
+
+                        <a href="report.html"
+                            class="inline-flex items-center gap-space-xs text-secondary font-label-md text-label-md font-bold mt-space-md hover:underline">
+
+                            Start a Report
+
+                            <span class="material-symbols-outlined text-sm">
+                                arrow_forward
+                            </span>
+
+                        </a>
+
+                    </div>
+
+
+                    <!-- STEP 2 -->
+
+                    <div class="relative">
+
+                        <div class="text-headline-xl font-headline-xl text-secondary-fixed-dim">
+                            02
+                        </div>
+
+                        <h3 class="text-headline-md font-headline-md mt-space-sm">
+                            Track
+                        </h3>
+
+                        <p class="text-body-md text-on-surface-variant mt-space-xs">
+                            Get a unique ticket and monitor every update as your complaint moves through the civic system.
+                        </p>
+
+                        <a href="reports.html"
+                            class="inline-flex items-center gap-space-xs text-secondary font-label-md text-label-md font-bold mt-space-md hover:underline">
+
+                            Track My Report
+
+                            <span class="material-symbols-outlined text-sm">
+                                arrow_forward
+                            </span>
+
+                        </a>
+
+                    </div>
+
+
+                    <!-- STEP 3 -->
+
+                    <div class="relative">
+
+                        <div class="text-headline-xl font-headline-xl text-secondary-fixed-dim">
+                            03
+                        </div>
+
+                        <h3 class="text-headline-md font-headline-md mt-space-sm">
+                            Resolve
+                        </h3>
+
+                        <p class="text-body-md text-on-surface-variant mt-space-xs">
+                            Authorities act on verified issues while citizens receive transparent resolution updates.
+                        </p>
+
+                        <a href="community.html"
+                            class="inline-flex items-center gap-space-xs text-secondary font-label-md text-label-md font-bold mt-space-md hover:underline">
+
+                            See Civic Activity
+
+                            <span class="material-symbols-outlined text-sm">
+                                arrow_forward
+                            </span>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ========================= -->
+        <!-- REPORT CTA -->
+        <!-- ========================= -->
+
+        <section class="bg-background py-space-2xl px-margin">
+
+            <div class="max-w-7xl mx-auto">
+
+                <div class="bg-surface border border-outline-variant p-space-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-space-xl">
+
+                    <div class="flex-1">
+
+                        <div class="flex items-center gap-space-xs mb-space-xxs">
+
+                            <span class="material-symbols-outlined text-secondary text-sm">
+                                campaign
+                            </span>
+
+                            <span class="text-label-sm font-label-sm text-secondary uppercase tracking-wider font-bold">
+                                Citizen Grievance Portal
+                            </span>
+
+                        </div>
+
+                        <h3 class="text-headline-sm font-headline-sm text-on-surface mb-space-xxs">
+                            Report an Issue in Your Locality
+                        </h3>
+
+                        <p class="text-body-md text-on-surface-variant">
+                            Submit grievances in seconds using your voice, regional language, or photos.
+                            Direct escalation to your ward officer.
+                        </p>
+
+                    </div>
+
+                    <div class="shrink-0 w-full sm:w-auto">
+
+                        <a href="report.html"
+                            class="inline-flex w-full sm:w-auto items-center justify-center gap-space-xs bg-secondary text-on-secondary px-space-xl py-space-md font-label-md text-label-md rounded-0 hover:opacity-90 transition-opacity font-medium">
+
+                            <span class="material-symbols-outlined text-sm">
+                                add_circle
+                            </span>
+
+                            <span>
+                                Raise a Ticket
+                            </span>
+
+                            <span class="material-symbols-outlined text-sm">
+                                arrow_forward
+                            </span>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ========================= -->
+        <!-- STATS BANNER -->
+        <!-- ========================= -->
+
+        <section class="bg-primary text-on-primary py-space-xl px-margin border-b border-outline-variant">
+
+            <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-space-lg text-center md:text-left divide-y md:divide-y-0 md:divide-x divide-outline">
+
+                <div class="px-space-md pt-space-md md:pt-0">
+
+                    <div class="text-headline-xl font-headline-xl text-secondary-fixed">
+                        1,42,850+
+                    </div>
+
+                    <div class="text-label-md font-label-md text-surface-variant mt-space-xxs">
+                        Reports Successfully Resolved
+                    </div>
+
+                </div>
+
+
+                <div class="px-space-md pt-space-md md:pt-0">
+
+                    <div class="text-headline-xl font-headline-xl text-secondary-fixed">
+                        88,300+
+                    </div>
+
+                    <div class="text-label-md font-label-md text-surface-variant mt-space-xxs">
+                        Citizens Connected
+                    </div>
+
+                </div>
+
+
+                <div class="px-space-md pt-space-md md:pt-0">
+
+                    <div class="text-headline-xl font-headline-xl text-secondary-fixed">
+                        198
+                    </div>
+
+                    <div class="text-label-md font-label-md text-surface-variant mt-space-xxs">
+                        Wards Covered
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ========================= -->
+        <!-- COMMUNITY PREVIEW -->
+        <!-- ========================= -->
+
+        <section class="py-space-2xl px-margin bg-surface">
+
+            <div class="max-w-7xl mx-auto">
+
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-space-lg mb-space-xl">
+
+                    <div>
+
+                        <div class="inline-flex items-center gap-space-xs text-secondary font-bold text-label-sm uppercase tracking-wider mb-space-xxs">
+
+                            <span class="material-symbols-outlined text-sm">
+                                groups
+                            </span>
+
+                            Community Intelligence
+                        </div>
+
+                        <h2 class="text-headline-lg font-headline-lg text-on-background">
+                            What's happening around the city?
+                        </h2>
+
+                        <p class="text-body-md text-on-surface-variant mt-space-xs max-w-2xl">
+                            Explore verified citizen reports, active clusters, and neighbourhood-level civic activity.
+                        </p>
+
+                    </div>
+
+
+                    <a href="community.html"
+                        class="inline-flex items-center justify-center gap-space-xs bg-primary text-on-primary px-space-xl py-space-md font-label-md text-label-md rounded-0 hover:bg-inverse-surface transition-colors shrink-0">
+
+                        View Full Civic Feed &amp; Hotspots
+
+                        <span class="material-symbols-outlined text-sm">
+                            arrow_forward
+                        </span>
+
+                    </a>
+
+                </div>
+
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-space-lg">
+
+
+                    <!-- ISSUE CARD -->
+
+                    <div class="bg-surface-container-low border border-outline-variant p-space-lg">
+
+                        <div class="flex items-center justify-between">
+
+                            <span class="text-label-sm text-secondary font-bold uppercase">
+                                Waterlogging
+                            </span>
+
+                            <span class="text-label-sm text-on-surface-variant">
+                                Ward 14
+                            </span>
+
+                        </div>
+
+                        <h3 class="text-headline-sm font-headline-sm mt-space-md">
+                            Severe waterlogging near Canal Crossing
+                        </h3>
+
+                        <p class="text-body-sm text-on-surface-variant mt-space-xs">
+                            9 citizen reports clustered in the same location.
+                        </p>
+
+                        <div class="flex items-center justify-between mt-space-lg pt-space-md border-t border-outline-variant">
+
+                            <span class="text-label-sm text-on-surface-variant">
+                                48 affected
+                            </span>
+
+                            <span class="text-label-sm text-secondary font-bold">
+                                Active
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ISSUE CARD -->
+
+                    <div class="bg-surface-container-low border border-outline-variant p-space-lg">
+
+                        <div class="flex items-center justify-between">
+
+                            <span class="text-label-sm text-secondary font-bold uppercase">
+                                Roads
+                            </span>
+
+                            <span class="text-label-sm text-on-surface-variant">
+                                Ward 28
+                            </span>
+
+                        </div>
+
+                        <h3 class="text-headline-sm font-headline-sm mt-space-md">
+                            Deep asphalt crater near Prem Nagar Market
+                        </h3>
+
+                        <p class="text-body-sm text-on-surface-variant mt-space-xs">
+                            6 citizen reports clustered in the same area.
+                        </p>
+
+                        <div class="flex items-center justify-between mt-space-lg pt-space-md border-t border-outline-variant">
+
+                            <span class="text-label-sm text-on-surface-variant">
+                                32 affected
+                            </span>
+
+                            <span class="text-label-sm text-secondary font-bold">
+                                Scheduled
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ISSUE CARD -->
+
+                    <div class="bg-surface-container-low border border-outline-variant p-space-lg">
+
+                        <div class="flex items-center justify-between">
+
+                            <span class="text-label-sm text-secondary font-bold uppercase">
+                                Streetlights
+                            </span>
+
+                            <span class="text-label-sm text-on-surface-variant">
+                                Ward 52
+                            </span>
+
+                        </div>
+
+                        <h3 class="text-headline-sm font-headline-sm mt-space-md">
+                            Multiple dark streetlights on 80ft Road
+                        </h3>
+
+                        <p class="text-body-sm text-on-surface-variant mt-space-xs">
+                            4 citizen reports clustered together.
+                        </p>
+
+                        <div class="flex items-center justify-between mt-space-lg pt-space-md border-t border-outline-variant">
+
+                            <span class="text-label-sm text-on-surface-variant">
+                                19 affected
+                            </span>
+
+                            <span class="text-label-sm text-secondary font-bold">
+                                Assigned
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ISSUE CARD -->
+
+                    <div class="bg-surface-container-low border border-outline-variant p-space-lg">
+
+                        <div class="flex items-center justify-between">
+
+                            <span class="text-label-sm text-secondary font-bold uppercase">
+                                Garbage
+                            </span>
+
+                            <span class="text-label-sm text-on-surface-variant">
+                                Ward 74
+                            </span>
+
+                        </div>
+
+                        <h3 class="text-headline-sm font-headline-sm mt-space-md">
+                            Overflowing secondary waste bin
+                        </h3>
+
+                        <p class="text-body-sm text-on-surface-variant mt-space-xs">
+                            5 citizen reports clustered around the crossing.
+                        </p>
+
+                        <div class="flex items-center justify-between mt-space-lg pt-space-md border-t border-outline-variant">
+
+                            <span class="text-label-sm text-on-surface-variant">
+                                27 affected
+                            </span>
+
+                            <span class="text-label-sm text-secondary font-bold">
+                                En route
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- COMMUNITY CTA -->
+
+                <div class="mt-space-xl p-space-lg bg-surface-container border border-outline-variant flex flex-col sm:flex-row items-center justify-between gap-space-md text-center sm:text-left">
+
+                    <div>
+
+                        <h4 class="text-headline-sm font-headline-sm text-on-surface">
+                            Looking for historical reports in your ward?
+                        </h4>
+
+                        <p class="text-body-sm text-on-surface-variant mt-space-xxs">
+                            Explore ward-level grievance heatmaps, SLA turnaround reports, and active civic officers.
+                        </p>
+
+                    </div>
+
+
+                    <a href="community.html"
+                        class="inline-flex items-center justify-center gap-space-xs bg-primary text-on-primary px-space-xl py-space-md font-label-md text-label-md rounded-0 hover:bg-inverse-surface transition-colors shrink-0">
+
+                        <span>
+                            View Full Civic Feed &amp; Hotspots
+                        </span>
+
+                        <span class="material-symbols-outlined text-sm">
+                            arrow_forward
+                        </span>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ========================= -->
+        <!-- MAJOR HOTSPOTS MAP -->
+        <!-- ========================= -->
+
+        <section class="py-space-2xl px-margin border-t border-outline-variant bg-surface-container-low"
+            id="hotspots-map">
+
+            <div class="max-w-7xl mx-auto">
+
+                <!-- Header -->
+
+                <div class="flex flex-col lg:flex-row lg:items-end justify-between mb-space-xl gap-space-md">
+
+                    <div>
+
+                        <div class="inline-flex items-center gap-space-xs text-secondary font-bold text-label-sm uppercase tracking-wider mb-space-xxs">
+
+                            <span class="material-symbols-outlined text-sm">
+                                map
+                            </span>
+
+                            <span>
+                                Geographic Civic Intelligence
+                            </span>
+
+                        </div>
+
+
+                        <h2 class="text-headline-lg font-headline-lg text-on-background mt-space-xxs">
+                            Major Civic Hotspots &amp; Ward Activities
+                        </h2>
+
+
+                        <p class="text-body-md text-on-surface-variant mt-space-xxs max-w-2xl">
+                            Visualizing high-density clusters across municipal zones to prioritize root-cause infrastructure repairs and rapid emergency response.
+                        </p>
+
+                    </div>
+
+
+                    <div class="flex flex-wrap items-center gap-space-xs">
+
+                        <button class="px-space-md py-space-xs text-label-sm font-label-sm font-medium bg-primary text-on-primary border border-primary transition-colors">
+                            All Wards
+                        </button>
+
+                        <button class="px-space-md py-space-xs text-label-sm font-label-sm font-medium bg-surface text-on-surface border border-outline-variant hover:bg-surface-container transition-colors">
+                            Waterlogging
+                        </button>
+
+                        <button class="px-space-md py-space-xs text-label-sm font-label-sm font-medium bg-surface text-on-surface border border-outline-variant hover:bg-surface-container transition-colors">
+                            Potholes &amp; Roads
+                        </button>
+
+                        <button class="px-space-md py-space-xs text-label-sm font-label-sm font-medium bg-surface text-on-surface border border-outline-variant hover:bg-surface-container transition-colors">
+                            Streetlights
+                        </button>
+
+                        <button class="px-space-md py-space-xs text-label-sm font-label-sm font-medium bg-surface text-on-surface border border-outline-variant hover:bg-surface-container transition-colors">
+                            Garbage Hotspots
+                        </button>
+
+                        <a href="community.html"
+                            class="px-space-md py-space-xs text-label-sm font-label-sm font-medium text-secondary hover:underline inline-flex items-center gap-space-xxs ml-space-xs">
+
+                            <span>
+                                Full Map View
+                            </span>
+
+                            <span class="material-symbols-outlined text-sm">
+                                open_in_full
+                            </span>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <!-- MAP -->
+
+                <div class="border border-outline-variant bg-surface relative overflow-hidden">
+
+                    <!-- Summary Bar -->
+
+                    <div class="border-b border-outline-variant bg-surface-container px-space-lg py-space-sm flex flex-wrap items-center justify-between gap-space-md text-body-sm">
+
+                        <div class="flex items-center gap-space-lg flex-wrap">
+
+                            <div class="flex items-center gap-space-xs">
+
+                                <span class="material-symbols-outlined text-secondary text-sm">
+                                    location_on
+                                </span>
+
+                                <span>
+                                    Bengaluru Civic Grid
+                                </span>
+
+                            </div>
+
+                            <div class="flex items-center gap-space-xs">
+
+                                <span class="w-2 h-2 bg-secondary rounded-full"></span>
+
+                                <span>
+                                    30 active clusters
+                                </span>
+
+                            </div>
+
+                            <div class="flex items-center gap-space-xs">
+
+                                <span class="w-2 h-2 bg-primary rounded-full"></span>
+
+                                <span>
+                                    198 wards monitored
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                        <a href="community.html"
+                            class="text-secondary font-label-sm font-bold hover:underline inline-flex items-center gap-space-xxs">
+
+                            Open Civic Hotspot Map
+
+                            <span class="material-symbols-outlined text-sm">
+                                arrow_forward
+                            </span>
+
+                        </a>
+
+                    </div>
+
+
+                    <!-- MAP AREA -->
+
+                    <div class="relative min-h-[500px] bg-[#edf3fb] overflow-hidden">
+
+                        <!-- MAP GRID -->
+
+                        <div class="absolute inset-0 opacity-40"
+                            style="background-image: linear-gradient(#c5d2e2 1px, transparent 1px), linear-gradient(90deg, #c5d2e2 1px, transparent 1px); background-size: 50px 50px;">
+                        </div>
+
+
+                        <!-- DECORATIVE ROADS -->
+
+                        <div class="absolute left-[8%] top-0 bottom-0 w-[2px] bg-white rotate-[12deg] origin-top"></div>
+
+                        <div class="absolute left-[28%] top-0 bottom-0 w-[3px] bg-white rotate-[-20deg] origin-top"></div>
+
+                        <div class="absolute left-[53%] top-0 bottom-0 w-[2px] bg-white rotate-[30deg] origin-top"></div>
+
+                        <div class="absolute left-[75%] top-0 bottom-0 w-[3px] bg-white rotate-[-15deg] origin-top"></div>
+
+                        <div class="absolute left-0 right-0 top-[30%] h-[3px] bg-white rotate-[8deg]"></div>
+
+                        <div class="absolute left-0 right-0 top-[65%] h-[2px] bg-white rotate-[-5deg]"></div>
+
+
+                        <!-- HOTSPOT 1 -->
+
+                        <div class="absolute left-[20%] top-[28%]">
+
+                            <div class="relative">
+
+                                <div class="absolute -inset-6 bg-secondary/10 rounded-full"></div>
+
+                                <div class="relative w-12 h-12 bg-secondary text-on-secondary rounded-full flex items-center justify-center shadow-lg border-4 border-white">
+
+                                    <span class="material-symbols-outlined">
+                                        water
+                                    </span>
+
+                                </div>
+
+                                <div class="absolute left-14 top-0 bg-surface border border-outline-variant p-space-sm shadow-md whitespace-nowrap">
+
+                                    <div class="text-label-sm font-bold">
+                                        Ward 14 • Rajpur Rd
+                                    </div>
+
+                                    <div class="text-body-sm text-secondary mt-1">
+                                        9 active reports
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- HOTSPOT 2 -->
+
+                        <div class="absolute left-[42%] top-[54%]">
+
+                            <div class="relative">
+
+                                <div class="absolute -inset-5 bg-secondary/10 rounded-full"></div>
+
+                                <div class="relative w-12 h-12 bg-secondary text-on-secondary rounded-full flex items-center justify-center shadow-lg border-4 border-white">
+
+                                    <span class="material-symbols-outlined">
+                                        construction
+                                    </span>
+
+                                </div>
+
+                                <div class="absolute left-14 top-0 bg-surface border border-outline-variant p-space-sm shadow-md whitespace-nowrap">
+
+                                    <div class="text-label-sm font-bold">
+                                        Ward 28 • Prem Nagar
+                                    </div>
+
+                                    <div class="text-body-sm text-secondary mt-1">
+                                        6 active reports
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- HOTSPOT 3 -->
+
+                        <div class="absolute left-[68%] top-[23%]">
+
+                            <div class="relative">
+
+                                <div class="absolute -inset-4 bg-secondary/10 rounded-full"></div>
+
+                                <div class="relative w-11 h-11 bg-secondary text-on-secondary rounded-full flex items-center justify-center shadow-lg border-4 border-white">
+
+                                    <span class="material-symbols-outlined">
+                                        lightbulb
+                                    </span>
+
+                                </div>
+
+                                <div class="absolute left-13 top-0 bg-surface border border-outline-variant p-space-sm shadow-md whitespace-nowrap">
+
+                                    <div class="text-label-sm font-bold">
+                                        Ward 52 • Patel Nagar
+                                    </div>
+
+                                    <div class="text-body-sm text-secondary mt-1">
+                                        4 active reports
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- HOTSPOT 4 -->
+
+                        <div class="absolute left-[72%] top-[65%]">
+
+                            <div class="relative">
+
+                                <div class="absolute -inset-4 bg-secondary/10 rounded-full"></div>
+
+                                <div class="relative w-11 h-11 bg-secondary text-on-secondary rounded-full flex items-center justify-center shadow-lg border-4 border-white">
+
+                                    <span class="material-symbols-outlined">
+                                        delete
+                                    </span>
+
+                                </div>
+
+                                <div class="absolute right-14 top-0 bg-surface border border-outline-variant p-space-sm shadow-md whitespace-nowrap">
+
+                                    <div class="text-label-sm font-bold">
+                                        Ward 74 • Indiranagar
+                                    </div>
+
+                                    <div class="text-body-sm text-secondary mt-1">
+                                        5 active reports
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- HOTSPOT 5 -->
+
+                        <div class="absolute left-[52%] top-[80%]">
+
+                            <div class="relative">
+
+                                <div class="w-10 h-10 bg-secondary text-on-secondary rounded-full flex items-center justify-center shadow-lg border-4 border-white">
+
+                                    <span class="material-symbols-outlined">
+                                        report_problem
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- MAP LABELS -->
+
+                        <div class="absolute left-[10%] top-[45%] text-label-sm font-bold text-on-surface-variant opacity-60">
+                            CENTRAL ZONE
+                        </div>
+
+                        <div class="absolute left-[35%] top-[15%] text-label-sm font-bold text-on-surface-variant opacity-60">
+                            NORTH ZONE
+                        </div>
+
+                        <div class="absolute left-[61%] top-[45%] text-label-sm font-bold text-on-surface-variant opacity-60">
+                            EAST ZONE
+                        </div>
+
+                        <div class="absolute left-[32%] top-[85%] text-label-sm font-bold text-on-surface-variant opacity-60">
+                            SOUTH ZONE
+                        </div>
+
+
+                        <!-- MAP CONTROLS -->
+
+                        <div class="absolute right-space-md bottom-space-md flex flex-col gap-space-xs">
+
+                            <button class="w-10 h-10 bg-surface border border-outline-variant flex items-center justify-center hover:bg-surface-container shadow-sm">
+
+                                <span class="material-symbols-outlined">
+                                    add
+                                </span>
+
+                            </button>
+
+                            <button class="w-10 h-10 bg-surface border border-outline-variant flex items-center justify-center hover:bg-surface-container shadow-sm">
+
+                                <span class="material-symbols-outlined">
+                                    remove
+                                </span>
+
+                            </button>
+
+                        </div>
+
+
+                        <!-- MAP LEGEND -->
+
+                        <div class="absolute left-space-md bottom-space-md bg-surface border border-outline-variant p-space-md shadow-sm">
+
+                            <div class="text-label-sm font-bold mb-space-xs">
+                                Incident Density
+                            </div>
+
+                            <div class="flex items-center gap-space-sm">
+
+                                <div class="flex items-center gap-space-xxs">
+
+                                    <span class="w-3 h-3 bg-secondary/30 rounded-full"></span>
+
+                                    <span class="text-body-sm">
+                                        Low
+                                    </span>
+
+                                </div>
+
+                                <div class="flex items-center gap-space-xxs">
+
+                                    <span class="w-3 h-3 bg-secondary/60 rounded-full"></span>
+
+                                    <span class="text-body-sm">
+                                        Medium
+                                    </span>
+
+                                </div>
+
+                                <div class="flex items-center gap-space-xxs">
+
+                                    <span class="w-3 h-3 bg-secondary rounded-full"></span>
+
+                                    <span class="text-body-sm">
+                                        High
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ========================= -->
+        <!-- FINAL CTA -->
+        <!-- ========================= -->
+
+        <section class="bg-primary text-on-primary py-space-2xl px-margin">
+
+            <div class="max-w-5xl mx-auto text-center">
+
+                <div class="inline-flex items-center gap-space-xs text-secondary-fixed font-bold text-label-sm uppercase tracking-wider mb-space-sm">
+
+                    <span class="material-symbols-outlined text-sm">
+                        verified
+                    </span>
+
+                    Built for accountable cities
+                </div>
+
+                <h2 class="text-headline-xl font-headline-xl">
+                    Your report can help improve your neighbourhood.
+                </h2>
+
+                <p class="text-body-lg text-surface-variant max-w-2xl mx-auto mt-space-md">
+                    Raise an issue today, follow its progress, and help your community stay informed.
+                </p>
+
+                <div class="flex flex-wrap items-center justify-center gap-space-md mt-space-xl">
+
+                    <a href="report.html"
+                        class="inline-flex items-center justify-center gap-space-xs bg-secondary text-on-secondary px-space-xl py-space-md font-label-md text-label-md font-medium rounded-0 hover:opacity-90 transition-opacity">
+
+                        Raise a Ticket
+
+                        <span class="material-symbols-outlined text-sm">
+                            arrow_forward
+                        </span>
+
+                    </a>
+
+                    <a href="reports.html"
+                        class="inline-flex items-center justify-center gap-space-xs bg-transparent text-on-primary px-space-xl py-space-md font-label-md text-label-md font-medium border border-outline-variant rounded-0 hover:bg-inverse-surface transition-colors">
+
+                        Track My Reports
+
+                        <span class="material-symbols-outlined text-sm">
+                            arrow_forward
+                        </span>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ========================= -->
+    <!-- FOOTER -->
+    <!-- ========================= -->
+
+    <footer class="bg-surface-container-low border-t border-outline-variant py-space-2xl px-margin">
+
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-space-2xl mb-space-2xl">
+
+
+            <!-- FOOTER BRAND -->
+
+            <div>
+
+                <a href="index.html"
+                    class="text-headline-md font-headline-md font-bold text-primary flex items-center gap-space-xs mb-space-md">
+
+                    <span class="material-symbols-outlined text-secondary"
+                        style="font-variation-settings: 'FILL' 1;">
+                        location_city
+                    </span>
+
+                    Sheher Saathi
+
+                </a>
+
+
+                <p class="text-body-md text-on-surface-variant">
+                    Your city. Your voice. Your Saathi. Empowering urban communities across India with accountable civic-tech solutions.
+                </p>
+
+            </div>
+
+
+            <!-- QUICK LINKS -->
+
+            <div>
+
+                <h4 class="text-headline-sm font-headline-sm text-on-surface mb-space-md">
+                    Quick Links
+                </h4>
+
+
+                <ul class="space-y-space-xs text-body-md">
+
+                    <li>
+                        <a class="text-on-surface-variant hover:text-primary transition-colors"
+                            href="report.html">
+                            Report Issue
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class="text-on-surface-variant hover:text-primary transition-colors"
+                            href="community.html">
+                            Community Issues
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class="text-on-surface-variant hover:text-primary transition-colors"
+                            href="reports.html">
+                            My Reports
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class="text-on-surface-variant hover:text-primary transition-colors"
+                            href="index.html#how-it-works">
+                            How It Works
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <!-- TRANSPARENCY -->
+
+            <div>
+
+                <h4 class="text-headline-sm font-headline-sm text-on-surface mb-space-md">
+                    Transparency Notes
+                </h4>
+
+                <p class="text-body-sm text-on-surface-variant mb-space-sm">
+                    All grievance records are published in accordance with the Right to Information standards and municipal public accountability frameworks.
+                </p>
+
+
+                <a class="text-label-md font-label-md text-primary font-bold hover:text-secondary inline-flex items-center gap-space-xxs"
+                    href="#">
+
+                    <span>
+                        Read Open Data Policy
+                    </span>
+
+                    <span class="material-symbols-outlined text-sm">
+                        open_in_new
+                    </span>
+
+                </a>
+
+            </div>
+
+
+            <!-- HELPLINES -->
+
+            <div>
+
+                <h4 class="text-headline-sm font-headline-sm text-on-surface mb-space-md">
+                    Helpline Numbers
+                </h4>
+
+
+                <ul class="space-y-space-xs text-body-sm text-on-surface-variant">
+
+                    <li>
+                        <strong class="text-on-surface">
+                            General Municipal:
+                        </strong>
+                        1916
+                    </li>
+
+                    <li>
+                        <strong class="text-on-surface">
+                            Pothole &amp; Roads:
+                        </strong>
+                        1800-425-001
+                    </li>
+
+                    <li>
+                        <strong class="text-on-surface">
+                            Sanitation &amp; Garbage:
+                        </strong>
+                        1800-233-456
+                    </li>
+
+                    <li>
+                        <strong class="text-on-surface">
+                            Water Supply:
+                        </strong>
+                        1916 (Ext. 2)
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+
+        <!-- COPYRIGHT -->
+
+        <div class="max-w-7xl mx-auto pt-space-lg border-t border-outline-variant flex flex-col md:flex-row items-center justify-between text-body-sm text-on-surface-variant gap-space-md">
+
+            <div>
+                © 2025 Sheher Saathi Civic Technologies. All rights reserved.
+            </div>
+
+
+            <div class="flex gap-space-lg">
+
+                <a class="hover:text-primary transition-colors"
+                    href="#">
+                    Privacy Policy
+                </a>
+
+                <a class="hover:text-primary transition-colors"
+                    href="#">
+                    Terms of Service
+                </a>
+
+                <a class="hover:text-primary transition-colors"
+                    href="#">
+                    Citizen Charter
+                </a>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+</body>
+
+</html>
