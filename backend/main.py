@@ -130,8 +130,8 @@ def get_clusters(db: Session = Depends(get_db)):
         return {"clusters": []}
 
     ids = [c.id for c in complaints]
-    embeddings = [get_embedding(c.raw_text) for c in complaints]
-    labels = cluster_complaints(ids, embeddings)
+    categories = [c.category for c in complaints]
+    labels = cluster_complaints(ids, categories)
 
     # Group complaints by cluster label
     grouped = {}
@@ -168,8 +168,8 @@ def get_clusters(db: Session = Depends(get_db)):
 def get_cluster_detail(cluster_id: int, db: Session = Depends(get_db)):
     complaints = db.query(models.Complaint).all()
     ids = [c.id for c in complaints]
-    embeddings = [get_embedding(c.raw_text) for c in complaints]
-    labels = cluster_complaints(ids, embeddings)
+    categories = [c.category for c in complaints]
+    labels = cluster_complaints(ids, categories)
 
     members = [c for c in complaints if labels.get(c.id) == cluster_id]
     if not members:
@@ -211,8 +211,8 @@ def get_dashboard(db: Session = Depends(get_db)):
 
     if complaints:
         ids = [c.id for c in complaints]
-        embeddings = [get_embedding(c.raw_text) for c in complaints]
-        labels = cluster_complaints(ids, embeddings)
+        categories = [c.category for c in complaints]
+        labels = cluster_complaints(ids, categories)
         grouped = {}
         for c in complaints:
             if labels[c.id] != -1:
