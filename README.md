@@ -234,7 +234,7 @@ Human Verification & Action
 | LLM           | Llama                                |
 | LLM Inference | Groq                                 |
 | Backend       | FastAPI                              |
-| Frontend      | Streamlit                            |
+| Frontend      | HTML, CSS, JavaScript                           |
 | Embeddings    | Multilingual Embedding Model         |
 | Vector Search | FAISS                                |
 | Clustering    | DBSCAN / Similarity-based Clustering |
@@ -258,23 +258,6 @@ GET  /dashboard
 GET  /pulse
 
 POST /verify
-```
-
----
-
-## 📊 Example Structured Complaint
-
-```json
-{
-  "category": "waterlogging",
-  "subcategory": "road waterlogging",
-  "location": "Sector 14",
-  "severity": "high",
-  "duration": "recurring",
-  "affected_group": "school students",
-  "status": "reported",
-  "cluster_id": null
-}
 ```
 
 ---
