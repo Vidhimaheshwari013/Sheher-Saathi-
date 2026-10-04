@@ -179,19 +179,16 @@
 
                 <nav class="hidden md:flex items-center gap-space-lg">
 
-                    <!-- Community Page -->
                     <a class="text-label-md font-label-md text-on-surface-variant hover:text-primary transition-colors"
                         href="community.html">
                         Community Issues
                     </a>
 
-                    <!-- Reports Page -->
                     <a class="text-label-md font-label-md text-on-surface-variant hover:text-primary transition-colors"
                         href="reports.html">
                         My Reports
                     </a>
 
-                    <!-- Homepage Section -->
                     <a class="text-label-md font-label-md text-on-surface-variant hover:text-primary transition-colors"
                         href="index.html#how-it-works">
                         How it works
@@ -202,7 +199,6 @@
 
             <div class="flex items-center gap-space-md">
 
-                <!-- Authority Login stays in navigation -->
                 <a class="hidden sm:inline-flex items-center gap-space-xxs text-label-md font-label-md text-on-surface-variant hover:text-primary transition-colors border border-outline-variant px-space-md py-space-xs rounded-0"
                     href="admin-login.html">
 
@@ -257,7 +253,6 @@
 
                     <div class="flex flex-wrap gap-space-md mt-space-xl">
 
-                        <!-- RAISE TICKET -->
                         <a href="report.html"
                             class="inline-flex items-center justify-center gap-space-xs bg-secondary text-on-secondary px-space-xl py-space-md font-label-md text-label-md font-medium rounded-0 hover:opacity-90 transition-opacity">
 
@@ -273,7 +268,6 @@
 
                         </a>
 
-                        <!-- COMMUNITY -->
                         <a href="community.html"
                             class="inline-flex items-center justify-center gap-space-xs bg-surface text-on-surface px-space-xl py-space-md font-label-md text-label-md font-medium border border-outline-variant rounded-0 hover:bg-surface-container transition-colors">
 
@@ -366,8 +360,6 @@
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-space-lg">
 
 
-                    <!-- REPORT -->
-
                     <a href="report.html"
                         class="group bg-surface border border-outline-variant p-space-xl hover:border-secondary transition-colors">
 
@@ -398,8 +390,6 @@
                     </a>
 
 
-                    <!-- COMMUNITY -->
-
                     <a href="community.html"
                         class="group bg-surface border border-outline-variant p-space-xl hover:border-secondary transition-colors">
 
@@ -429,8 +419,6 @@
 
                     </a>
 
-
-                    <!-- REPORTS -->
 
                     <a href="reports.html"
                         class="group bg-surface border border-outline-variant p-space-xl hover:border-secondary transition-colors">
@@ -497,8 +485,6 @@
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-space-xl">
 
 
-                    <!-- STEP 1 -->
-
                     <div class="relative">
 
                         <div class="text-headline-xl font-headline-xl text-secondary-fixed-dim">
@@ -527,8 +513,6 @@
                     </div>
 
 
-                    <!-- STEP 2 -->
-
                     <div class="relative">
 
                         <div class="text-headline-xl font-headline-xl text-secondary-fixed-dim">
@@ -556,8 +540,6 @@
 
                     </div>
 
-
-                    <!-- STEP 3 -->
 
                     <div class="relative">
 
@@ -758,8 +740,6 @@
                 </div>
 
 
-                <!-- COMMUNITY CTA -->
-
                 <div class="mt-space-xl p-space-lg bg-surface-container border border-outline-variant flex flex-col sm:flex-row items-center justify-between gap-space-md text-center sm:text-left">
 
                     <div>
@@ -804,8 +784,6 @@
 
             <div class="max-w-7xl mx-auto">
 
-                <!-- Header -->
-
                 <div class="flex flex-col lg:flex-row lg:items-end justify-between mb-space-xl gap-space-md">
 
                     <div>
@@ -837,11 +815,7 @@
                 </div>
 
 
-                <!-- MAP -->
-
                 <div class="border border-outline-variant bg-surface relative overflow-hidden">
-
-                    <!-- Summary Bar -->
 
                     <div class="border-b border-outline-variant bg-surface-container px-space-lg py-space-sm flex flex-wrap items-center justify-between gap-space-md text-body-sm">
 
@@ -884,8 +858,6 @@
 
                     </div>
 
-
-                    <!-- MAP AREA -->
 
                     <div id="indexHotspotsMap" style="height: 480px;" class="w-full"></div>
 
@@ -962,9 +934,6 @@
 
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-space-2xl mb-space-2xl">
 
-
-            <!-- FOOTER BRAND -->
-
             <div>
 
                 <a href="index.html"
@@ -986,8 +955,6 @@
 
             </div>
 
-
-            <!-- QUICK LINKS -->
 
             <div>
 
@@ -1031,8 +998,6 @@
             </div>
 
 
-            <!-- TRANSPARENCY -->
-
             <div>
 
                 <h4 class="text-headline-sm font-headline-sm text-on-surface mb-space-md">
@@ -1059,8 +1024,6 @@
 
             </div>
 
-
-            <!-- HELPLINES -->
 
             <div>
 
@@ -1106,8 +1069,6 @@
         </div>
 
 
-        <!-- COPYRIGHT -->
-
         <div class="max-w-7xl mx-auto pt-space-lg border-t border-outline-variant flex flex-col md:flex-row items-center justify-between text-body-sm text-on-surface-variant gap-space-md">
 
             <div>
@@ -1143,150 +1104,657 @@
 
     <!-- Shared Geocoding and Map Logic -->
     <script>
-        const API_URL = "http://127.0.0.18000";
+        // ============================================================
+        // PRODUCTION BACKEND
+        // ============================================================
+
+        const API_URL = "https://sheher-saathi-backend.onrender.com";
+
         const DELHI_CENTER = [28.6139, 77.2090];
         const DELHI_VIEWBOX = "76.80,28.90,77.40,28.40";
 
-        const geocodeCache = JSON.parse(localStorage.getItem("delhiGeocodeCache") || "{}");
+
+        // ============================================================
+        // GEOCODING CACHE
+        // ============================================================
+
+        const geocodeCache = JSON.parse(
+            localStorage.getItem("delhiGeocodeCache") || "{}"
+        );
 
         function saveGeocodeCache() {
-            localStorage.setItem("delhiGeocodeCache", JSON.stringify(geocodeCache));
+            localStorage.setItem(
+                "delhiGeocodeCache",
+                JSON.stringify(geocodeCache)
+            );
         }
 
         function sleep(ms) {
             return new Promise(resolve => setTimeout(resolve, ms));
         }
 
+
         async function geocodeLocation(locationText) {
+
             if (!locationText) return null;
+
             const key = locationText.trim().toLowerCase();
 
-            if (geocodeCache[key]) return geocodeCache[key];
+            if (geocodeCache[key]) {
+                return geocodeCache[key];
+            }
 
-            const query = encodeURIComponent(`${locationText}, Delhi, India`);
-            const url = `https://nominatim.openstreetmap.org/search?q=${query}&format=json&limit=1&countrycodes=in&viewbox=${DELHI_VIEWBOX}&bounded=1`;
+            const query = encodeURIComponent(
+                `${locationText}, Delhi, India`
+            );
+
+            const url =
+                `https://nominatim.openstreetmap.org/search` +
+                `?q=${query}` +
+                `&format=json` +
+                `&limit=1` +
+                `&countrycodes=in` +
+                `&viewbox=${DELHI_VIEWBOX}` +
+                `&bounded=1`;
 
             try {
+
                 const response = await fetch(url);
+
+                if (!response.ok) {
+                    throw new Error("Geocoding request failed");
+                }
+
                 const results = await response.json();
+
                 if (results.length > 0) {
-                    const coords = [parseFloat(results[0].lat), parseFloat(results[0].lon)];
+
+                    const coords = [
+                        parseFloat(results[0].lat),
+                        parseFloat(results[0].lon)
+                    ];
+
                     geocodeCache[key] = coords;
+
                     saveGeocodeCache();
+
                     return coords;
                 }
+
             } catch (error) {
-                console.error("Geocoding failed for:", locationText, error);
+
+                console.error(
+                    "Geocoding failed for:",
+                    locationText,
+                    error
+                );
+
             }
+
             return null;
         }
 
-        const PRIORITY_COLOR = { high: "#dc2626", medium: "#f59e0b", low: "#6b7280" };
 
-        async function renderClustersOnMap(mapInstance, clusters, maxMarkers = 15) {
+        // ============================================================
+        // MAP PRIORITY COLORS
+        // ============================================================
+
+        const PRIORITY_COLOR = {
+            high: "#dc2626",
+            medium: "#f59e0b",
+            low: "#6b7280"
+        };
+
+
+        // ============================================================
+        // RENDER CLUSTERS
+        // ============================================================
+
+        async function renderClustersOnMap(
+            mapInstance,
+            clusters,
+            maxMarkers = 15
+        ) {
+
             mapInstance.eachLayer(layer => {
-                if (layer instanceof L.CircleMarker) mapInstance.removeLayer(layer);
+
+                if (layer instanceof L.CircleMarker) {
+                    mapInstance.removeLayer(layer);
+                }
+
             });
 
+
             for (const cluster of clusters.slice(0, maxMarkers)) {
+
                 let coords = null;
-                for (const loc of cluster.locations) {
+
+                for (const loc of (cluster.locations || [])) {
+
                     coords = await geocodeLocation(loc);
-                    if (coords) break;
+
+                    if (coords) {
+                        break;
+                    }
+
                     await sleep(1100);
                 }
 
+
+                // Fallback position inside Delhi
                 if (!coords) {
+
                     coords = [
-                        DELHI_CENTER[0] + (Math.random() - 0.5) * 0.1,
-                        DELHI_CENTER[1] + (Math.random() - 0.5) * 0.1,
+                        DELHI_CENTER[0] +
+                        (Math.random() - 0.5) * 0.1,
+
+                        DELHI_CENTER[1] +
+                        (Math.random() - 0.5) * 0.1
                     ];
+
                 }
 
-                const color = PRIORITY_COLOR[cluster.priority.level] || "#6b7280";
-                const categoryLabel = (cluster.category || "Issue").replace(/_/g, " ");
+
+                const priorityLevel =
+                    cluster.priority?.level || "low";
+
+                const color =
+                    PRIORITY_COLOR[priorityLevel] ||
+                    "#6b7280";
+
+
+                const categoryLabel =
+                    (cluster.category || "Issue")
+                        .replace(/_/g, " ");
+
 
                 L.circleMarker(coords, {
-                    radius: 8 + Math.min(cluster.size, 10),
+
+                    radius:
+                        8 +
+                        Math.min(
+                            Number(cluster.size) || 0,
+                            10
+                        ),
+
                     fillColor: color,
+
                     color: color,
+
                     fillOpacity: 0.6,
-                    weight: 2,
+
+                    weight: 2
+
                 })
-                .bindPopup(`<strong>${categoryLabel}</strong><br>${cluster.size} reports · Priority: ${cluster.priority.level}<br>${cluster.locations[0] || ""}`)
+
+                .bindPopup(`
+                    <strong>${categoryLabel}</strong>
+                    <br>
+                    ${cluster.size || 0} reports
+                    · Priority: ${priorityLevel}
+                    <br>
+                    ${cluster.locations?.[0] || ""}
+                `)
+
                 .addTo(mapInstance);
+
 
                 await sleep(1100);
             }
         }
 
+
+        // ============================================================
+        // PRIORITY → STATUS
+        // ============================================================
+
         function statusFromPriority(level) {
-            if (level === "high") return "Active";
-            if (level === "medium") return "Assigned";
+
+            if (level === "high") {
+                return "Active";
+            }
+
+            if (level === "medium") {
+                return "Assigned";
+            }
+
             return "Monitoring";
         }
 
+
+        // ============================================================
+        // COMMUNITY MINI CARD
+        // ============================================================
+
         function buildMiniCard(cluster) {
-            const categoryLabel = (cluster.category || "Issue").replace(/_/g, " ");
-            const location = cluster.locations[0] || "Multiple areas";
+
+            const categoryLabel =
+                (cluster.category || "Issue")
+                    .replace(/_/g, " ");
+
+            const location =
+                cluster.locations?.[0] ||
+                "Multiple areas";
+
+            const severity =
+                cluster.priority?.avg_severity ??
+                0;
+
+            const priority =
+                cluster.priority?.level ||
+                "low";
+
+
             return `
                 <div class="bg-surface-container-low border border-outline-variant p-space-lg">
+
                     <div class="flex items-center justify-between">
-                        <span class="text-label-sm text-secondary font-bold uppercase">${categoryLabel}</span>
-                        <span class="text-label-sm text-on-surface-variant">Cluster #${cluster.cluster_id}</span>
+
+                        <span class="text-label-sm text-secondary font-bold uppercase">
+                            ${categoryLabel}
+                        </span>
+
+                        <span class="text-label-sm text-on-surface-variant">
+                            Cluster #${cluster.cluster_id ?? "—"}
+                        </span>
+
                     </div>
-                    <h3 class="text-headline-sm font-headline-sm mt-space-md capitalize">${categoryLabel} near ${location}</h3>
-                    <p class="text-body-sm text-on-surface-variant mt-space-xs">${cluster.size} citizen reports clustered in this area.</p>
+
+
+                    <h3 class="text-headline-sm font-headline-sm mt-space-md capitalize">
+                        ${categoryLabel} near ${location}
+                    </h3>
+
+
+                    <p class="text-body-sm text-on-surface-variant mt-space-xs">
+                        ${cluster.size || 0} citizen reports clustered in this area.
+                    </p>
+
+
                     <div class="flex items-center justify-between mt-space-lg pt-space-md border-t border-outline-variant">
-                        <span class="text-label-sm text-on-surface-variant">Severity ${cluster.priority.avg_severity}/5</span>
-                        <span class="text-label-sm text-secondary font-bold">${statusFromPriority(cluster.priority.level)}</span>
+
+                        <span class="text-label-sm text-on-surface-variant">
+                            Severity ${severity}/5
+                        </span>
+
+                        <span class="text-label-sm text-secondary font-bold">
+                            ${statusFromPriority(priority)}
+                        </span>
+
                     </div>
+
                 </div>
             `;
         }
 
+
+        // ============================================================
+        // HOMEPAGE DATA
+        // ============================================================
+
         async function initHomepage() {
+
             try {
-                const [dashboardRes, clustersRes] = await Promise.all([
+
+                const [
+                    dashboardRes,
+                    clustersRes
+                ] = await Promise.all([
+
                     fetch(`${API_URL}/dashboard`),
+
                     fetch(`${API_URL}/clusters`)
+
                 ]);
-                const dashboard = await dashboardRes.json();
-                const { clusters } = await clustersRes.json();
 
-                const uniqueAreas = new Set(clusters.flatMap(c => c.locations));
-                document.getElementById("statTotalReports").textContent = dashboard.total_complaints + "+";
-                document.getElementById("statActiveClusters").textContent = clusters.length;
-                document.getElementById("statAreasCovered").textContent = uniqueAreas.size;
 
-                const cardsContainer = document.getElementById("indexIssueCards");
-                const topClusters = [...clusters].sort((a, b) => b.size - a.size).slice(0, 4);
-                cardsContainer.innerHTML = topClusters.length ? topClusters.map(buildMiniCard).join("") : `<p class="text-body-sm text-on-surface-variant">No clusters yet — be the first to report an issue.</p>`;
-
-                const heroPulse = document.getElementById("heroLivePulse");
-                if (heroPulse) {
-                    heroPulse.innerHTML = topClusters.slice(0, 3).map(c => `
-                        <div class="border-l-4 border-secondary pl-space-md">
-                            <div class="text-headline-sm font-headline-sm capitalize">${(c.category || "Issue").replace(/_/g, " ")}</div>
-                            <div class="text-body-sm text-on-surface-variant mt-space-xxs">${c.size} reports · ${c.locations[0] || "Delhi"}</div>
-                        </div>
-                    `).join("");
+                if (!dashboardRes.ok) {
+                    throw new Error(
+                        `Dashboard request failed: ${dashboardRes.status}`
+                    );
                 }
 
-                document.getElementById("mapClusterCount").innerHTML = `<span class="w-2 h-2 bg-secondary rounded-full"></span> ${clusters.length} active clusters`;
 
-                const map = L.map("indexHotspotsMap").setView(DELHI_CENTER, 11);
-                L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-                    attribution: "&copy; OpenStreetMap contributors",
-                }).addTo(map);
+                if (!clustersRes.ok) {
+                    throw new Error(
+                        `Clusters request failed: ${clustersRes.status}`
+                    );
+                }
 
-                await renderClustersOnMap(map, clusters, 8);
+
+                const dashboard =
+                    await dashboardRes.json();
+
+
+                const clustersData =
+                    await clustersRes.json();
+
+
+                const clusters =
+                    clustersData.clusters || [];
+
+
+                // ====================================================
+                // 1. TOTAL REPORTS
+                // ====================================================
+
+                const totalReportsEl =
+                    document.getElementById(
+                        "statTotalReports"
+                    );
+
+
+                if (totalReportsEl) {
+
+                    totalReportsEl.textContent =
+                        `${dashboard.total_complaints ?? 0}+`;
+
+                }
+
+
+                // ====================================================
+                // 2. ACTIVE CLUSTERS
+                // ====================================================
+
+                const activeClustersEl =
+                    document.getElementById(
+                        "statActiveClusters"
+                    );
+
+
+                if (activeClustersEl) {
+
+                    activeClustersEl.textContent =
+                        clusters.length;
+
+                }
+
+
+                // ====================================================
+                // 3. AREAS COVERED
+                // ====================================================
+
+                const uniqueAreas =
+                    new Set();
+
+
+                clusters.forEach(cluster => {
+
+                    (cluster.locations || []).forEach(
+                        location => {
+
+                            if (
+                                location &&
+                                location.trim()
+                            ) {
+
+                                uniqueAreas.add(
+                                    location.trim()
+                                );
+
+                            }
+
+                        }
+                    );
+
+                });
+
+
+                const areasCoveredEl =
+                    document.getElementById(
+                        "statAreasCovered"
+                    );
+
+
+                if (areasCoveredEl) {
+
+                    areasCoveredEl.textContent =
+                        uniqueAreas.size;
+
+                }
+
+
+                // ====================================================
+                // 4. COMMUNITY ISSUE CARDS
+                // ====================================================
+
+                const cardsContainer =
+                    document.getElementById(
+                        "indexIssueCards"
+                    );
+
+
+                const topClusters =
+                    [...clusters]
+                        .sort(
+                            (a, b) =>
+                                (b.size || 0) -
+                                (a.size || 0)
+                        )
+                        .slice(0, 4);
+
+
+                if (cardsContainer) {
+
+                    cardsContainer.innerHTML =
+                        topClusters.length
+
+                            ? topClusters
+                                .map(buildMiniCard)
+                                .join("")
+
+                            : `
+                                <p class="text-body-sm text-on-surface-variant">
+                                    No clusters yet — be the first to report an issue.
+                                </p>
+                            `;
+
+                }
+
+
+                // ====================================================
+                // 5. HERO LIVE PULSE
+                // ====================================================
+
+                const heroPulse =
+                    document.getElementById(
+                        "heroLivePulse"
+                    );
+
+
+                if (heroPulse) {
+
+                    if (topClusters.length) {
+
+                        heroPulse.innerHTML =
+                            topClusters
+                                .slice(0, 3)
+                                .map(cluster => {
+
+                                    const category =
+                                        (
+                                            cluster.category ||
+                                            "Issue"
+                                        ).replace(
+                                            /_/g,
+                                            " "
+                                        );
+
+
+                                    return `
+                                        <div class="border-l-4 border-secondary pl-space-md">
+
+                                            <div class="text-headline-sm font-headline-sm capitalize">
+                                                ${category}
+                                            </div>
+
+                                            <div class="text-body-sm text-on-surface-variant mt-space-xxs">
+                                                ${cluster.size || 0} reports
+                                                ·
+                                                ${cluster.locations?.[0] || "Delhi"}
+                                            </div>
+
+                                        </div>
+                                    `;
+
+                                })
+                                .join("");
+
+                    } else {
+
+                        heroPulse.innerHTML = `
+                            <div class="border-l-4 border-secondary pl-space-md">
+
+                                <div class="text-headline-sm font-headline-sm">
+                                    No active civic pulses
+                                </div>
+
+                                <div class="text-body-sm text-on-surface-variant mt-space-xxs">
+                                    Be the first citizen to report an issue.
+                                </div>
+
+                            </div>
+                        `;
+
+                    }
+
+                }
+
+
+                // ====================================================
+                // 6. MAP CLUSTER COUNT
+                // ====================================================
+
+                const mapClusterCount =
+                    document.getElementById(
+                        "mapClusterCount"
+                    );
+
+
+                if (mapClusterCount) {
+
+                    mapClusterCount.innerHTML = `
+                        <span class="w-2 h-2 bg-secondary rounded-full"></span>
+                        ${clusters.length} active clusters
+                    `;
+
+                }
+
+
+                // ====================================================
+                // 7. HOTSPOT MAP
+                // ====================================================
+
+                const mapElement =
+                    document.getElementById(
+                        "indexHotspotsMap"
+                    );
+
+
+                if (mapElement) {
+
+                    const map =
+                        L.map(
+                            "indexHotspotsMap"
+                        ).setView(
+                            DELHI_CENTER,
+                            11
+                        );
+
+
+                    L.tileLayer(
+                        "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                        {
+                            attribution:
+                                "&copy; OpenStreetMap contributors"
+                        }
+                    ).addTo(map);
+
+
+                    await renderClustersOnMap(
+                        map,
+                        clusters,
+                        8
+                    );
+
+                }
+
             } catch (error) {
-                console.error("Homepage data load failed:", error);
+
+                console.error(
+                    "Homepage data load failed:",
+                    error
+                );
+
+
+                // Keep page usable if backend is waking up
+                const totalReportsEl =
+                    document.getElementById(
+                        "statTotalReports"
+                    );
+
+                const activeClustersEl =
+                    document.getElementById(
+                        "statActiveClusters"
+                    );
+
+                const areasCoveredEl =
+                    document.getElementById(
+                        "statAreasCovered"
+                    );
+
+
+                if (totalReportsEl) {
+                    totalReportsEl.textContent = "0";
+                }
+
+                if (activeClustersEl) {
+                    activeClustersEl.textContent = "0";
+                }
+
+                if (areasCoveredEl) {
+                    areasCoveredEl.textContent = "0";
+                }
+
+
+                const heroPulse =
+                    document.getElementById(
+                        "heroLivePulse"
+                    );
+
+
+                if (heroPulse) {
+
+                    heroPulse.innerHTML = `
+                        <div class="border-l-4 border-secondary pl-space-md">
+
+                            <div class="text-headline-sm font-headline-sm">
+                                Civic pulse temporarily unavailable
+                            </div>
+
+                            <div class="text-body-sm text-on-surface-variant mt-space-xxs">
+                                The civic service is waking up. Please refresh in a moment.
+                            </div>
+
+                        </div>
+                    `;
+
+                }
+
             }
+
         }
 
-        document.addEventListener("DOMContentLoaded", initHomepage);
+
+        // ============================================================
+        // START HOMEPAGE
+        // ============================================================
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            initHomepage
+        );
+
     </script>
 
 </body>
