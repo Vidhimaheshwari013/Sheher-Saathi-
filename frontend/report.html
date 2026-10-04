@@ -1372,37 +1372,136 @@
     }
 
     async function submitFollowup() {
-      const answer = document.getElementById("followupAnswer").value.trim();
-      if (!answer) { alert("Please answer the follow-up question."); return; }
-      const button = document.getElementById("followupButton");
-      const status = document.getElementById("followupStatus");
-      button.disabled = true;
-      button.innerHTML = '<span class="material-symbols-outlined text-base animate-spin">progress_activity</span> Updating...';
-      try {
-        // Create the original complaint once, then update that same ID.
-        if (!currentComplaintId) await createComplaint();
-        const response = await fetch(`${API_BASE}/complaints/${currentComplaintId}/followup`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ answer }) });
-        if (!response.ok) {
-          const detail = await response.text().catch(() => "");
-          throw new Error(`Follow-up failed (${response.status}) ${detail}`);
-        }
-        const updated = await response.json();
-        localStorage.setItem("latestComplaint", JSON.stringify(updated));
-        const location = getFormValues().location;
-        const updatedAnalysis = updated?.issues ? updated : await analyzeComplaint(`${currentProblem}\nAdditional information: ${answer}`, location);
-        renderAnalysis(updatedAnalysis, location, currentProblem);
-        const box = document.getElementById("followupBox");
-        if (box) box.classList.add("hidden");
-        if (status) { status.textContent = "Updated successfully."; status.className = "text-xs mt-2 text-green-700"; }
-      } catch (error) {
-        console.error(error);
-        if (status) { status.textContent = error.message; status.className = "text-xs mt-2 text-error"; status.classList.remove("hidden"); }
-        alert("I could not update the complaint. Check the backend Follow-up endpoint in Swagger.");
-      } finally {
-        button.disabled = false;
-        button.innerHTML = '<span class="material-symbols-outlined text-base">refresh</span> Update Summary';
-      }
+    const answer = document.getElementById("followupAnswer").value.trim();
+
+    if (!answer) {
+        alert("Please answer the follow-up question.");
+        return;
     }
+
+    const button = document.getElementById("followupButton");
+    const status = document.getElementById("followupStatus");
+    const submitTicketBtn = document.getElementById("submitTicketButton");
+    const followupBox = document.getElementById("followupBox");
+    const dispatchHelp = document.getElementById("dispatchHelp");
+
+    button.disabled = true;
+    button.innerHTML =
+        '<span class="material-symbols-outlined text-base animate-spin">progress_activity</span> Updating...';
+
+    try {
+        // Create the complaint only once
+        if (!currentComplaintId) {
+            await createComplaint();
+        }
+
+        const response = await fetch(
+            `${API_BASE}/complaints/${currentComplaintId}/followup`,
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    answer: answer
+                })
+            }
+        );
+
+        if (!response.ok) {
+            const detail = await response.text().catch(() => "");
+            throw new Error(
+                `Follow-up failed (${response.status}) ${detail}`
+            );
+        }
+
+        const updated = await response.json();
+
+        // Keep the same complaint/ticket
+        if (updated?.id || updated?.complaint_id || updated?.ticket_id) {
+            currentComplaintId =
+                updated.id ??
+                updated.complaint_id ??
+                updated.ticket_id ??
+                currentComplaintId;
+        }
+
+        localStorage.setItem(
+            "latestComplaint",
+            JSON.stringify(updated)
+        );
+
+        // Re-analyze using the original complaint + follow-up answer
+        const location = getFormValues().location;
+
+        let updatedAnalysis;
+
+        if (updated?.issues) {
+            updatedAnalysis = updated;
+        } else {
+            updatedAnalysis = await analyzeComplaint(
+                `${currentProblem}\nAdditional information: ${answer}`,
+                location
+            );
+        }
+
+        renderAnalysis(
+            updatedAnalysis,
+            location,
+            currentProblem
+        );
+
+        // =====================================================
+        // IMPORTANT: FOLLOW-UP IS NOW ANSWERED
+        // =====================================================
+
+        if (followupBox) {
+            followupBox.classList.add("hidden");
+        }
+
+        // Re-enable the official ticket button
+        if (submitTicketBtn) {
+            submitTicketBtn.disabled = false;
+            submitTicketBtn.innerHTML =
+                '<span class="material-symbols-outlined text-xl">send</span> Submit Official Ticket';
+        }
+
+        // Update the instruction text
+        if (dispatchHelp) {
+            dispatchHelp.textContent =
+                "Your follow-up has been recorded. Verify your details and submit the official ticket.";
+        }
+
+        if (status) {
+            status.textContent =
+                "Follow-up answered successfully. You can now submit your ticket.";
+            status.className =
+                "text-xs mt-2 text-green-700";
+            status.classList.remove("hidden");
+        }
+
+        // Clear answer box
+        document.getElementById("followupAnswer").value = "";
+
+    } catch (error) {
+        console.error(error);
+
+        if (status) {
+            status.textContent = error.message;
+            status.className = "text-xs mt-2 text-error";
+            status.classList.remove("hidden");
+        }
+
+        alert(
+            "I could not update the complaint. Please check the backend Follow-up endpoint."
+        );
+
+    } finally {
+        button.disabled = false;
+        button.innerHTML =
+            '<span class="material-symbols-outlined text-base">refresh</span> Update Summary';
+    }
+}
 
     async function submitTicket() {
       const values = getFormValues();
