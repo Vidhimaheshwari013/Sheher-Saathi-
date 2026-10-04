@@ -6,8 +6,6 @@ from fastapi.middleware.cors import CORSMiddleware
 from ai.extraction import extract_complaint
 from . import models, schemas
 from .database import engine, get_db
-from ai.embeddings import get_embedding
-from ai.faiss_index import complaint_index
 from ai.clustering import cluster_complaints
 from ai.priority import calculate_priority
 from datetime import datetime, timedelta, timezone
@@ -51,8 +49,6 @@ def create_complaint(complaint: schemas.ComplaintCreate, db: Session = Depends(g
     db.add(db_complaint)
     db.commit()
     db.refresh(db_complaint)
-    embedding = get_embedding(db_complaint.raw_text)
-    complaint_index.add(db_complaint.id, embedding)
     return db_complaint
 
 @app.get("/complaints", response_model=List[schemas.ComplaintOut])
